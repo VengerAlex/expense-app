@@ -1,132 +1,46 @@
+# Getting Started with Create React App
 
-## 💸 EXPENSE APP - EXPA 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-**EXPA** - додаток для ведення і аналізу ваших доходів та витрат.
+## Available Scripts
 
-<br>
+In the project directory, you can run:
 
-## 👩‍💻 Необхідні посилання
+### `npm start`
 
-Дизайн: [**Figma**](https://www.figma.com/file/FOLd8B665OmyKjlGsbRDb1/WEB-APP-Incode-Finance)
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-API документація: [**Swagger**](https://incode-backend-dev.herokuapp.com/api/)
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-<br>
+### `npm test`
 
-## 🛠 Технології
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-⚡️ **Основа**
+### `npm run build`
 
-- ```TypeScript```
-- ```React``` 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-⚡️ **State менеджер**
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-- ```Redux Toolkit```
-- ```Redux Thunk```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-⚡️ **Роутінг**
+### `npm run eject`
 
-- ```React Router```
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-⚡️ **Робота із запитами**
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-- ```Axios```
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-⚡️ **Обробка та валідація форм (на вибір)**
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-- ```Formik``` 
-- ```React Hook Form```
+## Learn More
 
-⚡️ **Валідація форм**
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-- ```Yup```
-
-⚡️ **Графіки (на вибір)**
-
-- ```Recharts``` 
-- ```Сharts.js```
-
-⚡️ **UI бібліотека**
-
-- ```Material UI```
-
-⚡️ **Стилізація (на вибір)**
-
-- ```Стилізація від MUI``` 
-- ```SASS/SCSS modules```
-- ```styled-component```
-
-⚡️ **Валідація та форматування коду**
-
-- ```ESLint``` 
-- ```Prettier``` 
-
-> Можете використовувати ESLint окремо (валідації та форматування), або в поєднанні з Prettier.
-
-> Усі бібліотеки мають бути актуальної версії.
-
-<br>
-
-## 🖥️ Основні екрани
-
-🔐 Сторінка **Auth**. Містить в собі наступні екрани:
-	
-- **Sign In** 
-- **Sign Up**
-- **Reset Password**
-
-📝 Сторінка **Main**. Містить в собі наступні екрани:
-	
-- **Dashboard** 
-- **Analytics**
-- **Categories**
-- **Settings**
-
-<br>
-
-## 📱 Адаптивна версія
-
-Додаток повинен включати в себе адаптацію під усі сучасні пристрої, починаючи з ```>= 320 px``` і закінчуючи розмірами для настільних моніторів.
-
-Breakpoints:
-- ```xs: 320 - 600 px```
-- ```sm: 601 - 900 px```
-- ```md: 901 - 1200 px```
-- ```lg: 1200 - 1536 px```
-- ```xl: >= 1537 px```
-
-> Ця сітка взята з ```MUI```, щоб вам було зручно робити адаптацію з використанням ```useMediaQuery()```. Але ви можете використовувати інші бібліотеки для адаптації додатку.
-
-<br>
-
-## ✏️ Робочий процес з Git
-
-Основні гілки:
-
-* `main` - гілка в якій мають бути тільки релізні версії проекту. 
-* `development` - гілка в якій відбувається увесь процес розробки.
-
-Окрім цього потрібно умовно розділити весь процес розробки на основні етапи. 
-
-> На приклад: `Створення Sign In форми`, `Валідація Sign In форми`, тощо.
-
-Далі для кожного етапу створити окрему гілку (відгалужену від `development`). І після завершення усіх задач, які були закладені в конкретний етап, створити `pull request` та здійснити послідуючий `merge` в гілку `development`.
-
-> Кожен `pull request` повинен бути перевірений, і тільки після цього відбувається `merge`.
-
-Також потрібно дотримуватись наступного `branch` найменування та `commit` повідомлень:
-
- * Приклад `branch` найменування: 
-	 * `EXPA-{branch_number}-{short_task_description}`
-	 * `EXPA-10-reset_password_form`
-   
- * Приклад `commit` повідомлень:   
-	 * `EXPA-{branch_number} {ADD | UPD | FIX | ...}: {message}`  
-	 * `EXPA-10 ADD: validation for reset password form`
-
-## 📌 Порядок виконання завдання
-
-1. Зробити ```fork``` репозиторія.
-2. Зробити ```merge``` релізної версії додатку в гілку ```main```.
-3. Створити ```pull request``` релізної версії проекту в даний репозиторій.
+To learn React, check out the [React documentation](https://reactjs.org/).

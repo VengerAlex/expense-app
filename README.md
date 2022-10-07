@@ -120,7 +120,7 @@ Breakpoints:
 * Приклад `branch` найменування:
     * `EXPA-{branch_number}-{short_task_description}`
     * `EXPA-10-reset_password_form`
-
+* 
 * Приклад `commit` повідомлень:
     * `EXPA-{branch_number} {ADD | UPD | FIX | ...}: {message}`
     * `EXPA-10 ADD: validation for reset password form`

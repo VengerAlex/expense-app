@@ -24,7 +24,6 @@ interface ISignInForm {
 
 const SignIn: FC = () => {
   const {
-    register,
     control,
     handleSubmit,
     formState: { errors, isValid, isSubmitSuccessful },
@@ -32,7 +31,10 @@ const SignIn: FC = () => {
   } = useForm<ISignInForm>({ mode: "onChange" });
 
   const onSubmit = (data: ISignInForm) => {
+    console.log(data);
     // axios
+
+    reset();
   };
 
   return (
@@ -41,28 +43,34 @@ const SignIn: FC = () => {
         Sign In
       </Typography>
 
-      <FormControl component="form" onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          error={!!errors.email}
-          control={control}
-          formName="email"
-          label="Email Address"
-        />
-        <Input
-          error={!!errors.password}
-          control={control}
-          formName="password"
-          label="Password"
-          isPassword={true}
-        />
-        <StyledBoxFlex>
-          <FormControlLabel
-            control={<StyledCheckbox color="success" />}
-            label={<StyledLabel variant="subtitle2">Remember me</StyledLabel>}
+      <FormControl sx={{ maxWidth: "335px" }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            autoFocus
+            sx={{ mb: "15px" }}
+            error={!!errors.email}
+            control={control}
+            formName="email"
+            label="Email Address"
           />
-          <MyLink to={ROUTES.SIGN_UP}>Reset Password?</MyLink>
-        </StyledBoxFlex>
-        <StyledPrimaryButton disabled={!isValid}>Login</StyledPrimaryButton>
+          <Input
+            error={!!errors.password}
+            control={control}
+            formName="password"
+            label="Password"
+            isPassword={true}
+          />
+          <StyledBoxFlex>
+            <FormControlLabel
+              control={<StyledCheckbox color="success" />}
+              label={<StyledLabel variant="subtitle2">Remember me</StyledLabel>}
+            />
+            <MyLink to={ROUTES.SIGN_UP}>Reset Password?</MyLink>
+          </StyledBoxFlex>
+          <StyledPrimaryButton type="submit" disabled={!isValid}>
+            Login
+          </StyledPrimaryButton>
+        </form>
       </FormControl>
 
       <Typography variant="subtitle2">

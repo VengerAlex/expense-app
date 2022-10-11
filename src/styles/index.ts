@@ -13,7 +13,7 @@ export const StyledPrimaryButton = styled(Button)(() => ({
   backgroundColor: theme.palette.green.main,
   border: "1px solid #539713",
   textTransform: "none",
-  padding: "9.5px 161.5px",
+  padding: "9.5px 132.5px",
   margin: "24px 0",
   "&:hover": {
     backgroundColor: theme.palette.green.main,

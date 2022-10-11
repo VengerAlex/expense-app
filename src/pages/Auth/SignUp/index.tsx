@@ -28,7 +28,7 @@ const SignUp: FC = () => {
   return (
     <AuthPageWrapper bgImage={signUpCover}>
       <Typography variant="h1">Sign Up</Typography>
-      <FormControl component="form">
+      <FormControl sx={{ width: "335px" }}>
         <Input
           error={!!errors.fullName}
           control={control}

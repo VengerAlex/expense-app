@@ -1,27 +1,61 @@
 import { createTheme } from "@mui/material";
 
+declare module "@mui/material/styles" {
+  interface Palette {
+    black: string;
+    violet: string;
+    blue: string;
+    orange: string;
+    red: string;
+    green: {
+      main: string;
+      lighter: string;
+      border: string;
+    };
+    white: string;
+    bgr: string;
+    disabled: string;
+  }
+
+  interface PaletteOptions {
+    black: string;
+    violet: string;
+    blue: string;
+    orange: string;
+    red: string;
+    green: {
+      main: string;
+      lighter: string;
+      border: string;
+    };
+    white: string;
+    bgr: string;
+    disabled: string;
+  }
+}
+
 export const theme = createTheme({
   palette: {
-    background: { default: "#D9E7F8" },
-    secondary: { main: "#1D283A" },
-    text: { primary: "#FFFFFF", secondary: "#F5F5F5" },
-    primary: { main: "#539713", light: "#B2D0AD" },
-    darkBlue: { main: "#05eeee", light: "#B2D0AD" },
-    // colors: {
-    //     green: "#539713",
-    //     lightGreen: "#B2D0AD",
-    //     strokeGreen: "#58F83B",
-    //     black: "#000000",
-    //     violet: "#D4CCF1",
-    //     blue: "#69B0FF",
-    //     orange: "#F08E5B",
-    //     red: "#EE5E5E",
-    //     BGR: "#F1F2F1",
-    // }
+    success: {
+      main: "#539713",
+    },
+    black: "#1d283a",
+    violet: "#d4ccf1",
+    blue: "#69b0ff",
+    orange: "#f08e5b",
+    red: "#ee5e5e",
+    green: {
+      main: "#539713",
+      lighter: "#b2d0ad",
+      border: "#58F83B",
+    },
+    white: "#ffffff",
+    bgr: "#f5f5f5",
+    disabled: "#a19eaa",
   },
   typography: {
     allVariants: {
-      fontFamily: "Montserrat",
+      fontFamily: ["Montserrat", "sans-serif"].join(","),
       fontSize: 16,
       color: "#fff",
     },

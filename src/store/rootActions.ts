@@ -1,4 +1,4 @@
-import * as userActions from "./reducers/user/user.actions";
+import * as userActions from "./reducers/auth/auth.actions";
 
 export const allActions = {
   ...userActions,

@@ -21,7 +21,7 @@ export const AuthPageWrapper: FC<IAuthPageWrapper> = ({
       <Grid
         sx={{ backgroundColor: "#1D283A", p: "48px 60px" }}
         item
-        xs={12}
+        xs={10}
         sm={8}
         md={5}
         component={Paper}

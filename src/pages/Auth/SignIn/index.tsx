@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { Typography, FormControl, Checkbox, Box } from "@mui/material";
+import { Typography, FormControl } from "@mui/material";
 import { useForm } from "react-hook-form";
 
 import Input from "../../../components/Input";
@@ -11,29 +11,37 @@ import { ROUTES } from "../../../utils/types";
 import { MyLink } from "../../../components/MyLink";
 
 import {
+  ErrorMessage,
   StyledBoxFlex,
   StyledCheckbox,
   StyledLabel,
   StyledPrimaryButton,
 } from "../../../styles/index";
+import { useActions } from "../../../hooks/useActions";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { getAuthState } from "../../../store/reducers/auth/authSlice";
 
 interface ISignInForm {
   email: string;
   password: string;
+  isRememberMe: string;
 }
 
 const SignIn: FC = () => {
+  const { login } = useActions();
+  const { errorSignIn } = useAppSelector(getAuthState);
+
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid, isSubmitSuccessful },
+    formState: { errors, isValid },
     reset,
   } = useForm<ISignInForm>({ mode: "onChange" });
 
   const onSubmit = (data: ISignInForm) => {
-    console.log(data);
-    // axios
+    const { email, password } = data;
 
+    login({ username: email, password });
     reset();
   };
 
@@ -47,7 +55,6 @@ const SignIn: FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             autoFocus
-            sx={{ mb: "15px" }}
             error={!!errors.email}
             control={control}
             formName="email"
@@ -55,6 +62,7 @@ const SignIn: FC = () => {
           />
           <Input
             error={!!errors.password}
+            sx={{ mb: "-15px" }}
             control={control}
             formName="password"
             label="Password"
@@ -62,7 +70,12 @@ const SignIn: FC = () => {
           />
           <StyledBoxFlex>
             <FormControlLabel
-              control={<StyledCheckbox color="success" />}
+              control={
+                <StyledCheckbox
+                  color="success"
+                  {...control.register("isRememberMe")}
+                />
+              }
               label={<StyledLabel variant="subtitle2">Remember me</StyledLabel>}
             />
             <MyLink to={ROUTES.SIGN_UP}>Reset Password?</MyLink>
@@ -70,6 +83,9 @@ const SignIn: FC = () => {
           <StyledPrimaryButton type="submit" disabled={!isValid}>
             Login
           </StyledPrimaryButton>
+          {errorSignIn && (
+            <ErrorMessage variant="subtitle2">{errorSignIn}</ErrorMessage>
+          )}
         </form>
       </FormControl>
 

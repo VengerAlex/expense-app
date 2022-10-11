@@ -41,6 +41,12 @@ export const StyledLabel = styled(Typography)(() => ({
   opacity: 0.8,
 }));
 
+export const ErrorMessage = styled(Typography)(() => ({
+  alignItems: "center",
+  margin: "0 auto 10px",
+  color: theme.palette.red,
+}));
+
 export const StyledCheckbox = styled(Checkbox)(() => ({
   color: theme.palette.bgr,
   "&:checked": {
@@ -52,6 +58,7 @@ export const StyledCheckbox = styled(Checkbox)(() => ({
 }));
 
 export const StyledInput = styled(TextField)(() => ({
+  marginBottom: "15px",
   "& .MuiInputBase-root": {
     color: theme.palette.white,
     fontSize: "16px",
@@ -63,11 +70,10 @@ export const StyledInput = styled(TextField)(() => ({
     fontSize: "14px",
     lineHeight: "24.8px",
   },
-  "& .MuiFocused": {
-    color: "red",
-  },
   "& .MuiInput-root:after": {
     borderBottom: `2px solid ${theme.palette.green.border}`,
   },
+  "& .MuiInput-root": {
+    borderBottom: `2px solid ${theme.palette.white}`,
+  },
 }));
-// MuiInput-root:after

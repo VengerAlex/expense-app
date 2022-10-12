@@ -22,6 +22,7 @@ const authSlice = createSlice({
         state.isLoading = false;
 
         state.errorSignIn = "";
+        state.errorSignUp = "";
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -31,7 +32,6 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(register.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.isLoading = false;
 
         state.errorSignUp = "";

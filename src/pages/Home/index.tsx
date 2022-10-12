@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 const Home: FC = () => {
-  return <div>HOME</div>;
+  return <div>ONLY FOR AUTHORIZED</div>;
 };
 
 export default Home;

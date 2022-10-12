@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Box from "@mui/material/Box";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { FormControl, Typography } from "@mui/material";
@@ -30,16 +31,10 @@ const SignUp: FC = () => {
     handleSubmit,
     formState: { errors, isValid, isSubmitSuccessful },
     reset,
-    watch,
   } = useForm<ISignUpForm>({
     mode: "onChange",
     resolver: yupResolver(signUpSchema),
   });
-  const [password, confirmedPassword] = watch([
-    "password",
-    "confirmedPassword",
-  ]);
-  const isTheSamePassword = password === confirmedPassword;
 
   const onSubmit = (data: ISignUpForm) => {
     const { username, password, fullName: displayName } = data;
@@ -86,15 +81,18 @@ const SignUp: FC = () => {
             label="Confirmed Password"
             isPassword={true}
           />
-          <Checkbox
-            labelText="By creating an account you agree to the terms of use and our privacy policy."
-            control={control}
-          />
+          <Box sx={{ textAlign: "left" }}>
+            <Checkbox
+              labelText="By creating an account you agree to the terms of use and our privacy policy."
+              control={control}
+            />
+          </Box>
           <StyledPrimaryButton
             type="submit"
-            disabled={!isValid || !isTheSamePassword}
+            disabled={!isValid}
+            sx={{ mb: 3, my: 3 }}
           >
-            Sign
+            Sign Up
           </StyledPrimaryButton>
           {errorSignUp && (
             <ErrorMessage variant="subtitle2">{errorSignUp}</ErrorMessage>

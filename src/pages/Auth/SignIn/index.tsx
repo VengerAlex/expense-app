@@ -26,7 +26,7 @@ interface ISignInForm {
 
 const SignIn: FC = () => {
   const { login } = useActions();
-  const { errorSignIn } = useAppSelector(getAuthState);
+  const { errorSignIn, isLoading } = useAppSelector(getAuthState);
 
   const {
     control,
@@ -75,8 +75,8 @@ const SignIn: FC = () => {
             <MyLink to={ROUTES.RESET}>Reset Password?</MyLink>
           </StyledBoxFlex>
 
-          <StyledPrimaryButton type="submit" disabled={!isValid}>
-            Login
+          <StyledPrimaryButton sx={{ mb: 3 }} type="submit" disabled={!isValid}>
+            {isLoading ? "Loading" : "Login"}
           </StyledPrimaryButton>
           {errorSignIn && (
             <ErrorMessage variant="subtitle2">{errorSignIn}</ErrorMessage>

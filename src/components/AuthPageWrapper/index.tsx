@@ -4,7 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Logo from "../../assets/images/logo.svg";
+import { Logo } from "../Logo";
 
 interface IAuthPageWrapper {
   children: ReactNode;
@@ -28,7 +28,7 @@ export const AuthPageWrapper: FC<IAuthPageWrapper> = ({
         elevation={6}
         square
       >
-        <Box component="img" alt="Company logo" src={Logo} />
+        <Logo />
         <Box
           sx={{
             textAlign: "center",

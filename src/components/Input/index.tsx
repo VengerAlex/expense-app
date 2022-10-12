@@ -21,7 +21,7 @@ const Input: FC<IInput> = ({
 
   return (
     <StyledInput
-      {...control.register(formName, { required: true, minLength: 6 })}
+      {...control.register(formName)}
       {...props}
       name={formName}
       type={!isPassword ? "text" : showPassword ? "text" : "password"}

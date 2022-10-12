@@ -1,10 +1,10 @@
 import { FC } from "react";
-
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography, FormControl } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
 import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
-import { ROUTES } from "../../../utils/types";
+import { ROUTES, showErrorText } from "../../../utils/types";
 import { MyLink } from "../../../components/MyLink";
 import signInCover from "../../../assets/images/cover-login.jpg";
 import {
@@ -16,6 +16,7 @@ import { useActions } from "../../../hooks/useActions";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { getAuthState } from "../../../store/reducers/auth/authSlice";
 import { Checkbox } from "../../../components/Checkbox";
+import { signInSchema } from "../../../utils/schema";
 
 interface ISignInForm {
   username: string;
@@ -32,7 +33,10 @@ const SignIn: FC = () => {
     handleSubmit,
     formState: { errors, isValid },
     reset,
-  } = useForm<ISignInForm>({ mode: "onChange" });
+  } = useForm<ISignInForm>({
+    mode: "onChange",
+    resolver: yupResolver(signInSchema),
+  });
 
   const onSubmit = (data: ISignInForm) => {
     const { username, password } = data;
@@ -50,6 +54,7 @@ const SignIn: FC = () => {
       <FormControl sx={{ maxWidth: "335px" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
+            helperText={showErrorText(errors, "username")}
             autoFocus
             error={!!errors.username}
             control={control}
@@ -57,6 +62,7 @@ const SignIn: FC = () => {
             label="Username"
           />
           <Input
+            helperText={showErrorText(errors, "password")}
             error={!!errors.password}
             sx={{ mb: "-15px" }}
             control={control}
@@ -65,7 +71,7 @@ const SignIn: FC = () => {
             isPassword={true}
           />
           <StyledBoxFlex>
-            <Checkbox checked control={control} labelText="Remember me" />
+            <Checkbox control={control} labelText="Remember me" />
             <MyLink to={ROUTES.RESET}>Reset Password?</MyLink>
           </StyledBoxFlex>
 

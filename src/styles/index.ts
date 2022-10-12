@@ -48,6 +48,7 @@ export const StyledLabel = styled(Typography)(() => ({
 }));
 
 export const ErrorMessage = styled(Typography)(() => ({
+  fontSize: "14px",
   alignItems: "center",
   margin: "0 auto 10px",
   color: theme.palette.red,
@@ -64,7 +65,10 @@ export const StyledCheckbox = styled(Checkbox)(() => ({
 }));
 
 export const StyledInput = styled(TextField)(() => ({
-  marginBottom: "15px",
+  "& .MuiFormHelperText-root": {
+    fontSize: "12px",
+    color: theme.palette.red,
+  },
   "& .MuiInputBase-root": {
     color: theme.palette.white,
     fontSize: "16px",

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography, FormControl } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -17,6 +18,7 @@ import { useAppSelector } from "../../../hooks/useAppSelector";
 import { getAuthState } from "../../../store/reducers/auth/authSlice";
 import { Checkbox } from "../../../components/Checkbox";
 import { signInSchema } from "../../../utils/schema";
+import localstorageService from "../../../services/localstorage.service";
 
 interface ISignInForm {
   username: string;
@@ -25,6 +27,10 @@ interface ISignInForm {
 }
 
 const SignIn: FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || ROUTES.Home;
+  const isAuth = localstorageService.get("accessToken");
   const { login } = useActions();
   const { errorSignIn, isLoading } = useAppSelector(getAuthState);
 
@@ -44,6 +50,10 @@ const SignIn: FC = () => {
     login({ username, password });
     reset();
   };
+
+  if (isAuth) {
+    navigate(from, { replace: true });
+  }
 
   return (
     <AuthPageWrapper bgImage={signInCover}>

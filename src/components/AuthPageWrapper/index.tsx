@@ -31,15 +31,21 @@ export const AuthPageWrapper: FC<IAuthPageWrapper> = ({
         <Box component="img" alt="Company logo" src={Logo} />
         <Box
           sx={{
-            py: "80px",
-            my: 8,
+            textAlign: "center",
             mx: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
           }}
         >
-          {children}
+          <Box
+            sx={{
+              maxWidth: "330px",
+              margin: "0 auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            {children}
+          </Box>
         </Box>
       </Grid>
       <Grid

@@ -53,6 +53,7 @@ export const theme = createTheme({
     bgr: "#f5f5f5",
     disabled: "#a19eaa",
   },
+  spacing: [0, 4, 8, 16, 32, 64],
   typography: {
     allVariants: {
       fontFamily: ["Montserrat", "sans-serif"].join(","),

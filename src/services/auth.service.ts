@@ -26,14 +26,6 @@ class AuthService {
 
     return response;
   }
-
-  async logout() {
-    const response = await axios.get(getAuthUrl("logout"));
-
-    localStorage.remove("accessToken");
-
-    return response;
-  }
 }
 
 export default new AuthService();

@@ -8,26 +8,32 @@ import {
 } from "@mui/material";
 import { theme } from "../providers/ThemeProvider";
 
-export const StyledPrimaryButton = styled(Button)(() => ({
-  color: theme.palette.white,
-  backgroundColor: theme.palette.green.main,
-  border: "1px solid #539713",
-  textTransform: "none",
-  padding: "9.5px 132.5px",
-  margin: "24px 0",
-  "&:hover": {
+type PropsButton = {
+  p?: string;
+};
+
+export const StyledPrimaryButton = styled(Button)<PropsButton>(
+  ({ p = "9.5px 132.5px" }) => ({
+    color: theme.palette.white,
     backgroundColor: theme.palette.green.main,
-    border: `1px solid ${theme.palette.green.border}`,
-  },
-  "&:active": {
-    border: `1px solid ${theme.palette.green.main}`,
-    backgroundColor: theme.palette.green.main,
-  },
-  "&:disabled": {
-    border: "none",
-    backgroundColor: theme.palette.disabled,
-  },
-}));
+    border: "1px solid #539713",
+    textTransform: "none",
+    padding: p,
+    margin: "24px 0",
+    "&:hover": {
+      backgroundColor: theme.palette.green.main,
+      border: `1px solid ${theme.palette.green.border}`,
+    },
+    "&:active": {
+      border: `1px solid ${theme.palette.green.main}`,
+      backgroundColor: theme.palette.green.main,
+    },
+    "&:disabled": {
+      border: "none",
+      backgroundColor: theme.palette.disabled,
+    },
+  }),
+);
 
 export const StyledBoxFlex = styled(Box)(() => ({
   marginTop: "20px",

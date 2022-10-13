@@ -8,6 +8,7 @@ import { StyledInput } from "../../styles";
 type IInput = TextFieldProps & {
   isPassword?: boolean;
   control: any;
+  isBlack?: boolean;
   formName: string;
 };
 
@@ -15,6 +16,7 @@ const Input: FC<IInput> = ({
   isPassword = false,
   formName,
   control,
+  isBlack,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -23,6 +25,7 @@ const Input: FC<IInput> = ({
     <StyledInput
       {...control.register(formName)}
       {...props}
+      isBlack={isBlack}
       name={formName}
       type={!isPassword ? "text" : showPassword ? "text" : "password"}
       variant="standard"

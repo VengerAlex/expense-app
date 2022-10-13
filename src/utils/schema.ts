@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { phoneRegExp } from "./helpers";
 
 export const resetSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -22,4 +23,12 @@ export const signUpSchema = resetPasswordSchema.shape({
   isConfirmed: yup
     .bool()
     .oneOf([true], "You must accept the terms and conditions"),
+});
+
+export const extendedSettingsSchema = yup.object().shape({
+  firstName: yup.string().required().min(5).max(30),
+  lastName: yup.string().required().min(5).max(30),
+  userName: yup.string().required().min(5).max(30),
+  email: yup.string().email().required(),
+  phoneNumber: yup.string().matches(phoneRegExp, "Phone number is not valid"),
 });

@@ -25,6 +25,7 @@
         "prettier"
     ],
     "rules": {
+        "no-unneeded-ternary": 0,
         "no-underscore-dangle": 0,
         "new-cap": 0,
         "no-useless-escape": 0,

@@ -22,6 +22,9 @@ type PropsButton = {
 export const StyledPrimaryButton = styled(Button)<PropsButton>(
   ({ p = "9.5px 125.5px" }) => ({
     color: theme.palette.white,
+    fontSize: "16px",
+    lineHeight: "24.8px",
+    fontWeight: 600,
     backgroundColor: theme.palette.green.main,
     border: "1px solid #539713",
     textTransform: "none",
@@ -40,6 +43,28 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
     },
   }),
 );
+
+export const StyledSecondaryButton = styled(Button)(() => ({
+  color: theme.palette.white,
+  fontSize: "16px",
+  lineHeight: "24.8px",
+  fontWeight: 600,
+  backgroundColor: theme.palette.black,
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: theme.palette.black,
+    color: theme.palette.green.main,
+  },
+  "&:active": {
+    opacity: 0.7,
+    backgroundColor: theme.palette.black,
+  },
+  "&:disabled": {
+    color: theme.palette.white,
+    opacity: 0.7,
+    backgroundColor: theme.palette.disabled,
+  },
+}));
 
 export const StyledBoxFlex = styled(Box)(() => ({
   marginTop: "20px",
@@ -84,44 +109,48 @@ export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
   }),
 );
 
-export const StyledInput = styled(TextField)(() => ({
-  marginBottom: "15px",
-  "& .MuiFormHelperText-root": {
-    fontSize: "12px",
-    color: theme.palette.red,
-  },
-  "& .MuiInputBase-root": {
-    color: theme.palette.white,
-    fontSize: "16px",
-    opacity: 0.7,
-    "&.Mui-error": {
+export const StyledInput = styled(TextField)<{ isBlack?: boolean }>(
+  ({ isBlack }) => ({
+    marginBottom: "15px",
+    "& .MuiFormHelperText-root": {
+      fontSize: "12px",
       color: theme.palette.red,
     },
-  },
-  "& .MuiFormLabel-root": {
-    color: theme.palette.white,
-    fontWeight: 400,
-    fontSize: "14px",
-    lineHeight: "24.8px",
-  },
-  "& .MuiInput-root:after": {
-    borderBottom: `2px solid ${theme.palette.green.border}`,
-  },
-  "& .MuiInput-root": {
-    borderBottom: `2px solid ${theme.palette.white}`,
-    "&.Mui-focused:not(.Mui-error)": {
-      borderBottom: "2px solid transparent",
+    "& .MuiInputBase-root": {
+      color: isBlack ? theme.palette.black : theme.palette.white,
+      fontSize: "16px",
+      opacity: 0.7,
+      "&.Mui-error": {
+        color: theme.palette.red,
+      },
     },
-    "&.Mui-error": {
-      borderBottom: `2px solid ${theme.palette.red}`,
+    "& .MuiFormLabel-root": {
+      color: isBlack ? theme.palette.black : theme.palette.white,
+      fontWeight: 400,
+      fontSize: "14px",
+      lineHeight: "24.8px",
     },
-  },
-  "& .MuiInputLabel-root": {
-    "&.Mui-focused": {
-      color: theme.palette.white,
+    "& .MuiInput-root:after": {
+      borderBottom: `2px solid ${theme.palette.green.border}`,
     },
-  },
-}));
+    "& .MuiInput-root": {
+      borderBottom: `2px solid ${
+        isBlack ? theme.palette.black : theme.palette.white
+      }`,
+      "&.Mui-focused:not(.Mui-error)": {
+        borderBottom: "2px solid transparent",
+      },
+      "&.Mui-error": {
+        borderBottom: `2px solid ${theme.palette.red}`,
+      },
+    },
+    "& .MuiInputLabel-root": {
+      "&.Mui-focused": {
+        color: isBlack ? theme.palette.black : theme.palette.white,
+      },
+    },
+  }),
+);
 
 export const StyledGridNavbar = styled(Grid)(() => ({
   backgroundColor: theme.palette.black,
@@ -183,11 +212,21 @@ export const StyledProvideWrapper = styled(Box)(() => ({
   margin: "0 auto",
 }));
 
-export const StyledAvatar = styled(Avatar)(() => ({
-  backgroundColor: theme.palette.white,
-  color: theme.palette.black,
-  fontSize: "16px",
-  fontWeight: "600",
-  lineHeight: "24.8px",
-  marginRight: "10px",
+export const StyledAvatar = styled(Avatar)<{ bgColor?: string }>(
+  ({ bgColor }) => ({
+    backgroundColor: bgColor,
+    color: theme.palette.black,
+    fontSize: "16px",
+    fontWeight: "600",
+    lineHeight: "24.8px",
+    marginRight: "10px",
+  }),
+);
+
+export const StyledBoxSettingsWrapper = styled(Box)(() => ({
+  height: "calc(100vh - 140px)",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
 }));

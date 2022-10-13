@@ -50,7 +50,7 @@ export const theme = createTheme({
       border: "#58F83B",
     },
     white: "#ffffff",
-    bgr: "#f5f5f5",
+    bgr: "#F5F5F5",
     disabled: "#a19eaa",
   },
   spacing: [0, 4, 8, 16, 32, 64],

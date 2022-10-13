@@ -29,7 +29,7 @@ interface ISignInForm {
 const SignIn: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || ROUTES.Home;
+  const from = location.state?.from?.pathname || ROUTES.HOME;
   const isAuth = localstorageService.get("accessToken");
   const { login } = useActions();
   const { errorSignIn, isLoading } = useAppSelector(getAuthState);

@@ -20,7 +20,11 @@ export enum RESET_PAGE {
   PASSWORDS = "PASSWORDS",
   NOTIFICATION = "NOTIFICATION",
 }
-
+export enum SETTINGS {
+  EXTENDED = "EXTENDED",
+  PASSWORDS = "PASSWORDS",
+  NOTIFICATION = "NOTIFICATION",
+}
 export const showErrorText = (errors: any, value: string) => {
   return errors[value]?.message ? errors[value]?.message : " ";
 };

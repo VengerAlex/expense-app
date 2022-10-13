@@ -21,9 +21,7 @@ export const AuthPageWrapper: FC<IAuthPageWrapper> = ({
       <Grid
         sx={{ backgroundColor: "#1D283A", p: "48px 60px" }}
         item
-        xs={10}
-        sm={8}
-        md={5}
+        xs={6}
         component={Paper}
         elevation={6}
         square
@@ -50,9 +48,7 @@ export const AuthPageWrapper: FC<IAuthPageWrapper> = ({
       </Grid>
       <Grid
         item
-        xs={12}
-        sm={4}
-        md={7}
+        xs={6}
         sx={{
           backgroundImage: `url(${bgImage})`,
           backgroundRepeat: "no-repeat",

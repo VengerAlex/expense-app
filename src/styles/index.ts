@@ -1,6 +1,7 @@
 import {
   Divider,
   Box,
+  Paper,
   Avatar,
   Button,
   Checkbox,
@@ -102,8 +103,6 @@ type NotificationBoxProps = {
 export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
   ({ theme, light = false }) => ({
     color: light ? theme.palette.black : theme.palette.white,
-    maxWidth: "330px",
-    height: "381px",
     borderRadius: light ? "8px" : "0px",
     backgroundColor: light ? theme.palette.green.lighter : "transparent",
   }),
@@ -229,4 +228,13 @@ export const StyledBoxSettingsWrapper = styled(Box)(() => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+}));
+
+export const StyledNotifWrapper = styled(Paper)(() => ({
+  padding: theme.spacing(4),
+  borderRadius: "8px",
+  backgroundColor: theme.palette.green.lighter,
+  minWidth: "394px",
+  minHeight: "369px",
+  textAlign: "center",
 }));

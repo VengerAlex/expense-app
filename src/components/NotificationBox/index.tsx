@@ -7,10 +7,12 @@ type INotificationBoxProps = BoxProps & {
   title: string;
   btnTitle: string;
   navigateTo: string;
+  titleColor?: string;
 };
 
 export const NotificationBox = ({
   title,
+  titleColor,
   navigateTo,
   btnTitle,
   ...props
@@ -20,6 +22,7 @@ export const NotificationBox = ({
   const navigateToHandler = () => {
     navigate(navigateTo);
   };
+
   return (
     <StyledNotificationBox {...props}>
       <Box
@@ -31,7 +34,7 @@ export const NotificationBox = ({
       <Typography
         pb="24px"
         variant="h5"
-        sx={{ maxWidth: "267px", m: "0 auto" }}
+        sx={{ maxWidth: "267px", m: "0 auto", color: titleColor }}
       >
         {title}
       </Typography>

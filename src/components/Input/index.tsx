@@ -4,6 +4,7 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 import { IconButton, InputAdornment, TextFieldProps } from "@mui/material";
 import { StyledInput } from "../../styles";
+import { theme } from "../../providers/ThemeProvider";
 
 type IInput = TextFieldProps & {
   isPassword?: boolean;
@@ -35,7 +36,11 @@ const Input: FC<IInput> = ({
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
-                    sx={{ color: "#fff" }}
+                    sx={{
+                      color: isBlack
+                        ? theme.palette.black
+                        : theme.palette.white,
+                    }}
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (

@@ -8,15 +8,10 @@ import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
 import { ROUTES, showErrorText } from "../../../utils/types";
 import { MyLink } from "../../../components/MyLink";
 import signInCover from "../../../assets/images/cover-login.jpg";
-import {
-  ErrorMessage,
-  StyledBoxFlex,
-  StyledPrimaryButton,
-} from "../../../styles/index";
+import { ErrorMessage, StyledPrimaryButton } from "../../../styles/index";
 import { useActions } from "../../../hooks/useActions";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { getAuthState } from "../../../store/reducers/auth/authSlice";
-import { Checkbox } from "../../../components/Checkbox";
 import { signInSchema } from "../../../utils/schema";
 import localstorageService from "../../../services/localstorage.service";
 
@@ -57,7 +52,7 @@ const SignIn: FC = () => {
 
   return (
     <AuthPageWrapper bgImage={signInCover}>
-      <Typography sx={{ m: "160px 0 32px" }} variant="h1">
+      <Typography variant="h1" mb={4}>
         Sign In
       </Typography>
 
@@ -66,6 +61,8 @@ const SignIn: FC = () => {
           <Input
             helperText={showErrorText(errors, "username")}
             autoFocus
+            InputLabelProps={{ shrink: true }}
+            placeholder="example@gmail.com"
             error={!!errors.username}
             control={control}
             formName="username"
@@ -74,16 +71,15 @@ const SignIn: FC = () => {
           <Input
             helperText={showErrorText(errors, "password")}
             error={!!errors.password}
-            sx={{ mb: "-15px" }}
+            sx={{ mb: -1 }}
+            InputLabelProps={{ shrink: true }}
+            placeholder="***************"
             control={control}
             formName="password"
             label="Password"
             isPassword={true}
           />
-          <StyledBoxFlex>
-            <Checkbox control={control} labelText="Remember me" />
-            <MyLink to={ROUTES.RESET}>Reset Password?</MyLink>
-          </StyledBoxFlex>
+          <MyLink to={ROUTES.RESET}>Reset Password?</MyLink>
 
           <StyledPrimaryButton sx={{ mb: 3 }} type="submit" disabled={!isValid}>
             {isLoading ? "Loading" : "Login"}

@@ -28,7 +28,7 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
       backgroundColor: theme.palette.green.main,
     },
     "&:disabled": {
-      border: "none",
+      border: "1px solid transparent",
       backgroundColor: theme.palette.disabled,
     },
   }),
@@ -77,41 +77,67 @@ export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
   }),
 );
 
-export const StyledInput = styled(TextField)(() => ({
-  marginBottom: "15px",
+export const StyledInput = styled(TextField)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+  "&.MuiTextField-root": {
+    borderColor: theme.palette.blue,
+  },
+
+  "& .MuiInput-input": {
+    "&:placeholder": {
+      color: "red",
+    },
+  },
+
+  "& label": {
+    fontSize: "14px",
+    lineHeight: "21.7px",
+    fontWeight: 400,
+    color: theme.palette.white,
+    "&.Mui-focused": {
+      color: theme.palette.white,
+    },
+
+    "&.Mui-error": {
+      color: theme.palette.white,
+    },
+  },
   "& .MuiFormHelperText-root": {
     fontSize: "12px",
     color: theme.palette.red,
+    "&.Mui-error": {
+      color: theme.palette.red,
+    },
   },
   "& .MuiInputBase-root": {
     color: theme.palette.white,
     fontSize: "16px",
     opacity: 0.7,
+    borderColor: theme.palette.white,
+    "&:before": {
+      borderColor: theme.palette.white,
+    },
+
+    "&:after": {
+      borderColor: theme.palette.white,
+    },
+
+    "&.Mui-focused": {
+      "&:after": {
+        borderColor: theme.palette.green.main,
+      },
+    },
+    "& .MuiFormLabel-root": {
+      color: theme.palette.white,
+      fontWeight: 400,
+      fontSize: "14px",
+      lineHeight: "24.8px",
+    },
     "&.Mui-error": {
       color: theme.palette.red,
-    },
-  },
-  "& .MuiFormLabel-root": {
-    color: theme.palette.white,
-    fontWeight: 400,
-    fontSize: "14px",
-    lineHeight: "24.8px",
-  },
-  "& .MuiInput-root:after": {
-    borderBottom: `2px solid ${theme.palette.green.border}`,
-  },
-  "& .MuiInput-root": {
-    borderBottom: `2px solid ${theme.palette.white}`,
-    "&.Mui-focused:not(.Mui-error)": {
-      borderBottom: "2px solid transparent",
-    },
-    "&.Mui-error": {
-      borderBottom: `2px solid ${theme.palette.red}`,
-    },
-  },
-  "& .MuiInputLabel-root": {
-    "&.Mui-focused": {
-      color: theme.palette.white,
+      "&:after": {
+        borderColor: theme.palette.red,
+      },
     },
   },
 }));

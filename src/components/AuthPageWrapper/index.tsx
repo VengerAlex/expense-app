@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Logo } from "../Logo";
+import { theme } from "../../providers/ThemeProvider";
 
 interface IAuthPageWrapper {
   children: ReactNode;
@@ -19,7 +20,7 @@ export const AuthPageWrapper: FC<IAuthPageWrapper> = ({
     <Grid container sx={{ height: "100vh" }}>
       <CssBaseline />
       <Grid
-        sx={{ backgroundColor: "#1D283A", p: "48px 60px" }}
+        sx={{ backgroundColor: theme.palette.black, padding: "48px 60px" }}
         item
         xs={6}
         component={Paper}
@@ -28,17 +29,18 @@ export const AuthPageWrapper: FC<IAuthPageWrapper> = ({
         <Logo />
         <Box
           sx={{
+            height: "calc(100vh - 158px)",
             textAlign: "center",
-            mx: 4,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Box
             sx={{
               maxWidth: "330px",
               margin: "0 auto",
-              display: "flex",
               flexDirection: "column",
-              alignItems: "center",
             }}
           >
             {children}

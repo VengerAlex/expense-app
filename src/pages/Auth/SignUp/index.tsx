@@ -1,107 +1,29 @@
-import { FC } from "react";
-import Box from "@mui/material/Box";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { FormControl, Typography } from "@mui/material";
-import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
+import { useState } from "react";
+import { SignUpForm } from "./SignUpForm";
 import signUpCover from "../../../assets/images/cover-sign-up.jpg";
-import Input from "../../../components/Input";
-import { ErrorMessage, StyledPrimaryButton } from "../../../styles";
-import { MyLink } from "../../../components/MyLink";
-import { ROUTES, showErrorText } from "../../../utils/types";
-import { useActions } from "../../../hooks/useActions";
-import { useAppSelector } from "../../../hooks/useAppSelector";
-import { getAuthState } from "../../../store/reducers/auth/authSlice";
-import { Checkbox } from "../../../components/Checkbox";
-import { signUpSchema } from "../../../utils/schema";
+import signInCover from "../../../assets/images/cover-login.jpg";
+import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
+import { NotificationBox } from "../../../components/NotificationBox";
+import { ROUTES, SIGN_UP } from "../../../utils/types";
 
-interface ISignUpForm {
-  fullName: string;
-  username: string;
-  password: string;
-  confirmedPassword: string;
-  isConfirmed: boolean;
-}
+const SignUp = () => {
+  const [currentComponent, setCurrentComponent] = useState(SIGN_UP.FORM);
 
-const SignUp: FC = () => {
-  const { register } = useActions();
-  const { errorSignUp } = useAppSelector(getAuthState);
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isValid, isSubmitSuccessful },
-    reset,
-  } = useForm<ISignUpForm>({
-    mode: "onChange",
-    resolver: yupResolver(signUpSchema),
-  });
-
-  const onSubmit = (data: ISignUpForm) => {
-    const { username, password, fullName: displayName } = data;
-
-    register({ username, password, displayName });
-    isSubmitSuccessful && reset();
-  };
+  const currentImage =
+    currentComponent === SIGN_UP.FORM ? signUpCover : signInCover;
 
   return (
-    <AuthPageWrapper bgImage={signUpCover}>
-      <Typography sx={{ m: "80px 0 32px" }} variant="h1">
-        Sign Up
-      </Typography>
-      <FormControl sx={{ width: "335px" }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            helperText={showErrorText(errors, "fullName")}
-            autoFocus
-            error={!!errors.fullName}
-            control={control}
-            formName="fullName"
-            label="Full Name"
-          />
-          <Input
-            helperText={showErrorText(errors, "username")}
-            error={!!errors.username}
-            control={control}
-            formName="username"
-            label="User Name"
-          />
-          <Input
-            helperText={showErrorText(errors, "password")}
-            error={!!errors.password}
-            control={control}
-            formName="password"
-            label="Password"
-            isPassword={true}
-          />
-          <Input
-            helperText={showErrorText(errors, "confirmedPassword")}
-            error={!!errors.confirmedPassword}
-            control={control}
-            formName="confirmedPassword"
-            label="Confirmed Password"
-            isPassword={true}
-          />
-          <Box sx={{ textAlign: "left" }}>
-            <Checkbox
-              labelText="By creating an account you agree to the terms of use and our privacy policy."
-              control={control}
-            />
-          </Box>
-          <StyledPrimaryButton
-            type="submit"
-            disabled={!isValid}
-            sx={{ mb: 3, my: 3 }}
-          >
-            Sign Up
-          </StyledPrimaryButton>
-          {errorSignUp && (
-            <ErrorMessage variant="subtitle2">{errorSignUp}</ErrorMessage>
-          )}
-        </form>
-      </FormControl>
-      <Typography variant="subtitle2">
-        I have an account. <MyLink to={ROUTES.SIGN_IN}>Go to Sign in</MyLink>
-      </Typography>
+    <AuthPageWrapper bgImage={currentImage}>
+      {currentComponent === SIGN_UP.FORM && (
+        <SignUpForm setCurrentComponent={setCurrentComponent} />
+      )}
+      {currentComponent === SIGN_UP.NOTIFICATION && (
+        <NotificationBox
+          navigateTo={ROUTES.SIGN_IN}
+          btnTitle="Let`s Start"
+          title=" Your account successfully created"
+        />
+      )}
     </AuthPageWrapper>
   );
 };

@@ -5,7 +5,7 @@ import { Typography, FormControl } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
 import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
-import { ROUTES, showErrorText } from "../../../utils/types";
+import { ISignInForm, ROUTES } from "../../../utils/types";
 import { MyLink } from "../../../components/MyLink";
 import signInCover from "../../../assets/images/cover-login.jpg";
 import { ErrorMessage, StyledPrimaryButton } from "../../../styles/index";
@@ -14,12 +14,7 @@ import { useAppSelector } from "../../../hooks/useAppSelector";
 import { getAuthState } from "../../../store/reducers/auth/authSlice";
 import { signInSchema } from "../../../utils/schema";
 import localstorageService from "../../../services/localstorage.service";
-
-interface ISignInForm {
-  username: string;
-  password: string;
-  isRememberMe: string;
-}
+import { showErrorText } from "../../../utils/helperes";
 
 const SignIn: FC = () => {
   const navigate = useNavigate();

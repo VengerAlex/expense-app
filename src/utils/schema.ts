@@ -19,7 +19,5 @@ export const resetPasswordSchema = yup.object().shape({
 export const signUpSchema = resetPasswordSchema.shape({
   username: yup.string().required().min(8).max(30),
   fullName: yup.string().required().min(5).max(30),
-  isConfirmed: yup
-    .bool()
-    .oneOf([true], "You must accept the terms and conditions"),
+  isConfirmed: yup.bool().oneOf([true]),
 });

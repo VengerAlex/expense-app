@@ -15,6 +15,9 @@ type PropsButton = {
 export const StyledPrimaryButton = styled(Button)<PropsButton>(
   ({ p = "9.5px 125.5px" }) => ({
     color: theme.palette.white,
+    fontSize: "16px",
+    lineHeight: "24.8px",
+    fontWeight: 600,
     backgroundColor: theme.palette.green.main,
     border: "1px solid #539713",
     textTransform: "none",
@@ -28,6 +31,7 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
       backgroundColor: theme.palette.green.main,
     },
     "&:disabled": {
+      color: theme.palette.white,
       border: "1px solid transparent",
       backgroundColor: theme.palette.disabled,
     },
@@ -54,7 +58,7 @@ export const ErrorMessage = styled(Typography)(() => ({
 }));
 
 export const StyledCheckbox = styled(Checkbox)(() => ({
-  color: theme.palette.bgr,
+  color: theme.palette.white,
   "&:checked": {
     color: theme.palette.green.main,
   },
@@ -78,15 +82,10 @@ export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
 );
 
 export const StyledInput = styled(TextField)(({ theme }) => ({
-  marginBottom: theme.spacing(2),
+  marginBottom: theme.spacing(1),
   "&.MuiTextField-root": {
+    marginTop: "0px",
     borderColor: theme.palette.blue,
-  },
-
-  "& .MuiInput-input": {
-    "&:placeholder": {
-      color: "red",
-    },
   },
 
   "& label": {
@@ -103,10 +102,22 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
     },
   },
   "& .MuiFormHelperText-root": {
+    marginTop: "12px",
+    marginBottom: "5px",
+    lineHeight: "0px",
     fontSize: "12px",
     color: theme.palette.red,
     "&.Mui-error": {
       color: theme.palette.red,
+    },
+  },
+  input: {
+    "&::placeholder": {
+      color: theme.palette.white,
+      fontWeight: 600,
+      opacity: 0.7,
+      fontSize: "16px",
+      lineHeight: "24.8px",
     },
   },
   "& .MuiInputBase-root": {

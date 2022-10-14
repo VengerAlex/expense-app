@@ -18,6 +18,27 @@ export enum RESET_PAGE {
   NOTIFICATION = "NOTIFICATION",
 }
 
-export const showErrorText = (errors: any, value: string) => {
-  return errors[value]?.message ? errors[value]?.message : " ";
-};
+export enum SIGN_UP {
+  FORM = "FORM",
+  NOTIFICATION = "NOTIFICATION",
+}
+
+export interface IResetPassword {
+  email: string;
+}
+export interface IResetForm {
+  password: string;
+  confirmedPassword: string;
+}
+export interface ISignUpFormValue {
+  fullName: string;
+  username: string;
+  password: string;
+  confirmedPassword: string;
+  isConfirmed: boolean;
+}
+export interface ISignInForm {
+  username: string;
+  password: string;
+  isRememberMe: string;
+}

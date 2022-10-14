@@ -4,7 +4,7 @@ import resetCover from "../../../assets/images/cover-reset-password.jpg";
 import { NotificationBox } from "../../../components/NotificationBox";
 import { RESET_PAGE, ROUTES } from "../../../utils/types";
 import EmailReset from "./EmailReset";
-import { ResetPassword } from "../../../components/ResetPassword";
+import { ResetPassword } from "./ResetPassword";
 
 const ResetPage = () => {
   const [currentComponent, setCurrentComponent] = useState(RESET_PAGE.EMAIL);

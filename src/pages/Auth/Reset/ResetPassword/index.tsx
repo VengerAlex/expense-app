@@ -1,15 +1,11 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { FormControl, Typography } from "@mui/material";
-import Input from "../Input";
-import { RESET_PAGE, showErrorText } from "../../utils/types";
-import { StyledPrimaryButton } from "../../styles";
-import { resetPasswordSchema } from "../../utils/schema";
-
-interface IResetForm {
-  password: string;
-  confirmedPassword: string;
-}
+import Input from "../../../../components/Input";
+import { IResetForm, RESET_PAGE } from "../../../../utils/types";
+import { StyledPrimaryButton } from "../../../../styles";
+import { resetPasswordSchema } from "../../../../utils/schema";
+import { showErrorText } from "../../../../utils/helperes";
 
 interface IResetPassword {
   setCurrentComponent: (component: RESET_PAGE) => void;
@@ -25,7 +21,7 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
   });
   return (
     <>
-      <Typography sx={{ m: "160px 0 32px", lineHeight: "55px" }} variant="h1">
+      <Typography sx={{ lineHeight: "55px", mb: 4 }} variant="h1">
         Reset Password
       </Typography>
 
@@ -34,14 +30,19 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
           <Input
             helperText={showErrorText(errors, "password")}
             error={!!errors.password}
+            autoFocus
+            placeholder="***************"
+            InputLabelProps={{ shrink: true }}
             control={control}
             formName="password"
-            label="Password"
+            label="Enter New Password"
             isPassword={true}
           />
           <Input
             helperText={showErrorText(errors, "confirmedPassword")}
             error={!!errors.confirmedPassword}
+            placeholder="***************"
+            InputLabelProps={{ shrink: true }}
             control={control}
             formName="confirmedPassword"
             label="Repeat New Password"
@@ -49,7 +50,7 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
           />
           <StyledPrimaryButton
             p="9.5px 75.5px"
-            sx={{ mb: 3 }}
+            sx={{ mb: 3, mt: 2 }}
             type="submit"
             disabled={!isValid}
             onClick={() => setCurrentComponent(RESET_PAGE.NOTIFICATION)}

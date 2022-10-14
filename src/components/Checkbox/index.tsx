@@ -13,6 +13,7 @@ export const Checkbox: FC<ICheckbox> = ({ control, labelText, ...props }) => {
     <FormControlLabel
       control={
         <StyledCheckbox
+          disableRipple
           {...props}
           color="success"
           {...control.register("isConfirmed")}

@@ -11,7 +11,7 @@ export const MyLink: FC<ILink> = ({ to, children }) => {
   return (
     <Link to={to}>
       <Typography
-        sx={{ color: "#69B0FF" }}
+        sx={{ color: "#69B0FF", ml: 1 }}
         component="span"
         variant="subtitle2"
       >

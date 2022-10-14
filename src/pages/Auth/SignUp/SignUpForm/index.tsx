@@ -22,13 +22,15 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
   const { errorSignUp, isLoading } = useAppSelector(getAuthState);
   const {
     control,
+    getValues,
     handleSubmit,
-    formState: { errors, isValid, isSubmitSuccessful },
+    formState: { errors, isValid },
     reset,
   } = useForm<ISignUpFormValue>({
     mode: "onChange",
     resolver: yupResolver(signUpSchema),
   });
+  const { username, fullName, password, confirmedPassword } = getValues();
 
   const onSubmit = (data: ISignUpFormValue) => {
     const { username, password, fullName: displayName } = data;
@@ -43,11 +45,11 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
       <Typography sx={{ m: "80px 0 32px" }} variant="h1">
         Sign Up
       </Typography>
-      <FormControl sx={{ width: "335px" }}>
+      <FormControl sx={{ minWidth: "330px" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
-            helperText={showErrorText(errors, "username")}
-            error={!!errors.username}
+            helperText={showErrorText(errors, "username", username)}
+            error={!!errors.username && !!username}
             autoFocus
             placeholder="Example1488"
             InputLabelProps={{ shrink: true }}
@@ -56,17 +58,17 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             label="User Name"
           />
           <Input
-            helperText={showErrorText(errors, "fullName")}
+            helperText={showErrorText(errors, "fullName", fullName)}
             placeholder="Example1488"
             InputLabelProps={{ shrink: true }}
-            error={!!errors.fullName}
+            error={!!errors.fullName && !!fullName}
             control={control}
             formName="fullName"
             label="Full Name"
           />
           <Input
-            helperText={showErrorText(errors, "password")}
-            error={!!errors.password}
+            helperText={showErrorText(errors, "password", password)}
+            error={!!errors.password && !!password}
             placeholder="***************"
             InputLabelProps={{ shrink: true }}
             control={control}
@@ -75,8 +77,12 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             isPassword={true}
           />
           <Input
-            helperText={showErrorText(errors, "confirmedPassword")}
-            error={!!errors.confirmedPassword}
+            helperText={showErrorText(
+              errors,
+              "confirmedPassword",
+              confirmedPassword,
+            )}
+            error={!!errors.confirmedPassword && !!confirmedPassword}
             placeholder="***************"
             InputLabelProps={{ shrink: true }}
             control={control}
@@ -86,6 +92,7 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
           />
           <Box sx={{ textAlign: "left" }}>
             <Checkbox
+              disableRipple
               labelText="By creating an account you agree to the terms of use and our privacy policy."
               control={control}
             />
@@ -103,7 +110,8 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
         </form>
       </FormControl>
       <Typography variant="subtitle2">
-        I have an account. <MyLink to={ROUTES.SIGN_IN}>Go to Sign in</MyLink>
+        I have no account.
+        <MyLink to={ROUTES.SIGN_IN}>Go to Sign in</MyLink>
       </Typography>
     </>
   );

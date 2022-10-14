@@ -15,11 +15,13 @@ interface IEmailReset {
 const EmailReset = ({ setCurrentComponent }: IEmailReset) => {
   const {
     control,
+    getValues,
     formState: { errors, isValid },
   } = useForm<IResetPassword>({
     mode: "onChange",
     resolver: yupResolver(resetSchema),
   });
+  const { email } = getValues();
 
   return (
     <>
@@ -34,10 +36,10 @@ const EmailReset = ({ setCurrentComponent }: IEmailReset) => {
       <FormControl sx={{ maxWidth: "335px" }}>
         <form>
           <Input
-            helperText={showErrorText(errors, "email")}
+            helperText={showErrorText(errors, "email", email)}
             InputLabelProps={{ shrink: true }}
             autoFocus
-            error={!!errors.email}
+            error={!!errors.email && !!email}
             placeholder="example@gmail.com"
             control={control}
             formName="email"

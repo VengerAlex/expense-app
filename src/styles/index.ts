@@ -61,6 +61,9 @@ export const StyledCheckbox = styled(Checkbox)(() => ({
   color: theme.palette.white,
   "&:checked": {
     color: theme.palette.green.main,
+    "&::after": {
+      backgroundColor: "red",
+    },
   },
   "&:hover": {
     color: theme.palette.green.lighter,
@@ -125,6 +128,13 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
     fontSize: "16px",
     opacity: 0.7,
     borderColor: theme.palette.white,
+    "&:hover": {
+      "&:not(.Mui-disabled)": {
+        "&:before": {
+          borderColor: theme.palette.green.lighter,
+        },
+      },
+    },
     "&:before": {
       borderColor: theme.palette.white,
     },

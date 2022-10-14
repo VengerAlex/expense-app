@@ -26,13 +26,19 @@ const SignIn: FC = () => {
 
   const {
     control,
+    getValues,
     handleSubmit,
     formState: { errors, isValid },
     reset,
   } = useForm<ISignInForm>({
     mode: "onChange",
+    defaultValues: {
+      username: "",
+      password: "",
+    },
     resolver: yupResolver(signInSchema),
   });
+  const { username, password } = getValues();
 
   const onSubmit = (data: ISignInForm) => {
     const { username, password } = data;
@@ -51,22 +57,22 @@ const SignIn: FC = () => {
         Sign In
       </Typography>
 
-      <FormControl sx={{ maxWidth: "335px" }}>
+      <FormControl sx={{ minWidth: "330px" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
-            helperText={showErrorText(errors, "username")}
+            helperText={showErrorText(errors, "username", username)}
             autoFocus
             InputLabelProps={{ shrink: true }}
-            placeholder="example@gmail.com"
-            error={!!errors.username}
+            placeholder="Example123"
+            error={!!errors.username && !!username}
             control={control}
             formName="username"
             label="Username"
           />
           <Input
-            helperText={showErrorText(errors, "password")}
-            error={!!errors.password}
-            sx={{ mb: -1 }}
+            helperText={showErrorText(errors, "password", password)}
+            error={!!errors.password && !!password}
+            sx={{ mb: 2 }}
             InputLabelProps={{ shrink: true }}
             placeholder="***************"
             control={control}
@@ -74,8 +80,6 @@ const SignIn: FC = () => {
             label="Password"
             isPassword={true}
           />
-          <MyLink to={ROUTES.RESET}>Reset Password?</MyLink>
-
           <StyledPrimaryButton sx={{ mb: 3 }} type="submit" disabled={!isValid}>
             {isLoading ? "Loading" : "Login"}
           </StyledPrimaryButton>
@@ -86,8 +90,11 @@ const SignIn: FC = () => {
       </FormControl>
 
       <Typography variant="subtitle2">
-        Don’t have account yet ?{" "}
-        <MyLink to={ROUTES.SIGN_UP}>New Account</MyLink>
+        Don’t have account yet?<MyLink to={ROUTES.SIGN_UP}>New Account</MyLink>
+      </Typography>
+      <Typography variant="subtitle2" mt={1}>
+        Forgot your password?
+        <MyLink to={ROUTES.RESET}>Reset Password?</MyLink>
       </Typography>
     </AuthPageWrapper>
   );

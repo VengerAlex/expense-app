@@ -25,6 +25,7 @@
         "prettier"
     ],
     "rules": {
+        "@typescript-eslint/no-throw-literal": 0,
         "no-underscore-dangle": 0,
         "new-cap": 0,
         "no-useless-escape": 0,

@@ -1,12 +1,12 @@
-import { FormControl, Typography, Box } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { resetSchema } from "../../../../utils/schema";
 import Input from "../../../../components/Input";
-import { StyledPrimaryButton } from "../../../../styles";
+import { StyledPrimaryButton, StyledFormControl } from "../../../../styles";
 import { IResetPassword, RESET_PAGE, ROUTES } from "../../../../utils/types";
 import { MyLink } from "../../../../components/MyLink";
-import { showErrorText } from "../../../../utils/helperes";
+import { showErrorText } from "../../../../utils/helpers";
 
 interface IEmailReset {
   setCurrentComponent: (component: RESET_PAGE) => void;
@@ -33,7 +33,7 @@ const EmailReset = ({ setCurrentComponent }: IEmailReset) => {
         reset your password and reset it
       </Typography>
 
-      <FormControl sx={{ maxWidth: "335px" }}>
+      <StyledFormControl>
         <form>
           <Input
             helperText={showErrorText(errors, "email", email)}
@@ -55,7 +55,7 @@ const EmailReset = ({ setCurrentComponent }: IEmailReset) => {
             Reset Password
           </StyledPrimaryButton>
         </form>
-      </FormControl>
+      </StyledFormControl>
       <Typography variant="subtitle2">
         I remembered the password.{" "}
         <MyLink to={ROUTES.SIGN_IN}>Go to Sign in</MyLink>

@@ -6,12 +6,14 @@ import { StyledNotificationBox, StyledPrimaryButton } from "../../styles";
 type INotificationBoxProps = BoxProps & {
   title: string;
   btnTitle: string;
+  p?: string;
   navigateTo: string;
 };
 
 export const NotificationBox = ({
   title,
   navigateTo,
+  p,
   btnTitle,
   ...props
 }: INotificationBoxProps) => {
@@ -35,7 +37,7 @@ export const NotificationBox = ({
       >
         {title}
       </Typography>
-      <StyledPrimaryButton onClick={navigateToHandler}>
+      <StyledPrimaryButton p={p} onClick={navigateToHandler}>
         {btnTitle}
       </StyledPrimaryButton>
     </StyledNotificationBox>

@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { FormControl, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Input from "../../../../components/Input";
 import { IResetForm, RESET_PAGE, ROUTES } from "../../../../utils/types";
-import { StyledPrimaryButton } from "../../../../styles";
+import { StyledPrimaryButton, StyledFormControl } from "../../../../styles";
 import { resetPasswordSchema } from "../../../../utils/schema";
-import { showErrorText } from "../../../../utils/helperes";
+import { showErrorText } from "../../../../utils/helpers";
 import { MyLink } from "../../../../components/MyLink";
 
 interface IResetPassword {
@@ -29,7 +29,7 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
         Reset Password
       </Typography>
 
-      <FormControl sx={{ maxWidth: "335px" }}>
+      <StyledFormControl>
         <form>
           <Input
             helperText={showErrorText(errors, "password", password)}
@@ -71,7 +71,7 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
           I remembered the password.
           <MyLink to={ROUTES.SIGN_IN}>Go to Sign in</MyLink>
         </Typography>
-      </FormControl>
+      </StyledFormControl>
     </>
   );
 };

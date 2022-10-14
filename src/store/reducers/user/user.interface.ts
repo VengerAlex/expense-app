@@ -15,8 +15,3 @@ export interface IUserInitialState {
   isLoading: boolean;
   errorSignIn: string;
 }
-
-export interface ILoginProps {
-  username: string;
-  password: string;
-}

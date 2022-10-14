@@ -5,6 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./ThemeProvider";
 import { store } from "../store";
+import { ReduxToastr } from "../components/ReduxToastr";
 
 interface IMainProvider {
   children: ReactNode;
@@ -15,6 +16,7 @@ export const MainProvider: FC<IMainProvider> = ({ children }) => {
     <Provider store={store}>
       <BrowserRouter>
         <CssBaseline />
+        <ReduxToastr />
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </BrowserRouter>
     </Provider>

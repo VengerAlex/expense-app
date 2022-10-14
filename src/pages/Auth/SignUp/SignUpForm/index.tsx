@@ -1,17 +1,22 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { Box, FormControl, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { getAuthState } from "../../../../store/reducers/auth/authSlice";
-import { ErrorMessage, StyledPrimaryButton } from "../../../../styles";
-import { ISignUpFormValue, ROUTES, SIGN_UP } from "../../../../utils/types";
+import { StyledFormControl, StyledPrimaryButton } from "../../../../styles";
+import {
+  ISignUpFormValue,
+  LOADING_STATUS,
+  ROUTES,
+  SIGN_UP,
+} from "../../../../utils/types";
 import Input from "../../../../components/Input";
 import { Checkbox } from "../../../../components/Checkbox";
 import { MyLink } from "../../../../components/MyLink";
 import { signUpSchema } from "../../../../utils/schema";
-import { showErrorText } from "../../../../utils/helperes";
+import { showErrorText } from "../../../../utils/helpers";
 
 interface ISignUpForm {
   setCurrentComponent: (component: SIGN_UP) => void;
@@ -19,7 +24,7 @@ interface ISignUpForm {
 
 export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
   const { register } = useActions();
-  const { errorSignUp, isLoading } = useAppSelector(getAuthState);
+  const { isLoading, statusCode, isFullFilled } = useAppSelector(getAuthState);
   const {
     control,
     getValues,
@@ -40,12 +45,18 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
     reset();
   };
 
+  useEffect(() => {
+    if (isFullFilled && statusCode === 201) {
+      setCurrentComponent(SIGN_UP.NOTIFICATION);
+    }
+  }, [statusCode, isFullFilled]);
+
   return (
     <>
       <Typography sx={{ m: "80px 0 32px" }} variant="h1">
         Sign Up
       </Typography>
-      <FormControl sx={{ minWidth: "330px" }}>
+      <StyledFormControl>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             helperText={showErrorText(errors, "username", username)}
@@ -93,6 +104,7 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
           />
           <Box sx={{ textAlign: "left" }}>
             <Checkbox
+              defaultChecked
               disableRipple
               labelText="By creating an account you agree to the terms of use and our privacy policy."
               control={control}
@@ -103,13 +115,10 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             disabled={!isValid}
             sx={{ mb: 3, my: 3 }}
           >
-            {isLoading ? "Loading" : "Sign Up"}
+            {isLoading === LOADING_STATUS.PENDING ? "Loading" : "Sign Up"}
           </StyledPrimaryButton>
-          {errorSignUp && (
-            <ErrorMessage variant="subtitle2">{errorSignUp}</ErrorMessage>
-          )}
         </form>
-      </FormControl>
+      </StyledFormControl>
       <Typography variant="subtitle2">
         I have no account.
         <MyLink to={ROUTES.SIGN_IN}>Go to Sign in</MyLink>

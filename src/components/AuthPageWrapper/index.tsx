@@ -20,7 +20,10 @@ export const AuthPageWrapper: FC<IAuthPageWrapper> = ({
     <Grid container sx={{ height: "100vh" }}>
       <CssBaseline />
       <Grid
-        sx={{ backgroundColor: theme.palette.black, padding: "48px 60px" }}
+        sx={{
+          backgroundColor: theme.palette.black,
+          padding: "48px 60px",
+        }}
         item
         xs={6}
         component={Paper}
@@ -29,6 +32,7 @@ export const AuthPageWrapper: FC<IAuthPageWrapper> = ({
         <Logo />
         <Box
           sx={{
+            overflowY: "auto",
             height: "calc(100vh - 158px)",
             textAlign: "center",
             display: "flex",

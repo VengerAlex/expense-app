@@ -1,20 +1,20 @@
 import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Typography, FormControl } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
 import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
-import { ISignInForm, ROUTES } from "../../../utils/types";
+import { ISignInForm, LOADING_STATUS, ROUTES } from "../../../utils/types";
 import { MyLink } from "../../../components/MyLink";
 import signInCover from "../../../assets/images/cover-login.jpg";
-import { ErrorMessage, StyledPrimaryButton } from "../../../styles/index";
+import { StyledPrimaryButton, StyledFormControl } from "../../../styles/index";
 import { useActions } from "../../../hooks/useActions";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { getAuthState } from "../../../store/reducers/auth/authSlice";
 import { signInSchema } from "../../../utils/schema";
 import localstorageService from "../../../services/localstorage.service";
-import { showErrorText } from "../../../utils/helperes";
+import { showErrorText } from "../../../utils/helpers";
 
 const SignIn: FC = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const SignIn: FC = () => {
   const from = location.state?.from?.pathname || ROUTES.Home;
   const isAuth = localstorageService.get("accessToken");
   const { login } = useActions();
-  const { errorSignIn, isLoading } = useAppSelector(getAuthState);
+  const { isLoading } = useAppSelector(getAuthState);
 
   const {
     control,
@@ -32,10 +32,6 @@ const SignIn: FC = () => {
     reset,
   } = useForm<ISignInForm>({
     mode: "onChange",
-    defaultValues: {
-      username: "",
-      password: "",
-    },
     resolver: yupResolver(signInSchema),
   });
   const { username, password } = getValues();
@@ -57,7 +53,7 @@ const SignIn: FC = () => {
         Sign In
       </Typography>
 
-      <FormControl sx={{ minWidth: "330px" }}>
+      <StyledFormControl>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             helperText={showErrorText(errors, "username", username)}
@@ -81,13 +77,10 @@ const SignIn: FC = () => {
             isPassword
           />
           <StyledPrimaryButton sx={{ mb: 3 }} type="submit" disabled={!isValid}>
-            {isLoading ? "Loading" : "Login"}
+            {isLoading === LOADING_STATUS.PENDING ? "Loading" : "Login"}
           </StyledPrimaryButton>
-          {errorSignIn && (
-            <ErrorMessage variant="subtitle2">{errorSignIn}</ErrorMessage>
-          )}
         </form>
-      </FormControl>
+      </StyledFormControl>
 
       <Typography variant="subtitle2">
         Don’t have account yet?<MyLink to={ROUTES.SIGN_UP}>New Account</MyLink>

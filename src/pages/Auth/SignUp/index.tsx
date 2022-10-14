@@ -19,9 +19,10 @@ const SignUp = () => {
       )}
       {currentComponent === SIGN_UP.NOTIFICATION && (
         <NotificationBox
+          p="9.5px 112.5px"
           navigateTo={ROUTES.SIGN_IN}
           btnTitle="Let`s Start"
-          title=" Your account successfully created"
+          title="Your account successfully created"
         />
       )}
     </AuthPageWrapper>

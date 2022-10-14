@@ -1,8 +1,14 @@
+import { LOADING_STATUS } from "../../../utils/types";
+
 export interface IRegisterResponse {
   username: string;
   displayName: string;
   id: number;
   admin: boolean;
+}
+
+export interface IRegisterThunkResponse {
+  status: number;
 }
 
 export interface ITokens {
@@ -11,9 +17,9 @@ export interface ITokens {
 }
 
 export interface IAuthInitialState {
-  isLoading: boolean;
-  errorSignIn: string;
-  errorSignUp: string;
+  isLoading: LOADING_STATUS;
+  isFullFilled: boolean;
+  statusCode: number;
 }
 
 export interface ILoginProps {

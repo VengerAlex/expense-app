@@ -2,11 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { login, register } from "./auth.actions";
 import { IAuthInitialState } from "./auth.interface";
 import { RootState } from "../../index";
+import { LOADING_STATUS } from "../../../utils/types";
 
 const initialState: IAuthInitialState = {
-  isLoading: false,
-  errorSignIn: "",
-  errorSignUp: "",
+  isLoading: LOADING_STATUS.IDLE,
+  isFullFilled: false,
+  statusCode: 0,
 };
 
 const authSlice = createSlice({
@@ -16,30 +17,27 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading = LOADING_STATUS.PENDING;
       })
       .addCase(login.fulfilled, (state) => {
-        state.isLoading = false;
-
-        state.errorSignIn = "";
-        state.errorSignUp = "";
+        state.isLoading = LOADING_STATUS.REJECTED;
       })
-      .addCase(login.rejected, (state, { payload }) => {
-        state.isLoading = false;
-        state.errorSignIn = payload as string;
+      .addCase(login.rejected, (state) => {
+        state.isLoading = LOADING_STATUS.REJECTED;
       })
       .addCase(register.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading = LOADING_STATUS.PENDING;
       })
       .addCase(register.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoading = LOADING_STATUS.REJECTED;
 
-        state.errorSignUp = "";
-        state.errorSignIn = "";
+        state.isFullFilled = true;
+        state.statusCode = payload.status;
       })
-      .addCase(register.rejected, (state, { payload }) => {
-        state.isLoading = false;
-        state.errorSignUp = payload as string;
+      .addCase(register.rejected, (state) => {
+        state.isLoading = LOADING_STATUS.REJECTED;
+        state.statusCode = 0;
+        state.isFullFilled = false;
       });
   },
 });

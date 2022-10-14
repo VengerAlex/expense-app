@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Checkbox,
+  FormControl,
   styled,
   TextField,
   Typography,
@@ -55,6 +56,10 @@ export const ErrorMessage = styled(Typography)(() => ({
   alignItems: "center",
   margin: "0 auto 10px",
   color: theme.palette.red,
+}));
+
+export const StyledFormControl = styled(FormControl)(() => ({
+  minWidth: "330px",
 }));
 
 export const StyledCheckbox = styled(Checkbox)(() => ({

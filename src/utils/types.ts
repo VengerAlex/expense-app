@@ -8,7 +8,7 @@ export enum ROUTES {
 
 export enum LOADING_STATUS {
   PENDING = "PENDING",
-  FULFILLED = "FULFILLED",
+  IDLE = "IDLE",
   REJECTED = "REJECTED",
 }
 

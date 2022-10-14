@@ -40,7 +40,7 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
             control={control}
             formName="password"
             label="Enter New Password"
-            isPassword={true}
+            isPassword
           />
           <Input
             helperText={showErrorText(
@@ -54,7 +54,8 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
             control={control}
             formName="confirmedPassword"
             label="Repeat New Password"
-            isPassword={true}
+            isPassword
+            isResetPassword
           />
           <StyledPrimaryButton
             p="9.5px 75.5px"

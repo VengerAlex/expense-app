@@ -74,7 +74,7 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             control={control}
             formName="password"
             label="Password"
-            isPassword={true}
+            isPassword
           />
           <Input
             helperText={showErrorText(
@@ -88,7 +88,8 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             control={control}
             formName="confirmedPassword"
             label="Confirmed Password"
-            isPassword={true}
+            isPassword
+            isResetPassword
           />
           <Box sx={{ textAlign: "left" }}>
             <Checkbox

@@ -6,12 +6,14 @@ import { StyledInput } from "../../styles";
 
 type IInput = TextFieldProps & {
   isPassword?: boolean;
+  isResetPassword?: boolean;
   control: any;
   formName: string;
 };
 
 const Input: FC<IInput> = ({
   isPassword = false,
+  isResetPassword = false,
   formName,
   control,
   ...props
@@ -19,7 +21,7 @@ const Input: FC<IInput> = ({
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
-    if (isPassword) {
+    if (isResetPassword) {
       event.preventDefault();
     }
   };

@@ -78,7 +78,7 @@ const SignIn: FC = () => {
             control={control}
             formName="password"
             label="Password"
-            isPassword={true}
+            isPassword
           />
           <StyledPrimaryButton sx={{ mb: 3 }} type="submit" disabled={!isValid}>
             {isLoading ? "Loading" : "Login"}

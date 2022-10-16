@@ -28,7 +28,7 @@ const EmailReset = ({ setCurrentComponent }: IEmailReset) => {
       <Typography variant="h1" mb={4} sx={{ lineHeight: "55px" }}>
         Reset Password
       </Typography>
-      <Typography variant="h5" sx={{ opacity: 0.8 }} mb={3}>
+      <Typography variant="h5" sx={{ opacity: 0.8, mb: 3 }}>
         Enter your email and we will send you an email with simple steps to
         reset your password and reset it
       </Typography>
@@ -37,7 +37,6 @@ const EmailReset = ({ setCurrentComponent }: IEmailReset) => {
         <form>
           <Input
             helperText={showErrorText(errors, "email", email)}
-            InputLabelProps={{ shrink: true }}
             autoFocus
             error={!!errors.email && !!email}
             placeholder="example@gmail.com"

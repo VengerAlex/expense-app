@@ -1,14 +1,18 @@
 import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Typography } from "@mui/material";
+import { Typography, FormControl } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
 import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
-import { ISignInForm, LOADING_STATUS, ROUTES } from "../../../utils/types";
+import { ISignInForm, ROUTES } from "../../../utils/types";
 import { MyLink } from "../../../components/MyLink";
 import signInCover from "../../../assets/images/cover-login.jpg";
-import { StyledPrimaryButton, StyledFormControl } from "../../../styles/index";
+import {
+  ErrorMessage,
+  StyledPrimaryButton,
+  StyledFormControl,
+} from "../../../styles/index";
 import { useActions } from "../../../hooks/useActions";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { getAuthState } from "../../../store/reducers/auth/authSlice";
@@ -32,6 +36,10 @@ const SignIn: FC = () => {
     reset,
   } = useForm<ISignInForm>({
     mode: "onChange",
+    defaultValues: {
+      username: "",
+      password: "",
+    },
     resolver: yupResolver(signInSchema),
   });
   const { username, password } = getValues();
@@ -58,7 +66,6 @@ const SignIn: FC = () => {
           <Input
             helperText={showErrorText(errors, "username", username)}
             autoFocus
-            InputLabelProps={{ shrink: true }}
             placeholder="Example123"
             error={!!errors.username && !!username}
             control={control}
@@ -69,7 +76,6 @@ const SignIn: FC = () => {
             helperText={showErrorText(errors, "password", password)}
             error={!!errors.password && !!password}
             sx={{ mb: 2 }}
-            InputLabelProps={{ shrink: true }}
             placeholder="***************"
             control={control}
             formName="password"
@@ -77,7 +83,7 @@ const SignIn: FC = () => {
             isPassword
           />
           <StyledPrimaryButton sx={{ mb: 3 }} type="submit" disabled={!isValid}>
-            {isLoading === LOADING_STATUS.PENDING ? "Loading" : "Login"}
+            {isLoading ? "Loading" : "Login"}
           </StyledPrimaryButton>
         </form>
       </StyledFormControl>

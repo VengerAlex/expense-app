@@ -30,6 +30,7 @@ const Input: FC<IInput> = ({
     <StyledInput
       {...control.register(formName)}
       {...props}
+      InputLabelProps={{ shrink: true }}
       onCopy={handleChange}
       onPaste={handleChange}
       name={formName}

@@ -63,7 +63,6 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             error={!!errors.username && !!username}
             autoFocus
             placeholder="Example1488"
-            InputLabelProps={{ shrink: true }}
             control={control}
             formName="username"
             label="User Name"
@@ -71,7 +70,6 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
           <Input
             helperText={showErrorText(errors, "fullName", fullName)}
             placeholder="Example1488"
-            InputLabelProps={{ shrink: true }}
             error={!!errors.fullName && !!fullName}
             control={control}
             formName="fullName"
@@ -81,7 +79,6 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             helperText={showErrorText(errors, "password", password)}
             error={!!errors.password && !!password}
             placeholder="***************"
-            InputLabelProps={{ shrink: true }}
             control={control}
             formName="password"
             label="Password"
@@ -95,7 +92,6 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             )}
             error={!!errors.confirmedPassword && !!confirmedPassword}
             placeholder="***************"
-            InputLabelProps={{ shrink: true }}
             control={control}
             formName="confirmedPassword"
             label="Confirmed Password"

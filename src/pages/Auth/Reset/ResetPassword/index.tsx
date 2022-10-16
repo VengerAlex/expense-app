@@ -36,7 +36,6 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
             error={!!errors.password && !!password}
             autoFocus
             placeholder="***************"
-            InputLabelProps={{ shrink: true }}
             control={control}
             formName="password"
             label="Enter New Password"
@@ -50,7 +49,6 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
             )}
             error={!!errors.confirmedPassword && !!confirmedPassword}
             placeholder="***************"
-            InputLabelProps={{ shrink: true }}
             control={control}
             formName="confirmedPassword"
             label="Repeat New Password"

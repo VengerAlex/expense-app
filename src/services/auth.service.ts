@@ -28,9 +28,7 @@ class AuthService {
   }
 
   async getNewTokens() {
-    const response = await axios.post(getAuthUrl("refresh"), {
-      withCredentials: true,
-    });
+    const response = await axios.post(getAuthUrl("refresh"));
 
     localstorageService.set("accessToken", response.data.accessToken);
   }

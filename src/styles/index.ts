@@ -39,6 +39,15 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
   }),
 );
 
+enum btnVariant {
+  PRIMARY,
+  SECONDARY,
+}
+
+interface IBtnProps {
+  variant: btnVariant;
+}
+
 export const StyledBoxFlex = styled(Box)(() => ({
   marginTop: "20px",
   display: "flex",

@@ -1,5 +1,7 @@
 import { toastr } from "react-redux-toastr";
 
+export const phoneRegExp = /^\+380\d{3}\d{2}\d{2}\d{2}$/;
+
 export const showErrorText = (
   errors: any,
   value: string,

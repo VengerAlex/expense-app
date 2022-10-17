@@ -47,14 +47,27 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
   }),
 );
 
-enum btnVariant {
-  PRIMARY,
-  SECONDARY,
-}
-
-interface IBtnProps {
-  variant: btnVariant;
-}
+export const StyledSecondaryButton = styled(Button)(() => ({
+  color: theme.palette.white,
+  fontSize: "16px",
+  lineHeight: "24.8px",
+  fontWeight: 600,
+  backgroundColor: theme.palette.black,
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: theme.palette.black,
+    color: theme.palette.green.main,
+  },
+  "&:active": {
+    opacity: 0.7,
+    backgroundColor: theme.palette.black,
+  },
+  "&:disabled": {
+    color: theme.palette.white,
+    opacity: 0.7,
+    backgroundColor: theme.palette.disabled,
+  },
+}));
 
 export const StyledBoxFlex = styled(Box)(() => ({
   marginTop: "20px",

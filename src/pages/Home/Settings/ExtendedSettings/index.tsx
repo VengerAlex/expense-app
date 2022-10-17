@@ -3,12 +3,18 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { FormControl } from "@mui/material";
 import Input from "../../../../components/Input";
-import { SETTINGS } from "../../../../utils/types";
+import { ROUTES, SETTINGS } from "../../../../utils/types";
 import { extendedSettingsSchema } from "../../../../utils/schema";
-import { StyledPrimaryButton, StyledSecondaryButton } from "../../../../styles";
+import {
+  StyledLogoutButton,
+  StyledPrimaryButton,
+  StyledSecondaryButton,
+} from "../../../../styles";
 import { ProfileAvatar } from "../../../../components/ProfileAvatar";
 import { theme } from "../../../../providers/ThemeProvider";
 import { showErrorText } from "../../../../utils/helpers";
+import { useActions } from "../../../../hooks/useActions";
+import { useNavigate } from "react-router-dom";
 
 interface IExtendedSettingsForm {
   fullName: string;
@@ -22,6 +28,8 @@ interface IExtendedSettings {
 export const ExtendedSettings: FC<IExtendedSettings> = ({
   setCurrentComponent,
 }) => {
+  const navigate = useNavigate();
+  const { logout } = useActions();
   const {
     control,
     getValues,
@@ -31,6 +39,12 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
     resolver: yupResolver(extendedSettingsSchema),
   });
   const { fullName, userName, phoneNumber } = getValues();
+
+  const logoutHandler = () => {
+    logout();
+
+    navigate(ROUTES.SIGN_IN);
+  };
 
   return (
     <>
@@ -48,7 +62,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             error={!!errors.fullName && !!fullName}
             control={control}
             placeholder="Arafat"
-            isBlack
+            isblack
             formName="fullName"
             label="Full Name"
           />
@@ -57,7 +71,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             error={!!errors.userName && !!userName}
             control={control}
             placeholder="Arafat1488"
-            isBlack
+            isblack
             formName="userName"
             label="UserName"
           />
@@ -66,19 +80,23 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             error={!!errors.phoneNumber && !!phoneNumber}
             control={control}
             placeholder="380937654671"
-            isBlack
+            isblack
             formName="phoneNumber"
             label="Phone Number"
           />
-          <StyledPrimaryButton disabled={!isValid} sx={{ mb: 4 }}>
+          <StyledPrimaryButton disabled={!isValid} sx={{ mb: 2 }}>
             Save Changes
           </StyledPrimaryButton>
           <StyledSecondaryButton
             onClick={() => setCurrentComponent(SETTINGS.PASSWORDS)}
             disableRipple
+            sx={{ mb: 2 }}
           >
             Reset Password
           </StyledSecondaryButton>
+          <StyledLogoutButton onClick={logoutHandler}>
+            Log Out
+          </StyledLogoutButton>
         </form>
       </FormControl>
     </>

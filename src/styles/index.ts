@@ -27,9 +27,9 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
     fontSize: "16px",
     lineHeight: "24.8px",
     fontWeight: 600,
+    textTransform: "none",
     backgroundColor: theme.palette.green.main,
     border: "1px solid #539713",
-    textTransform: "none",
     padding: p,
     "&:hover": {
       backgroundColor: theme.palette.green.main,
@@ -37,7 +37,7 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
     },
     "&:active": {
       border: `1px solid ${theme.palette.green.main}`,
-      backgroundColor: theme.palette.green.main,
+      backgroundColor: theme.palette.green.lighter,
     },
     "&:disabled": {
       color: theme.palette.white,
@@ -46,6 +46,18 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
     },
   }),
 );
+
+export const StyledLogoutButton = styled(Button)(() => ({
+  backgroundColor: theme.palette.green.lighter,
+  color: theme.palette.white,
+  fontSize: "16px",
+  lineHeight: "24.8px",
+  fontWeight: 600,
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: theme.palette.green.lighter,
+  },
+}));
 
 export const StyledSecondaryButton = styled(Button)(() => ({
   color: theme.palette.white,
@@ -119,8 +131,8 @@ export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
   }),
 );
 
-export const StyledInput = styled(TextField)<{ isBlack?: boolean }>(
-  ({ theme, isBlack }) => ({
+export const StyledInput = styled(TextField)<{ isblack?: boolean }>(
+  ({ theme, isblack }) => ({
     marginBottom: theme.spacing(1),
     "&.MuiTextField-root": {
       marginTop: "0px",
@@ -131,13 +143,13 @@ export const StyledInput = styled(TextField)<{ isBlack?: boolean }>(
       fontSize: "14px",
       lineHeight: "21.7px",
       fontWeight: 400,
-      color: isBlack ? theme.palette.black : theme.palette.white,
+      color: isblack ? theme.palette.black : theme.palette.white,
       "&.Mui-focused": {
-        color: isBlack ? theme.palette.black : theme.palette.white,
+        color: isblack ? theme.palette.black : theme.palette.white,
       },
 
       "&.Mui-error": {
-        color: isBlack ? theme.palette.black : theme.palette.white,
+        color: isblack ? theme.palette.black : theme.palette.white,
       },
     },
     "& .MuiFormHelperText-root": {
@@ -152,7 +164,7 @@ export const StyledInput = styled(TextField)<{ isBlack?: boolean }>(
     },
     input: {
       "&::placeholder": {
-        color: isBlack ? theme.palette.black : theme.palette.white,
+        color: isblack ? theme.palette.black : theme.palette.white,
         fontWeight: 600,
         opacity: 0.7,
         fontSize: "16px",
@@ -160,10 +172,10 @@ export const StyledInput = styled(TextField)<{ isBlack?: boolean }>(
       },
     },
     "& .MuiInputBase-root": {
-      color: isBlack ? theme.palette.black : theme.palette.white,
+      color: isblack ? theme.palette.black : theme.palette.white,
       fontSize: "16px",
       opacity: 0.7,
-      borderColor: isBlack ? theme.palette.black : theme.palette.white,
+      borderColor: isblack ? theme.palette.black : theme.palette.white,
       "&:hover": {
         "&:not(.Mui-disabled)": {
           "&:before": {
@@ -172,11 +184,11 @@ export const StyledInput = styled(TextField)<{ isBlack?: boolean }>(
         },
       },
       "&:before": {
-        borderColor: isBlack ? theme.palette.black : theme.palette.white,
+        borderColor: isblack ? theme.palette.black : theme.palette.white,
       },
 
       "&:after": {
-        borderColor: isBlack ? theme.palette.black : theme.palette.white,
+        borderColor: isblack ? theme.palette.black : theme.palette.white,
       },
 
       "&.Mui-focused": {
@@ -185,7 +197,7 @@ export const StyledInput = styled(TextField)<{ isBlack?: boolean }>(
         },
       },
       "& .MuiFormLabel-root": {
-        color: isBlack ? theme.palette.black : theme.palette.white,
+        color: isblack ? theme.palette.black : theme.palette.white,
         fontWeight: 400,
         fontSize: "14px",
         lineHeight: "24.8px",

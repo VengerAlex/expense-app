@@ -28,3 +28,7 @@ export const extendedSettingsSchema = yup.object().shape({
   userName: yup.string().required().min(5).max(30),
   phoneNumber: yup.string().matches(phoneRegExp, "Phone number is not valid"),
 });
+
+export const profileSettingsSchema = resetPasswordSchema.shape({
+  oldPassword: yup.string().required().min(8).max(30),
+});

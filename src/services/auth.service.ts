@@ -42,7 +42,7 @@ class AuthService {
     return response;
   }
 
-  logout() {
+  async logout() {
     localstorageAuthService.clearStorage();
   }
 }

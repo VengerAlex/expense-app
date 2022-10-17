@@ -3,12 +3,13 @@ import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import { IconButton, InputAdornment, TextFieldProps } from "@mui/material";
 import { StyledInput } from "../../styles";
+import { theme } from "../../providers/ThemeProvider";
 
 type IInput = TextFieldProps & {
   isPassword?: boolean;
   isResetPassword?: boolean;
   control: any;
-  isBlack?: boolean;
+  isblack?: boolean;
   formName: string;
 };
 
@@ -17,7 +18,7 @@ const Input: FC<IInput> = ({
   isResetPassword = false,
   formName,
   control,
-  isBlack = false,
+  isblack = false,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -32,7 +33,7 @@ const Input: FC<IInput> = ({
     <StyledInput
       {...control.register(formName)}
       {...props}
-      isBlack={isBlack}
+      isblack={isblack}
       InputLabelProps={{ shrink: true }}
       onCopy={handleChange}
       onPaste={handleChange}
@@ -45,7 +46,11 @@ const Input: FC<IInput> = ({
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
-                    sx={{ color: "#fff" }}
+                    sx={{
+                      color: isblack
+                        ? theme.palette.black
+                        : theme.palette.white,
+                    }}
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (

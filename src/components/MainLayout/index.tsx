@@ -1,6 +1,5 @@
 import { FC, ReactNode } from "react";
 import { Sidebar } from "../Sidebar";
-import { theme } from "../../providers/ThemeProvider";
 import { MainWrapper, MainContent } from "../../styles";
 
 interface IMainLayout {

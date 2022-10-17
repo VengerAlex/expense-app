@@ -1,7 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { Analytics, Dashboard } from "@mui/icons-material";
-import { Logo } from "../Logo";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import { theme } from "../../providers/ThemeProvider";
+import { ProfileAvatar } from "../ProfileAvatar";
+import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
+import { ROUTES } from "../../utils/types";
 import {
   StyledDivider,
   StyledGridNavbar,
@@ -12,13 +15,11 @@ import {
   StyledMenu,
   StyledProvideWrapper,
 } from "../../styles";
-import { ROUTES } from "../../utils/types";
-import { theme } from "../../providers/ThemeProvider";
-import { ProfileAvatar } from "../ProfileAvatar";
+import { Logo } from "../Logo";
 
 const LIST_ITEMS = [
-  { text: "DashBoard", to: ROUTES.HOME, icon: <Dashboard /> },
-  { text: "Analytics", to: ROUTES.ANALYTICS, icon: <Analytics /> },
+  { text: "DashBoard", to: ROUTES.HOME, icon: <GridViewRoundedIcon /> },
+  { text: "Analytics", to: ROUTES.ANALYTICS, icon: <AssessmentIcon /> },
   { text: "Categories", to: ROUTES.CATEGORIES, icon: <SettingsIcon /> },
   { text: "Settings", to: ROUTES.SETTINGS, icon: <SettingsIcon /> },
 ];

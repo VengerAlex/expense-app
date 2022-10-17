@@ -5,6 +5,7 @@ import { SETTINGS } from "../../../utils/types";
 import { theme } from "../../../providers/ThemeProvider";
 import { ExtendedSettings } from "./ExtendedSettings";
 import { StyledBoxSettingsWrapper } from "../../../styles";
+import { ProfileSettings } from "./ProfileSettings";
 
 interface ISettings {}
 export const Settings: FC<ISettings> = () => {
@@ -19,6 +20,9 @@ export const Settings: FC<ISettings> = () => {
         <StyledBoxSettingsWrapper>
           {currentComponent === SETTINGS.EXTENDED && (
             <ExtendedSettings setCurrentComponent={setCurrentComponent} />
+          )}
+          {currentComponent === SETTINGS.PASSWORDS && (
+            <ProfileSettings setCurrentComponent={setCurrentComponent} />
           )}
         </StyledBoxSettingsWrapper>
       </Box>

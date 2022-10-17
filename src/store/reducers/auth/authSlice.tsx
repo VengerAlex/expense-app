@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, register } from "./auth.actions";
+import { login, logout, register } from "./auth.actions";
 import { IAuthInitialState } from "./auth.interface";
 import { RootState } from "../../index";
 import { LOADING_STATUS, STATUS_CODE } from "../../../utils/types";
@@ -35,6 +35,12 @@ const authSlice = createSlice({
       .addCase(register.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
         state.statusCode = STATUS_CODE.DEFAULT;
+      })
+      .addCase(logout.pending, (state) => {
+        state.loading = LOADING_STATUS.PENDING;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.loading = LOADING_STATUS.REJECTED;
       });
   },
 });

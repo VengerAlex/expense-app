@@ -42,7 +42,7 @@ instance.interceptors.response.use(
         return instance.request(originalRequest);
       } catch (error) {
         if (errorCatch(error) === "jwt expired") {
-          localstorageAuthService.clearStorage();
+          AuthService.logout();
         }
       }
     }

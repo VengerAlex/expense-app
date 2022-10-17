@@ -85,7 +85,7 @@ export const theme = createTheme({
     h5: {
       fontSize: "16px",
       fontWeight: 600,
-      lineHeight: "24.8px",
+      lineHeight: "25px",
     },
     body1: {
       fontSize: "20px",
@@ -95,17 +95,17 @@ export const theme = createTheme({
     body2: {
       fontSize: "16px",
       fontWeight: 400,
-      lineHeight: "24.8px",
+      lineHeight: "25px",
     },
     subtitle1: {
       fontSize: "14px",
       fontWeight: 400,
-      lineHeight: "21.7px",
+      lineHeight: "22px",
     },
     subtitle2: {
       fontSize: "12px",
       fontWeight: 400,
-      lineHeight: "18.6px",
+      lineHeight: "19px",
     },
   },
 });

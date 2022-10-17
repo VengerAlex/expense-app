@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
+import { theme } from "../../providers/ThemeProvider";
 
 interface ILink {
   to: string;
@@ -11,7 +12,7 @@ export const MyLink: FC<ILink> = ({ to, children }) => {
   return (
     <Link to={to}>
       <Typography
-        sx={{ color: "#69B0FF", ml: 1 }}
+        sx={{ color: theme.palette.blue, ml: 1 }}
         component="span"
         variant="subtitle2"
       >

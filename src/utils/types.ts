@@ -9,7 +9,13 @@ export enum ROUTES {
 export enum LOADING_STATUS {
   PENDING = "PENDING",
   IDLE = "IDLE",
+  FULFILLED = "FULFILLED",
   REJECTED = "REJECTED",
+}
+
+export enum STATUS_CODE {
+  DEFAULT = 0,
+  CREATED = 201,
 }
 
 export enum RESET_PAGE {

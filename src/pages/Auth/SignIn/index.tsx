@@ -22,7 +22,7 @@ const SignIn: FC = () => {
   const from = location.state?.from?.pathname || ROUTES.Home;
   const isAuth = localstorageAuthService.getAccessToken();
   const { login } = useActions();
-  const { isLoading } = useAppSelector(getAuthState);
+  const { loading } = useAppSelector(getAuthState);
 
   const {
     control,
@@ -75,7 +75,7 @@ const SignIn: FC = () => {
             isPassword
           />
           <StyledPrimaryButton sx={{ mb: 3 }} type="submit" disabled={!isValid}>
-            {isLoading ? "Loading" : "Login"}
+            {loading ? "Loading" : "Login"}
           </StyledPrimaryButton>
         </form>
       </StyledFormControl>

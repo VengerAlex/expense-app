@@ -11,6 +11,7 @@ import {
   LOADING_STATUS,
   ROUTES,
   SIGN_UP,
+  STATUS_CODE,
 } from "../../../../utils/types";
 import Input from "../../../../components/Input";
 import { Checkbox } from "../../../../components/Checkbox";
@@ -24,7 +25,7 @@ interface ISignUpForm {
 
 export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
   const { register } = useActions();
-  const { isLoading, statusCode, isFullFilled } = useAppSelector(getAuthState);
+  const { loading, statusCode } = useAppSelector(getAuthState);
   const {
     control,
     getValues,
@@ -46,10 +47,13 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
   };
 
   useEffect(() => {
-    if (isFullFilled && statusCode === 201) {
+    if (
+      loading === LOADING_STATUS.FULFILLED &&
+      statusCode === STATUS_CODE.CREATED
+    ) {
       setCurrentComponent(SIGN_UP.NOTIFICATION);
     }
-  }, [statusCode, isFullFilled]);
+  }, [statusCode]);
 
   return (
     <>
@@ -111,7 +115,7 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             disabled={!isValid}
             sx={{ mb: 3, my: 3 }}
           >
-            {isLoading === LOADING_STATUS.PENDING ? "Loading" : "Sign Up"}
+            {loading === LOADING_STATUS.PENDING ? "Loading" : "Sign Up"}
           </StyledPrimaryButton>
         </form>
       </StyledFormControl>

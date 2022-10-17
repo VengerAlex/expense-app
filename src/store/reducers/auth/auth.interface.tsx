@@ -1,4 +1,4 @@
-import { LOADING_STATUS } from "../../../utils/types";
+import { LOADING_STATUS, STATUS_CODE } from "../../../utils/types";
 
 export interface IRegisterResponse {
   username: string;
@@ -17,9 +17,8 @@ export interface ITokens {
 }
 
 export interface IAuthInitialState {
-  isLoading: LOADING_STATUS;
-  isFullFilled: boolean;
-  statusCode: number;
+  loading: LOADING_STATUS;
+  statusCode: STATUS_CODE;
 }
 
 export interface ILoginProps {

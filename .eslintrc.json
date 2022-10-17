@@ -25,6 +25,8 @@
         "prettier"
     ],
     "rules": {
+        "no-restricted-globals": 0,
+        "@typescript-eslint/no-redeclare": 0,
         "@typescript-eslint/no-throw-literal": 0,
         "no-underscore-dangle": 0,
         "new-cap": 0,

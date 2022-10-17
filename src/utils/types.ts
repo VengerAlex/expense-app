@@ -1,11 +1,13 @@
 export enum ROUTES {
-  Home = "/",
+  HOME = "/",
   SIGN_IN = "/sign-in",
   SIGN_UP = "/sign-up",
   RESET = "/reset",
+  ANALYTICS = "/analytics",
+  CATEGORIES = "/categories",
+  SETTINGS = "/settings",
   NotFound = "*",
 }
-
 export enum LOADING_STATUS {
   PENDING = "PENDING",
   IDLE = "IDLE",

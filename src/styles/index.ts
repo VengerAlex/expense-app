@@ -1,10 +1,18 @@
 import {
+  Divider,
   Box,
+  Paper,
+  Avatar,
   Button,
   Checkbox,
-  FormControl,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
   styled,
   TextField,
+  FormControl,
   Typography,
 } from "@mui/material";
 import { theme } from "../providers/ThemeProvider";
@@ -175,4 +183,92 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
       },
     },
   },
+}));
+
+export const StyledGridNavbar = styled(Grid)(() => ({
+  backgroundColor: theme.palette.black,
+  textAlign: "center",
+  padding: "48px 0",
+  display: "flex",
+  flexDirection: "column",
+}));
+
+export const StyledList = styled(List)(() => ({
+  margin: "0 auto",
+  textAlign: "center",
+}));
+
+type StyledListItemProps = {
+  isActive?: boolean;
+};
+
+export const StyledListItem = styled(ListItem)<StyledListItemProps>(
+  ({ isActive }) => ({
+    borderBottom: isActive
+      ? `2px solid ${theme.palette.green.main}`
+      : "2px solid transparent",
+    transition: "all 250ms",
+    "&:hover": {
+      transition: "all 250ms",
+      borderBottom: `2px solid ${theme.palette.white}`,
+    },
+    "&:active": {
+      borderBottom: `2px solid ${theme.palette.green.main}`,
+    },
+  }),
+);
+
+export const StyledListItemIcon = styled(ListItemIcon)(() => ({
+  color: theme.palette.white,
+  opacity: 0.7,
+}));
+
+export const StyledListItemButton = styled(ListItemButton)(() => ({
+  paddingLeft: 0,
+  "&:hover": {
+    backgroundColor: "transparent",
+  },
+}));
+
+export const StyledMenu = styled(Typography)(() => ({
+  color: theme.palette.white,
+  marginLeft: "-20px",
+  fontWeight: 300,
+}));
+
+export const StyledDivider = styled(Divider)(() => ({
+  backgroundColor: theme.palette.bgr,
+  opacity: 0.3,
+}));
+
+export const StyledProvideWrapper = styled(Box)(() => ({
+  margin: "0 auto",
+}));
+
+export const StyledAvatar = styled(Avatar)<{ bgColor?: string }>(
+  ({ bgColor }) => ({
+    backgroundColor: bgColor,
+    color: theme.palette.black,
+    fontSize: "16px",
+    fontWeight: "600",
+    lineHeight: "24.8px",
+    marginRight: "10px",
+  }),
+);
+
+export const StyledBoxSettingsWrapper = styled(Box)(() => ({
+  height: "calc(100vh - 140px)",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+export const StyledNotifWrapper = styled(Paper)(() => ({
+  padding: theme.spacing(4),
+  borderRadius: "8px",
+  backgroundColor: theme.palette.green.lighter,
+  minWidth: "394px",
+  minHeight: "369px",
+  textAlign: "center",
 }));

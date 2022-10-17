@@ -19,7 +19,7 @@ import { localstorageAuthService } from "../../../services/localstorage.service"
 const SignIn: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || ROUTES.Home;
+  const from = location.state?.from?.pathname || ROUTES.HOME;
   const isAuth = localstorageAuthService.getAccessToken();
   const { login } = useActions();
   const { loading } = useAppSelector(getAuthState);

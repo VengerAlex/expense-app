@@ -47,6 +47,8 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             helperText={showErrorText(errors, "fullName", fullName)}
             error={!!errors.fullName && !!fullName}
             control={control}
+            placeholder="Arafat"
+            isBlack
             formName="fullName"
             label="Full Name"
           />
@@ -54,6 +56,8 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             helperText={showErrorText(errors, "userName", userName)}
             error={!!errors.userName && !!userName}
             control={control}
+            placeholder="Arafat1488"
+            isBlack
             formName="userName"
             label="UserName"
           />
@@ -61,19 +65,20 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             helperText={showErrorText(errors, "phoneNumber", phoneNumber)}
             error={!!errors.phoneNumber && !!phoneNumber}
             control={control}
+            placeholder="380937654671"
+            isBlack
             formName="phoneNumber"
             label="Phone Number"
           />
+          <StyledPrimaryButton disabled={!isValid} sx={{ mb: 4 }}>
+            Save Changes
+          </StyledPrimaryButton>
           <StyledSecondaryButton
             onClick={() => setCurrentComponent(SETTINGS.PASSWORDS)}
             disableRipple
-            sx={{ mb: 4 }}
           >
             Reset Password
           </StyledSecondaryButton>
-          <StyledPrimaryButton disabled={!isValid}>
-            Save Changes
-          </StyledPrimaryButton>
         </form>
       </FormControl>
     </>

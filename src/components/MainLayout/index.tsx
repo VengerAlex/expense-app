@@ -1,18 +1,16 @@
 import { FC, ReactNode } from "react";
-import { Grid } from "@mui/material";
 import { Sidebar } from "../Sidebar";
 import { theme } from "../../providers/ThemeProvider";
+import { MainWrapper, MainContent } from "../../styles";
 
 interface IMainLayout {
   children: ReactNode;
 }
 export const MainLayout: FC<IMainLayout> = ({ children }) => {
   return (
-    <Grid container sx={{ height: "100vh" }}>
+    <MainWrapper>
       <Sidebar />
-      <Grid item xs={10} sx={{ backgroundColor: theme.palette.black }}>
-        {children}
-      </Grid>
-    </Grid>
+      <MainContent>{children}</MainContent>
+    </MainWrapper>
   );
 };

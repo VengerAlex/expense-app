@@ -8,6 +8,7 @@ type IInput = TextFieldProps & {
   isPassword?: boolean;
   isResetPassword?: boolean;
   control: any;
+  isBlack?: boolean;
   formName: string;
 };
 
@@ -16,6 +17,7 @@ const Input: FC<IInput> = ({
   isResetPassword = false,
   formName,
   control,
+  isBlack = false,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -30,6 +32,7 @@ const Input: FC<IInput> = ({
     <StyledInput
       {...control.register(formName)}
       {...props}
+      isBlack={isBlack}
       InputLabelProps={{ shrink: true }}
       onCopy={handleChange}
       onPaste={handleChange}

@@ -119,92 +119,86 @@ export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
   }),
 );
 
-export const StyledInput = styled(TextField)(({ theme }) => ({
-  marginBottom: theme.spacing(1),
-  "&.MuiTextField-root": {
-    marginTop: "0px",
-    borderColor: theme.palette.blue,
-  },
-
-  "& label": {
-    fontSize: "14px",
-    lineHeight: "21.7px",
-    fontWeight: 400,
-    color: theme.palette.white,
-    "&.Mui-focused": {
-      color: theme.palette.white,
+export const StyledInput = styled(TextField)<{ isBlack?: boolean }>(
+  ({ theme, isBlack }) => ({
+    marginBottom: theme.spacing(1),
+    "&.MuiTextField-root": {
+      marginTop: "0px",
+      borderColor: theme.palette.blue,
     },
 
-    "&.Mui-error": {
-      color: theme.palette.white,
+    "& label": {
+      fontSize: "14px",
+      lineHeight: "21.7px",
+      fontWeight: 400,
+      color: isBlack ? theme.palette.black : theme.palette.white,
+      "&.Mui-focused": {
+        color: isBlack ? theme.palette.black : theme.palette.white,
+      },
+
+      "&.Mui-error": {
+        color: isBlack ? theme.palette.black : theme.palette.white,
+      },
     },
-  },
-  "& .MuiFormHelperText-root": {
-    marginTop: "12px",
-    marginBottom: "5px",
-    lineHeight: "0px",
-    fontSize: "12px",
-    color: theme.palette.red,
-    "&.Mui-error": {
+    "& .MuiFormHelperText-root": {
+      marginTop: "12px",
+      marginBottom: "5px",
+      lineHeight: "0px",
+      fontSize: "12px",
       color: theme.palette.red,
+      "&.Mui-error": {
+        color: theme.palette.red,
+      },
     },
-  },
-  input: {
-    "&::placeholder": {
-      color: theme.palette.white,
-      fontWeight: 600,
-      opacity: 0.7,
+    input: {
+      "&::placeholder": {
+        color: isBlack ? theme.palette.black : theme.palette.white,
+        fontWeight: 600,
+        opacity: 0.7,
+        fontSize: "16px",
+        lineHeight: "24.8px",
+      },
+    },
+    "& .MuiInputBase-root": {
+      color: isBlack ? theme.palette.black : theme.palette.white,
       fontSize: "16px",
-      lineHeight: "24.8px",
-    },
-  },
-  "& .MuiInputBase-root": {
-    color: theme.palette.white,
-    fontSize: "16px",
-    opacity: 0.7,
-    borderColor: theme.palette.white,
-    "&:hover": {
-      "&:not(.Mui-disabled)": {
-        "&:before": {
-          borderColor: theme.palette.green.lighter,
+      opacity: 0.7,
+      borderColor: isBlack ? theme.palette.black : theme.palette.white,
+      "&:hover": {
+        "&:not(.Mui-disabled)": {
+          "&:before": {
+            borderColor: theme.palette.green.lighter,
+          },
+        },
+      },
+      "&:before": {
+        borderColor: isBlack ? theme.palette.black : theme.palette.white,
+      },
+
+      "&:after": {
+        borderColor: isBlack ? theme.palette.black : theme.palette.white,
+      },
+
+      "&.Mui-focused": {
+        "&:after": {
+          borderColor: theme.palette.green.main,
+        },
+      },
+      "& .MuiFormLabel-root": {
+        color: isBlack ? theme.palette.black : theme.palette.white,
+        fontWeight: 400,
+        fontSize: "14px",
+        lineHeight: "24.8px",
+      },
+      "&.Mui-error": {
+        color: theme.palette.red,
+        "&:after": {
+          borderColor: theme.palette.red,
         },
       },
     },
-    "&:before": {
-      borderColor: theme.palette.white,
-    },
-
-    "&:after": {
-      borderColor: theme.palette.white,
-    },
-
-    "&.Mui-focused": {
-      "&:after": {
-        borderColor: theme.palette.green.main,
-      },
-    },
-    "& .MuiFormLabel-root": {
-      color: theme.palette.white,
-      fontWeight: 400,
-      fontSize: "14px",
-      lineHeight: "24.8px",
-    },
-    "&.Mui-error": {
-      color: theme.palette.red,
-      "&:after": {
-        borderColor: theme.palette.red,
-      },
-    },
-  },
-}));
-
-export const StyledGridNavbar = styled(Grid)(() => ({
-  backgroundColor: theme.palette.black,
-  textAlign: "center",
-  padding: "48px 0",
-  display: "flex",
-  flexDirection: "column",
-}));
+  }),
+);
 
 export const StyledList = styled(List)(() => ({
   margin: "0 auto",
@@ -284,4 +278,23 @@ export const StyledNotifWrapper = styled(Paper)(() => ({
   minWidth: "394px",
   minHeight: "369px",
   textAlign: "center",
+}));
+
+export const MainWrapper = styled(Box)(() => ({
+  display: "flex",
+  height: "100vh",
+}));
+
+export const MainContent = styled(Box)(() => ({
+  width: "calc(100vw - 260px)",
+  backgroundColor: theme.palette.bgr,
+}));
+
+export const StyledGridNavbar = styled(Grid)(() => ({
+  backgroundColor: theme.palette.black,
+  width: "260px",
+  textAlign: "center",
+  padding: "48px 0",
+  display: "flex",
+  flexDirection: "column",
 }));

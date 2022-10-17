@@ -30,7 +30,7 @@ export const Sidebar = () => {
   const isActivePage = (to: string) => pathname === to;
 
   return (
-    <StyledGridNavbar xs={2} item>
+    <StyledGridNavbar>
       <Logo sx={{ mb: "160px" }} />
       <StyledList sx={{ mb: "340px" }}>
         {LIST_ITEMS.map((item) => (

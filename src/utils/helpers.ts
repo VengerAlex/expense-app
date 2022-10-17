@@ -8,7 +8,7 @@ export const showErrorText = (
   return errors[value]?.message && !!fieldValue ? errors[value]?.message : " ";
 };
 
-const errorCatch = (error: any): string =>
+export const errorCatch = (error: any): string =>
   error.response && error.response.data
     ? typeof error.response.data.message === "object"
       ? error.response.data.message[0]

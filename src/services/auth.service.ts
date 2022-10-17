@@ -1,7 +1,7 @@
 import axios, { getAuthUrl } from "../api/index";
 import { ITokens } from "../store/reducers/user/user.interface";
 import { IRegisterResponse } from "../store/reducers/auth/auth.interface";
-import localstorageService from "./localstorage.service";
+import { localstorageAuthService } from "./localstorage.service";
 
 class AuthService {
   async login(username: string, password: string) {
@@ -11,8 +11,8 @@ class AuthService {
     });
 
     if (response.data.accessToken) {
-      localstorageService.set("accessToken", response.data.accessToken);
-      localstorageService.set("refreshToken", response.data.refreshToken);
+      localstorageAuthService.setAccessToken(response.data.accessToken);
+      localstorageAuthService.setRefreshToken(response.data.refreshToken);
     }
 
     return response;
@@ -28,9 +28,18 @@ class AuthService {
   }
 
   async getNewTokens() {
-    const response = await axios.post(getAuthUrl("refresh"));
+    const refreshToken = localstorageAuthService.getRefreshToken();
 
-    localstorageService.set("accessToken", response.data.accessToken);
+    const response = await axios.post(getAuthUrl("refresh"), {
+      refreshToken,
+    });
+
+    if (response.data.accessToken) {
+      localstorageAuthService.setAccessToken(response.data.accessToken);
+      localstorageAuthService.setRefreshToken(response.data.refreshToken);
+    }
+
+    return response;
   }
 }
 

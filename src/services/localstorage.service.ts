@@ -1,31 +1,42 @@
-class localStorageService {
-  get(key: string): number | object | string | null {
-    const item = localStorage.getItem(key);
-    const numPattern = new RegExp(/^\d+$/);
-    const jsonPattern = new RegExp(/[\[\{].*[\}\]]/);
+const ACCESS_TOKEN_KEY = "refreshToken";
+const REFRESH_TOKEN_KEY = "accessToken";
 
-    if (item) {
-      if (jsonPattern.test(item)) {
-        return JSON.parse(item);
-      }
-      if (numPattern.test(item)) {
-        return parseFloat(item);
-      }
-      return item;
-    }
-
-    return null;
+export const localstorageAuthService = (() => {
+  function privateSetAccessToken(token: string): void {
+    return localStorage.setItem(ACCESS_TOKEN_KEY, token);
   }
 
-  set(key: string, data: object | string): void {
-    typeof data === "object"
-      ? localStorage.setItem(key, JSON.stringify(data))
-      : localStorage.setItem(key, data);
+  function privateGetAccessToken(): string | null {
+    return localStorage.getItem(ACCESS_TOKEN_KEY);
   }
 
-  remove(key: string): void {
-    localStorage.removeItem(key);
+  function privateClearAccessToken(): void {
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
   }
-}
 
-export default new localStorageService();
+  function privateSetRefreshToken(token: string): void {
+    return localStorage.setItem(REFRESH_TOKEN_KEY, token);
+  }
+
+  function privateGetRefreshToken(): string | null {
+    return localStorage.getItem(REFRESH_TOKEN_KEY);
+  }
+
+  function privateClearRefreshToken(): void {
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
+  }
+
+  function privateClearStorage(): void {
+    localStorage.clear();
+  }
+
+  return {
+    setAccessToken: privateSetAccessToken,
+    getAccessToken: privateGetAccessToken,
+    clearAccessToken: privateClearAccessToken,
+    setRefreshToken: privateSetRefreshToken,
+    getRefreshToken: privateGetRefreshToken,
+    clearRefreshToken: privateClearRefreshToken,
+    clearStorage: privateClearStorage,
+  };
+})();

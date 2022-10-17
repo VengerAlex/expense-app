@@ -1,30 +1,26 @@
 import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Typography, FormControl } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
 import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
 import { ISignInForm, ROUTES } from "../../../utils/types";
 import { MyLink } from "../../../components/MyLink";
 import signInCover from "../../../assets/images/cover-login.jpg";
-import {
-  ErrorMessage,
-  StyledPrimaryButton,
-  StyledFormControl,
-} from "../../../styles/index";
+import { StyledPrimaryButton, StyledFormControl } from "../../../styles/index";
 import { useActions } from "../../../hooks/useActions";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { getAuthState } from "../../../store/reducers/auth/authSlice";
 import { signInSchema } from "../../../utils/schema";
-import localstorageService from "../../../services/localstorage.service";
 import { showErrorText } from "../../../utils/helpers";
+import { localstorageAuthService } from "../../../services/localstorage.service";
 
 const SignIn: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || ROUTES.Home;
-  const isAuth = localstorageService.get("accessToken");
+  const isAuth = localstorageAuthService.getAccessToken();
   const { login } = useActions();
   const { isLoading } = useAppSelector(getAuthState);
 
@@ -36,10 +32,6 @@ const SignIn: FC = () => {
     reset,
   } = useForm<ISignInForm>({
     mode: "onChange",
-    defaultValues: {
-      username: "",
-      password: "",
-    },
     resolver: yupResolver(signInSchema),
   });
   const { username, password } = getValues();

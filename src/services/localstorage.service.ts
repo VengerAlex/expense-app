@@ -1,5 +1,5 @@
-const ACCESS_TOKEN_KEY = "refreshToken";
-const REFRESH_TOKEN_KEY = "accessToken";
+const ACCESS_TOKEN_KEY = "accessToken";
+const REFRESH_TOKEN_KEY = "refreshToken";
 
 export const localstorageAuthService = (() => {
   function privateSetAccessToken(token: string): void {

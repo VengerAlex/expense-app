@@ -125,117 +125,123 @@ export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
   ({ theme, light = false }) => ({
     color: light ? theme.palette.black : theme.palette.white,
     maxWidth: "330px",
-    height: "381px",
     borderRadius: light ? "8px" : "0px",
     backgroundColor: light ? theme.palette.green.lighter : "transparent",
   }),
 );
 
-export const StyledInput = styled(TextField)<{ isblack?: boolean }>(
-  ({ theme, isblack }) => ({
-    marginBottom: theme.spacing(1),
-    "&.MuiTextField-root": {
-      marginTop: "0px",
-      borderColor: theme.palette.blue,
+export const StyledAvatar = styled(Avatar, {
+  shouldForwardProp: (prop) => prop !== "bgColor",
+})<{ bgColor?: string }>(({ bgColor }) => ({
+  backgroundColor: bgColor,
+  color: theme.palette.black,
+  fontSize: "16px",
+  fontWeight: "600",
+  lineHeight: "24.8px",
+  marginRight: "10px",
+}));
+
+export const StyledInput = styled(TextField, {
+  shouldForwardProp: (prop) => prop !== "isBlack",
+})<{ isBlack?: boolean }>(({ theme, isBlack }) => ({
+  marginBottom: theme.spacing(1),
+  "&.MuiTextField-root": {
+    marginTop: "0px",
+    borderColor: theme.palette.blue,
+  },
+
+  "& label": {
+    fontSize: "14px",
+    lineHeight: "21.7px",
+    fontWeight: 400,
+    color: isBlack ? theme.palette.black : theme.palette.white,
+    "&.Mui-focused": {
+      color: isBlack ? theme.palette.black : theme.palette.white,
     },
 
-    "& label": {
-      fontSize: "14px",
-      lineHeight: "21.7px",
-      fontWeight: 400,
-      color: isblack ? theme.palette.black : theme.palette.white,
-      "&.Mui-focused": {
-        color: isblack ? theme.palette.black : theme.palette.white,
-      },
-
-      "&.Mui-error": {
-        color: isblack ? theme.palette.black : theme.palette.white,
-      },
+    "&.Mui-error": {
+      color: isBlack ? theme.palette.black : theme.palette.white,
     },
-    "& .MuiFormHelperText-root": {
-      marginTop: "12px",
-      marginBottom: "5px",
-      lineHeight: "0px",
-      fontSize: "12px",
+  },
+  "& .MuiFormHelperText-root": {
+    marginTop: "12px",
+    marginBottom: "5px",
+    lineHeight: "0px",
+    fontSize: "12px",
+    color: theme.palette.red,
+    "&.Mui-error": {
       color: theme.palette.red,
-      "&.Mui-error": {
-        color: theme.palette.red,
-      },
     },
-    input: {
-      "&::placeholder": {
-        color: isblack ? theme.palette.black : theme.palette.white,
-        fontWeight: 600,
-        opacity: 0.7,
-        fontSize: "16px",
-        lineHeight: "24.8px",
-      },
-    },
-    "& .MuiInputBase-root": {
-      color: isblack ? theme.palette.black : theme.palette.white,
-      fontSize: "16px",
+  },
+  input: {
+    "&::placeholder": {
+      color: isBlack ? theme.palette.black : theme.palette.white,
+      fontWeight: 600,
       opacity: 0.7,
-      borderColor: isblack ? theme.palette.black : theme.palette.white,
-      "&:hover": {
-        "&:not(.Mui-disabled)": {
-          "&:before": {
-            borderColor: theme.palette.green.lighter,
-          },
-        },
-      },
-      "&:before": {
-        borderColor: isblack ? theme.palette.black : theme.palette.white,
-      },
-
-      "&:after": {
-        borderColor: isblack ? theme.palette.black : theme.palette.white,
-      },
-
-      "&.Mui-focused": {
-        "&:after": {
-          borderColor: theme.palette.green.main,
-        },
-      },
-      "& .MuiFormLabel-root": {
-        color: isblack ? theme.palette.black : theme.palette.white,
-        fontWeight: 400,
-        fontSize: "14px",
-        lineHeight: "24.8px",
-      },
-      "&.Mui-error": {
-        color: theme.palette.red,
-        "&:after": {
-          borderColor: theme.palette.red,
+      fontSize: "16px",
+      lineHeight: "24.8px",
+    },
+  },
+  "& .MuiInputBase-root": {
+    color: isBlack ? theme.palette.black : theme.palette.white,
+    fontSize: "16px",
+    opacity: 0.7,
+    borderColor: isBlack ? theme.palette.black : theme.palette.white,
+    "&:hover": {
+      "&:not(.Mui-disabled)": {
+        "&:before": {
+          borderColor: theme.palette.green.lighter,
         },
       },
     },
-  }),
-);
+    "&:before": {
+      borderColor: isBlack ? theme.palette.black : theme.palette.white,
+    },
+
+    "&:after": {
+      borderColor: isBlack ? theme.palette.black : theme.palette.white,
+    },
+
+    "&.Mui-focused": {
+      "&:after": {
+        borderColor: theme.palette.green.main,
+      },
+    },
+    "& .MuiFormLabel-root": {
+      color: isBlack ? theme.palette.black : theme.palette.white,
+      fontWeight: 400,
+      fontSize: "14px",
+      lineHeight: "24.8px",
+    },
+    "&.Mui-error": {
+      color: theme.palette.red,
+      "&:after": {
+        borderColor: theme.palette.red,
+      },
+    },
+  },
+}));
 
 export const StyledList = styled(List)(() => ({
   margin: "0 auto",
   textAlign: "center",
 }));
 
-type StyledListItemProps = {
-  isActive?: boolean;
-};
-
-export const StyledListItem = styled(ListItem)<StyledListItemProps>(
-  ({ isActive }) => ({
-    borderBottom: isActive
-      ? `2px solid ${theme.palette.green.main}`
-      : "2px solid transparent",
+export const StyledListItem = styled(ListItem, {
+  shouldForwardProp: (prop) => prop !== "isActive",
+})<{ isActive?: boolean }>(({ isActive }) => ({
+  borderBottom: isActive
+    ? `2px solid ${theme.palette.green.main}`
+    : "2px solid transparent",
+  transition: "all 250ms",
+  "&:hover": {
     transition: "all 250ms",
-    "&:hover": {
-      transition: "all 250ms",
-      borderBottom: `2px solid ${theme.palette.white}`,
-    },
-    "&:active": {
-      borderBottom: `2px solid ${theme.palette.green.main}`,
-    },
-  }),
-);
+    borderBottom: `2px solid ${theme.palette.white}`,
+  },
+  "&:active": {
+    borderBottom: `2px solid ${theme.palette.green.main}`,
+  },
+}));
 
 export const StyledListItemIcon = styled(ListItemIcon)(() => ({
   color: theme.palette.white,
@@ -263,17 +269,6 @@ export const StyledDivider = styled(Divider)(() => ({
 export const StyledProvideWrapper = styled(Box)(() => ({
   margin: "0 auto",
 }));
-
-export const StyledAvatar = styled(Avatar)<{ bgColor?: string }>(
-  ({ bgColor }) => ({
-    backgroundColor: bgColor,
-    color: theme.palette.black,
-    fontSize: "16px",
-    fontWeight: "600",
-    lineHeight: "24.8px",
-    marginRight: "10px",
-  }),
-);
 
 export const StyledBoxSettingsWrapper = styled(Box)(() => ({
   height: "calc(100vh - 140px)",

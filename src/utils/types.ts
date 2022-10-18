@@ -35,6 +35,13 @@ export enum SIGN_UP {
   NOTIFICATION = "NOTIFICATION",
 }
 
+export interface IUser {
+  username: string;
+  displayName: string;
+  id: number;
+  admin: boolean;
+}
+
 export interface IResetPassword {
   email: string;
 }
@@ -53,4 +60,10 @@ export interface ISignInForm {
   username: string;
   password: string;
   isRememberMe: string;
+}
+
+export interface IExtendedSettingsForm {
+  fullName: string;
+  userName: string;
+  phoneNumber: string;
 }

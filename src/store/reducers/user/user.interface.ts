@@ -1,17 +1,6 @@
-export interface IRegisterResponse {
-  username: string;
-  displayName: string;
-  id: number;
-  admin: boolean;
-}
-
-export interface ITokens {
-  accessToken: string;
-  refreshToken: string;
-}
+import { IUser, LOADING_STATUS } from "../../../utils/types";
 
 export interface IUserInitialState {
-  user: IRegisterResponse | null;
-  isLoading: boolean;
-  errorSignIn: string;
+  user: IUser | null;
+  loading: LOADING_STATUS;
 }

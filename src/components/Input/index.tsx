@@ -9,7 +9,7 @@ type IInput = TextFieldProps & {
   isPassword?: boolean;
   isResetPassword?: boolean;
   control: any;
-  isblack?: boolean;
+  isBlack?: boolean;
   formName: string;
 };
 
@@ -18,7 +18,7 @@ const Input: FC<IInput> = ({
   isResetPassword = false,
   formName,
   control,
-  isblack = false,
+  isBlack = false,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -33,7 +33,7 @@ const Input: FC<IInput> = ({
     <StyledInput
       {...control.register(formName)}
       {...props}
-      isblack={isblack}
+      isBlack={isBlack}
       InputLabelProps={{ shrink: true }}
       onCopy={handleChange}
       onPaste={handleChange}
@@ -47,7 +47,7 @@ const Input: FC<IInput> = ({
                 <InputAdornment position="end">
                   <IconButton
                     sx={{
-                      color: isblack
+                      color: isBlack
                         ? theme.palette.black
                         : theme.palette.white,
                     }}

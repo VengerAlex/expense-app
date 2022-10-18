@@ -2,6 +2,8 @@ import { FC } from "react";
 import { AvatarProps, Typography } from "@mui/material";
 import { StyledBoxFlex, StyledAvatar } from "../../styles";
 import { theme } from "../../providers/ThemeProvider";
+import { getUserState } from "../../store/reducers/user/userSlice";
+import { useAppSelector } from "../../hooks/useAppSelector";
 
 type IProfileAvatar = AvatarProps & {
   color: string;
@@ -17,15 +19,22 @@ export const ProfileAvatar: FC<IProfileAvatar> = ({
   circleText,
   ...props
 }) => {
+  const { user } = useAppSelector(getUserState);
+
+  const INITIALS = user?.displayName
+    .split(" ")
+    .map((value) => value[0])
+    .join("");
+
   return (
     <StyledBoxFlex>
       <StyledAvatar bgColor={bgColor} {...props}>
         <Typography color={theme.palette.black} variant={circleText}>
-          OV
+          {INITIALS}
         </Typography>
       </StyledAvatar>
       <Typography color={color} variant={myVariant}>
-        Olexander Venger
+        {user?.displayName}
       </Typography>
     </StyledBoxFlex>
   );

@@ -25,6 +25,7 @@
         "prettier"
     ],
     "rules": {
+        "prefer-const": 0,
         "import/order": 0,
         "no-restricted-globals": 0,
         "@typescript-eslint/no-redeclare": 0,

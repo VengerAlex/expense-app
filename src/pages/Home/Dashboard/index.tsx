@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Typography } from "@mui/material";
 import { MainLayout } from "../../../components/MainLayout";
 

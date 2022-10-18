@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import SignIn from "./pages/Auth/SignIn";
 import SignUp from "./pages/Auth/SignUp";
@@ -11,8 +11,20 @@ import { Analytics } from "./pages/Home/Analytics";
 import { Categories } from "./pages/Home/Categories";
 import { Settings } from "./pages/Home/Settings";
 import { Dashboard } from "./pages/Home/Dashboard";
+import { useActions } from "./hooks/useActions";
+import { localstorageAuthService } from "./services/localstorage.service";
 
 const App: FC = () => {
+  const { getMe } = useActions();
+
+  useEffect(() => {
+    const token = localstorageAuthService.getAccessToken();
+
+    if (token) {
+      getMe();
+    }
+  }, []);
+
   return (
     <Routes>
       <Route element={<PrivateRoute />}>

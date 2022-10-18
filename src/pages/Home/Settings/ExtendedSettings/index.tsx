@@ -1,9 +1,15 @@
-import { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { FormControl } from "@mui/material";
+import { FormControl, Typography } from "@mui/material";
 import Input from "../../../../components/Input";
-import { ROUTES, SETTINGS } from "../../../../utils/types";
+import {
+  IExtendedSettingsForm,
+  ISignInForm,
+  ROUTES,
+  SETTINGS,
+} from "../../../../utils/types";
 import { extendedSettingsSchema } from "../../../../utils/schema";
 import {
   StyledLogoutButton,
@@ -14,13 +20,9 @@ import { ProfileAvatar } from "../../../../components/ProfileAvatar";
 import { theme } from "../../../../providers/ThemeProvider";
 import { showErrorText } from "../../../../utils/helpers";
 import { useActions } from "../../../../hooks/useActions";
-import { useNavigate } from "react-router-dom";
-
-interface IExtendedSettingsForm {
-  fullName: string;
-  userName: string;
-  phoneNumber: string;
-}
+import { localstorageAuthService } from "../../../../services/localstorage.service";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
+import { getUserState } from "../../../../store/reducers/user/userSlice";
 
 interface IExtendedSettings {
   setCurrentComponent: (component: SETTINGS) => void;
@@ -28,9 +30,12 @@ interface IExtendedSettings {
 export const ExtendedSettings: FC<IExtendedSettings> = ({
   setCurrentComponent,
 }) => {
+  const token = localstorageAuthService.getAccessToken();
+  const { user } = useAppSelector(getUserState);
   const navigate = useNavigate();
-  const { logout } = useActions();
+  const { logout, changeInformation } = useActions();
   const {
+    handleSubmit,
     control,
     getValues,
     formState: { errors, isValid },
@@ -42,8 +47,12 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
 
   const logoutHandler = () => {
     logout();
+  };
 
-    navigate(ROUTES.SIGN_IN);
+  const onSubmit = (data: IExtendedSettingsForm) => {
+    const { fullName, userName } = data;
+
+    changeInformation({ username: userName, displayName: fullName });
   };
 
   return (
@@ -56,13 +65,13 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
         bgColor={theme.palette.red}
       />
       <FormControl sx={{ minWidth: "335px", marginTop: 4 }}>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             helperText={showErrorText(errors, "fullName", fullName)}
             error={!!errors.fullName && !!fullName}
             control={control}
             placeholder="Arafat"
-            isblack
+            isBlack
             formName="fullName"
             label="Full Name"
           />
@@ -71,7 +80,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             error={!!errors.userName && !!userName}
             control={control}
             placeholder="Arafat1488"
-            isblack
+            isBlack
             formName="userName"
             label="UserName"
           />
@@ -80,11 +89,11 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             error={!!errors.phoneNumber && !!phoneNumber}
             control={control}
             placeholder="380937654671"
-            isblack
+            isBlack
             formName="phoneNumber"
             label="Phone Number"
           />
-          <StyledPrimaryButton disabled={!isValid} sx={{ mb: 2 }}>
+          <StyledPrimaryButton type="submit" disabled={!isValid} sx={{ mb: 2 }}>
             Save Changes
           </StyledPrimaryButton>
           <StyledSecondaryButton

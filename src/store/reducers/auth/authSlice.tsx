@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, logout, register } from "./auth.actions";
+import { changePassword, login, logout, register } from "./auth.actions";
 import { IAuthInitialState } from "./auth.interface";
 import { RootState } from "../../index";
 import { LOADING_STATUS, STATUS_CODE } from "../../../utils/types";
+import { changeInformation } from "../user/user.actions";
 
 const initialState: IAuthInitialState = {
   loading: LOADING_STATUS.IDLE,
@@ -24,6 +25,7 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
       })
+
       .addCase(register.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
@@ -36,11 +38,18 @@ const authSlice = createSlice({
         state.loading = LOADING_STATUS.REJECTED;
         state.statusCode = STATUS_CODE.DEFAULT;
       })
-      .addCase(logout.pending, (state) => {
+
+      .addCase(changePassword.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
-      .addCase(logout.fulfilled, (state) => {
+      .addCase(changePassword.fulfilled, (state, { payload }) => {
+        state.loading = LOADING_STATUS.FULFILLED;
+
+        console.log(payload, "payload");
+      })
+      .addCase(changePassword.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
+        state.statusCode = STATUS_CODE.DEFAULT;
       });
   },
 });

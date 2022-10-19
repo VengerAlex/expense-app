@@ -3,7 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { FormControl } from "@mui/material";
 import Input from "../../../../components/Input";
-import { IExtendedSettingsForm, SETTINGS } from "../../../../utils/types";
+import {
+  IExtendedSettingsForm,
+  LOADING_STATUS,
+  SETTINGS,
+} from "../../../../utils/types";
 import { extendedSettingsSchema } from "../../../../utils/schema";
 import {
   StyledLogoutButton,
@@ -23,7 +27,7 @@ interface IExtendedSettings {
 export const ExtendedSettings: FC<IExtendedSettings> = ({
   setCurrentComponent,
 }) => {
-  const { user } = useAppSelector(getUserSelector);
+  const { user, loading } = useAppSelector(getUserSelector);
   const { logout, changeInformation } = useActions();
   const {
     handleSubmit,
@@ -40,6 +44,10 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
 
   const onSubmit = (data: IExtendedSettingsForm) => {
     changeInformation(data);
+
+    if (loading === LOADING_STATUS.FULFILLED) {
+      setCurrentComponent(SETTINGS.NOTIFICATION);
+    }
   };
 
   useEffect(() => {

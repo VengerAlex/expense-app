@@ -1,7 +1,11 @@
 import { FC } from "react";
 import { FormControl, Typography } from "@mui/material";
 import Input from "../../../../components/Input";
-import { ISignInForm, SETTINGS } from "../../../../utils/types";
+import {
+  IResetProfileForm,
+  LOADING_STATUS,
+  SETTINGS,
+} from "../../../../utils/types";
 import { StyledPrimaryButton } from "../../../../styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
@@ -10,36 +14,37 @@ import { theme } from "../../../../providers/ThemeProvider";
 import { ProfileAvatar } from "../../../../components/ProfileAvatar";
 import { showErrorText } from "../../../../utils/helpers";
 import { useActions } from "../../../../hooks/useActions";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
+import { getUserSelector } from "../../../../store/slices/user/userSlice";
 
 interface IProfileSettings {
   setCurrentComponent: (component: SETTINGS) => void;
 }
 
-interface IResetForm {
-  oldPassword: string;
-  password: string;
-  confirmedPassword: string;
-}
-
 export const ProfileSettings: FC<IProfileSettings> = ({
   setCurrentComponent,
 }) => {
+  const { loading } = useAppSelector(getUserSelector);
   const { changePassword } = useActions();
   const {
     handleSubmit,
     control,
     getValues,
     formState: { errors, isValid },
-  } = useForm<IResetForm>({
+  } = useForm<IResetProfileForm>({
     mode: "onChange",
     resolver: yupResolver(profileSettingsSchema),
   });
   const { oldPassword, password, confirmedPassword } = getValues();
 
-  const onSubmit = async (data: IResetForm) => {
+  const onSubmit = async (data: IResetProfileForm) => {
     const { oldPassword, password } = data;
 
     changePassword({ oldPassword, newPassword: password });
+
+    if (loading === LOADING_STATUS.FULFILLED) {
+      setCurrentComponent(SETTINGS.NOTIFICATION);
+    }
   };
 
   return (

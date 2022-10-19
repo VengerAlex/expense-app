@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, BoxProps, Typography } from "@mui/material";
 import illustrationImage from "../../assets/images/ilustration.png";
 import { StyledNotificationBox, StyledPrimaryButton } from "../../styles";
+import { SETTINGS } from "../../utils/types";
 
 type INotificationBoxProps = BoxProps & {
   title: string;
@@ -22,6 +23,7 @@ export const NotificationBox = ({
   const navigateToHandler = () => {
     navigate(navigateTo);
   };
+
   return (
     <StyledNotificationBox {...props}>
       <Box

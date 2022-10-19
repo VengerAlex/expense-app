@@ -67,3 +67,9 @@ export interface IExtendedSettingsForm {
   username: string;
   displayName: string;
 }
+
+export interface IResetProfileForm {
+  oldPassword: string;
+  password: string;
+  confirmedPassword: string;
+}

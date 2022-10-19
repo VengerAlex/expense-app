@@ -44,10 +44,8 @@ const authSlice = createSlice({
       .addCase(changePassword.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
-      .addCase(changePassword.fulfilled, (state, { payload }) => {
+      .addCase(changePassword.fulfilled, (state) => {
         state.loading = LOADING_STATUS.FULFILLED;
-
-        console.log(payload, "payload");
       })
       .addCase(changePassword.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;

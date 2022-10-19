@@ -47,12 +47,7 @@ export const changePassword = createAsyncThunk<any, IChangePassword>(
   "auth/changePassword",
   async ({ oldPassword, newPassword }, { rejectWithValue }) => {
     try {
-      const response = await AuthService.changePassword(
-        oldPassword,
-        newPassword,
-      );
-
-      console.log(response);
+      await AuthService.changePassword(oldPassword, newPassword);
 
       toastr.success("Password has been changes", "Completed successfully");
     } catch (error: any) {

@@ -30,7 +30,6 @@ export const Settings: FC<ISettings> = () => {
           {currentComponent === SETTINGS.NOTIFICATION && (
             <StyledNotifWrapper>
               <NotificationBox
-                onClick={() => setCurrentComponent(SETTINGS.EXTENDED)}
                 navigateTo={ROUTES.HOME}
                 btnTitle="Back to dashboard"
                 title="your changes are saved"

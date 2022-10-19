@@ -21,7 +21,7 @@ const userSlice = createSlice({
         state.loading = LOADING_STATUS.PENDING;
       })
       .addCase(getMe.fulfilled, (state, action: PayloadAction<IUser>) => {
-        state.loading = LOADING_STATUS.REJECTED;
+        state.loading = LOADING_STATUS.FULFILLED;
         state.user = action.payload;
       })
       .addCase(getMe.rejected, (state) => {
@@ -42,9 +42,15 @@ const userSlice = createSlice({
       })
 
       // logout
+      .addCase(logout.pending, (state) => {
+        state.loading = LOADING_STATUS.PENDING;
+      })
       .addCase(logout.fulfilled, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
         state.user = null;
+      })
+      .addCase(logout.rejected, (state) => {
+        state.loading = LOADING_STATUS.REJECTED;
       });
   },
 });

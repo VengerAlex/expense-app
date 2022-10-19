@@ -7,7 +7,7 @@ import {
   SETTINGS,
 } from "../../../../utils/types";
 import { StyledPrimaryButton } from "../../../../styles";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { profileSettingsSchema } from "../../../../utils/schema";
 import { theme } from "../../../../providers/ThemeProvider";
@@ -28,6 +28,7 @@ export const ProfileSettings: FC<IProfileSettings> = ({
   const { changePassword } = useActions();
   const {
     handleSubmit,
+    watch,
     control,
     getValues,
     formState: { errors, isValid },
@@ -36,6 +37,7 @@ export const ProfileSettings: FC<IProfileSettings> = ({
     resolver: yupResolver(profileSettingsSchema),
   });
   const { oldPassword, password, confirmedPassword } = getValues();
+  watch();
 
   const onSubmit = async (data: IResetProfileForm) => {
     const { oldPassword, password } = data;

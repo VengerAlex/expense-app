@@ -42,8 +42,11 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
   });
   const { username, displayName } = watch();
 
-  const onSubmit = (data: IExtendedSettingsForm) => {
-    changeInformation(data);
+  const onSubmit = () => {
+    changeInformation({
+      username: username?.trim(),
+      displayName: displayName?.trim(),
+    });
 
     if (loading === LOADING_STATUS.FULFILLED) {
       setCurrentComponent(SETTINGS.NOTIFICATION);
@@ -55,7 +58,8 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
   }, [reset, user]);
 
   const isBtnDisabled =
-    (username === user?.username && displayName === user?.displayName) ||
+    (username?.trim() === user?.username &&
+      displayName?.trim() === user?.displayName) ||
     !isValid;
 
   return (
@@ -73,6 +77,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             helperText={showErrorText(errors, "displayName", displayName)}
             error={!!errors.displayName && !!displayName}
             control={control}
+            placeholder={user?.displayName}
             isBlack
             formName="displayName"
             label="Full Name"
@@ -81,6 +86,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             helperText={showErrorText(errors, "username", username)}
             error={!!errors.username && !!username}
             control={control}
+            placeholder={user?.username}
             isBlack
             formName="username"
             label="UserName"

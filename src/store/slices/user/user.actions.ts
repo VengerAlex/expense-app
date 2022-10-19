@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import UserService from "../../../services/user.service";
 import { IUser } from "../../../utils/types";
+import AuthService from "../../../services/auth.service";
 
 export const getMe = createAsyncThunk<IUser>(
   "user/getMe",
@@ -25,10 +26,14 @@ export const changeInformation = createAsyncThunk<any, any>(
         displayName,
       );
 
-      return response.data;
+      return { data: response.data, status: response.status };
     } catch (error: any) {
       console.log(error);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );
+
+export const logout = createAsyncThunk("auth/logout", async () => {
+  await AuthService.logout();
+});

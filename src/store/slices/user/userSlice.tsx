@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserInitialState } from "./user.interface";
-import { LOADING_STATUS } from "../../../utils/types";
-import { changeInformation, getMe } from "./user.actions";
+import { IUser, LOADING_STATUS, STATUS_CODE } from "../../../utils/types";
+import { changeInformation, getMe, logout } from "./user.actions";
 import { RootState } from "../../index";
-import { logout } from "../auth/auth.actions";
 
 const initialState: IUserInitialState = {
   user: null,
   loading: LOADING_STATUS.IDLE,
+  status: STATUS_CODE.DEFAULT,
 };
 
 const userSlice = createSlice({
@@ -16,41 +16,39 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // getMe
       .addCase(getMe.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
-      .addCase(getMe.fulfilled, (state, { payload }) => {
+      .addCase(getMe.fulfilled, (state, action: PayloadAction<IUser>) => {
         state.loading = LOADING_STATUS.REJECTED;
-        state.user = payload;
+        state.user = action.payload;
       })
       .addCase(getMe.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
       })
 
+      // changeInformation
       .addCase(changeInformation.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
-      .addCase(changeInformation.fulfilled, (state, { payload }) => {
-        state.loading = LOADING_STATUS.REJECTED;
-        state.user = payload;
+      .addCase(changeInformation.fulfilled, (state, action) => {
+        state.loading = LOADING_STATUS.FULFILLED;
+        state.user = action.payload.data;
+        state.status = action.payload.status;
       })
       .addCase(changeInformation.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
       })
 
-      .addCase(logout.pending, (state) => {
-        state.loading = LOADING_STATUS.PENDING;
-      })
+      // logout
       .addCase(logout.fulfilled, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
         state.user = null;
-      })
-      .addCase(logout.rejected, (state) => {
-        state.loading = LOADING_STATUS.REJECTED;
       });
   },
 });
 
-export const getUserState = (state: RootState) => state.user;
+export const getUserSelector = (state: RootState) => state.user;
 
 export default userSlice.reducer;

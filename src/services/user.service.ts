@@ -8,16 +8,12 @@ class UserService {
   }
 
   async changeInformation(username: string, displayName: string) {
-    const response = await axios.patch(
-      getUserUrl("self"),
-      {
-        username,
-        displayName,
-      },
-      {
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-      },
-    );
+    const response = await axios.patch(getUserUrl("self"), {
+      username,
+      displayName,
+    });
+
+    console.log(response, "RESPONSE");
 
     return response;
   }

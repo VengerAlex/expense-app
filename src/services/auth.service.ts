@@ -1,9 +1,9 @@
 import axios, { getAuthUrl } from "../api/index";
 import { localstorageAuthService } from "./localstorage.service";
 import {
+  ILoginResponse,
   IRegisterThunkResponse,
-  ITokens,
-} from "../store/reducers/auth/auth.interface";
+} from "../store/slices/auth/auth.interface";
 
 class AuthService {
   async register(username: string, password: string, displayName: string) {
@@ -12,11 +12,11 @@ class AuthService {
       { username, password, displayName },
     );
 
-    return response;
+    return response.status;
   }
 
   async login(username: string, password: string) {
-    const response = await axios.post<ITokens>(getAuthUrl("login"), {
+    const response = await axios.post<ILoginResponse>(getAuthUrl("login"), {
       username,
       password,
     });
@@ -45,11 +45,9 @@ class AuthService {
   }
 
   async logout() {
-    const response = await axios.get(getAuthUrl("logout"));
+    await axios.get(getAuthUrl("logout"));
 
     localstorageAuthService.clearStorage();
-
-    return response;
   }
 
   async changePassword(oldPassword: string, newPassword: string) {

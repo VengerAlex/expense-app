@@ -1,9 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { changePassword, login, logout, register } from "./auth.actions";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { changePassword, login, register } from "./auth.actions";
 import { IAuthInitialState } from "./auth.interface";
 import { RootState } from "../../index";
 import { LOADING_STATUS, STATUS_CODE } from "../../../utils/types";
-import { changeInformation } from "../user/user.actions";
 
 const initialState: IAuthInitialState = {
   loading: LOADING_STATUS.IDLE,
@@ -16,6 +15,7 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // LOGIN
       .addCase(login.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
@@ -26,19 +26,21 @@ const authSlice = createSlice({
         state.loading = LOADING_STATUS.REJECTED;
       })
 
+      // REGISTER
       .addCase(register.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
-      .addCase(register.fulfilled, (state, { payload }) => {
+      .addCase(register.fulfilled, (state, action: PayloadAction<number>) => {
         state.loading = LOADING_STATUS.FULFILLED;
 
-        state.statusCode = payload.status;
+        state.statusCode = action.payload;
       })
       .addCase(register.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
         state.statusCode = STATUS_CODE.DEFAULT;
       })
 
+      // changePassword
       .addCase(changePassword.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
@@ -54,6 +56,6 @@ const authSlice = createSlice({
   },
 });
 
-export const getAuthState = (state: RootState) => state.auth;
+export const getAuthSelector = (state: RootState) => state.auth;
 
 export default authSlice.reducer;

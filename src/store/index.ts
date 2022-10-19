@@ -1,7 +1,7 @@
 import { reducer as toastrReducer } from "react-redux-toastr";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userSlice from "./reducers/user/userSlice";
-import authSlice from "./reducers/auth/authSlice";
+import userSlice from "./slices/user/userSlice";
+import authSlice from "./slices/auth/authSlice";
 
 const rootReducer = combineReducers({
   user: userSlice,

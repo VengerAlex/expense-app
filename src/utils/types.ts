@@ -18,6 +18,7 @@ export enum LOADING_STATUS {
 export enum STATUS_CODE {
   DEFAULT = 0,
   CREATED = 201,
+  SUCCESSFUL = 200,
 }
 export enum SETTINGS {
   EXTENDED = "EXTENDED",
@@ -63,7 +64,6 @@ export interface ISignInForm {
 }
 
 export interface IExtendedSettingsForm {
-  fullName: string;
-  userName: string;
-  phoneNumber: string;
+  username: string;
+  displayName: string;
 }

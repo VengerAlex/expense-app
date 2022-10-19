@@ -25,6 +25,7 @@
         "prettier"
     ],
     "rules": {
+        "consistent-return": 0,
         "prefer-const": 0,
         "import/order": 0,
         "no-restricted-globals": 0,

@@ -7,7 +7,7 @@ export interface IAuthInitialState {
 export interface IRegisterThunkResponse {
   status: number;
 }
-export interface ITokens {
+export interface ILoginResponse {
   accessToken: string;
   refreshToken: string;
 }
@@ -21,5 +21,4 @@ export interface IChangePassword {
 }
 export interface IRegisterProps extends ILoginProps {
   displayName: string;
-  username: string;
 }

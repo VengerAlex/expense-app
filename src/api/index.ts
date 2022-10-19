@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
 import AuthService from "../services/auth.service";
-import { errorCatch } from "../utils/helpers";
 import { localstorageAuthService } from "../services/localstorage.service";
 
 export const getAuthUrl = (string: string) => `/auth/${string}`;
@@ -37,9 +36,7 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
 //
 //         return instance.request(originalRequest);
 //       } catch (error) {
-//         if (errorCatch(error) === "jwt expired") {
-//           AuthService.logout();
-//         }
+//         await AuthService.logout();
 //       }
 //     }
 //

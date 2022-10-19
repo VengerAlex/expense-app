@@ -2,7 +2,7 @@ import { FC } from "react";
 import { AvatarProps, Typography } from "@mui/material";
 import { StyledBoxFlex, StyledAvatar } from "../../styles";
 import { theme } from "../../providers/ThemeProvider";
-import { getUserState } from "../../store/reducers/user/userSlice";
+import { getUserSelector } from "../../store/slices/user/userSlice";
 import { useAppSelector } from "../../hooks/useAppSelector";
 
 type IProfileAvatar = AvatarProps & {
@@ -19,7 +19,7 @@ export const ProfileAvatar: FC<IProfileAvatar> = ({
   circleText,
   ...props
 }) => {
-  const { user } = useAppSelector(getUserState);
+  const { user } = useAppSelector(getUserSelector);
 
   const INITIALS = user?.displayName
     .split(" ")

@@ -1,5 +1,5 @@
-import * as authActions from "./reducers/auth/auth.actions";
-import * as userActions from "./reducers/user/user.actions";
+import * as authActions from "./slices/auth/auth.actions";
+import * as userActions from "./slices/user/user.actions";
 
 export const allActions = {
   ...authActions,

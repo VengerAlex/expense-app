@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Box, Typography } from "@mui/material";
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { getAuthState } from "../../../../store/reducers/auth/authSlice";
+import { getAuthSelector } from "../../../../store/slices/auth/authSlice";
 import { StyledFormControl, StyledPrimaryButton } from "../../../../styles";
 import {
   ISignUpFormValue,
@@ -25,7 +25,7 @@ interface ISignUpForm {
 
 export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
   const { register } = useActions();
-  const { loading, statusCode } = useAppSelector(getAuthState);
+  const { loading, statusCode } = useAppSelector(getAuthSelector);
   const {
     control,
     getValues,

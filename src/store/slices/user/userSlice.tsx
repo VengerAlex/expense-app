@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserInitialState } from "./user.interface";
-import { IUser, LOADING_STATUS, STATUS_CODE } from "../../../utils/types";
+import { IUser, LOADING_STATUS } from "../../../utils/types";
 import { changeInformation, getMe, logout } from "./user.actions";
 import { RootState } from "../../index";
 
 const initialState: IUserInitialState = {
   user: null,
   loading: LOADING_STATUS.IDLE,
-  status: STATUS_CODE.DEFAULT,
 };
 
 const userSlice = createSlice({
@@ -35,7 +34,6 @@ const userSlice = createSlice({
       .addCase(changeInformation.fulfilled, (state, action) => {
         state.loading = LOADING_STATUS.FULFILLED;
         state.user = action.payload.data;
-        state.status = action.payload.status;
       })
       .addCase(changeInformation.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;

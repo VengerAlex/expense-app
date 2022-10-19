@@ -96,7 +96,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
             disabled={isBtnDisabled}
             sx={{ mb: 2 }}
           >
-            Save Changes
+            {loading === LOADING_STATUS.PENDING ? "Loading" : "Save Changes"}
           </StyledPrimaryButton>
           <StyledSecondaryButton
             onClick={() => setCurrentComponent(SETTINGS.PASSWORDS)}

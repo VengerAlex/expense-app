@@ -30,10 +30,11 @@ export const Settings: FC<ISettings> = () => {
           {currentComponent === SETTINGS.NOTIFICATION && (
             <StyledNotifWrapper>
               <NotificationBox
+                color={theme.palette.black}
                 navigateTo={ROUTES.HOME}
                 btnTitle="Back to dashboard"
                 title="your changes are saved"
-                p="9.5px 82px"
+                p="6px 82px"
               />
             </StyledNotifWrapper>
           )}

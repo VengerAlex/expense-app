@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import UserService from "../../../services/user.service";
 import { IUser } from "../../../utils/types";
 import AuthService from "../../../services/auth.service";
+import { toastError } from "../../../utils/helpers";
 
 export const getMe = createAsyncThunk<IUser>(
   "user/getMe",
@@ -26,9 +27,10 @@ export const changeInformation = createAsyncThunk<any, any>(
         displayName,
       );
 
-      return { data: response.data, status: response.status };
+      return response.data;
     } catch (error: any) {
-      console.log(error);
+      toastError(error);
+
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },

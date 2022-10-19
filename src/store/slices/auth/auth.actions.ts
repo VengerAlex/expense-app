@@ -48,8 +48,6 @@ export const changePassword = createAsyncThunk<any, IChangePassword>(
   async ({ oldPassword, newPassword }, { rejectWithValue }) => {
     try {
       await AuthService.changePassword(oldPassword, newPassword);
-
-      toastr.success("Password has been changes", "Completed successfully");
     } catch (error: any) {
       toastError(error);
       return rejectWithValue(error.response.data.message);

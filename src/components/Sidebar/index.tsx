@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AssessmentIcon from "@mui/icons-material/Assessment";
+import ArticleIcon from "@mui/icons-material/Article";
+import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
 import { theme } from "../../providers/ThemeProvider";
 import { ProfileAvatar } from "../ProfileAvatar";
-import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
 import { ROUTES } from "../../utils/types";
 import {
   StyledDivider,
@@ -20,7 +21,7 @@ import { Logo } from "../Logo";
 const LIST_ITEMS = [
   { text: "DashBoard", to: ROUTES.HOME, icon: <GridViewRoundedIcon /> },
   { text: "Analytics", to: ROUTES.ANALYTICS, icon: <AssessmentIcon /> },
-  { text: "Categories", to: ROUTES.CATEGORIES, icon: <SettingsIcon /> },
+  { text: "Categories", to: ROUTES.CATEGORIES, icon: <ArticleIcon /> },
   { text: "Settings", to: ROUTES.SETTINGS, icon: <SettingsIcon /> },
 ];
 
@@ -33,19 +34,19 @@ export const Sidebar = () => {
   return (
     <StyledGridNavbar>
       <Logo sx={{ mb: "160px" }} />
-      <StyledList sx={{ mb: "340px" }}>
+      <StyledList sx={{ pb: "340px" }}>
         {LIST_ITEMS.map((item) => (
-          <StyledListItem
-            isActive={isActivePage(item.to)}
-            key={item.text}
-            disablePadding
-          >
+          <StyledListItem key={item.text} disablePadding>
             <StyledListItemButton
-              disableRipple
+              isActive={isActivePage(item.to)}
               onClick={() => navigate(item.to)}
             >
-              <StyledListItemIcon>{item.icon}</StyledListItemIcon>
-              <StyledMenu variant="body2">{item.text}</StyledMenu>
+              <StyledListItemIcon isActive={isActivePage(item.to)}>
+                {item.icon}
+              </StyledListItemIcon>
+              <StyledMenu isActive={isActivePage(item.to)} variant="body2">
+                {item.text}
+              </StyledMenu>
             </StyledListItemButton>
           </StyledListItem>
         ))}

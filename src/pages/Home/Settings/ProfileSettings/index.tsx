@@ -7,7 +7,7 @@ import {
   SETTINGS,
 } from "../../../../utils/types";
 import { StyledPrimaryButton } from "../../../../styles";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { profileSettingsSchema } from "../../../../utils/schema";
 import { theme } from "../../../../providers/ThemeProvider";
@@ -15,7 +15,7 @@ import { ProfileAvatar } from "../../../../components/ProfileAvatar";
 import { showErrorText } from "../../../../utils/helpers";
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { getUserSelector } from "../../../../store/slices/user/userSlice";
+import { getAuthSelector } from "../../../../store/slices/auth/authSlice";
 
 interface IProfileSettings {
   setCurrentComponent: (component: SETTINGS) => void;
@@ -24,11 +24,12 @@ interface IProfileSettings {
 export const ProfileSettings: FC<IProfileSettings> = ({
   setCurrentComponent,
 }) => {
-  const { loading } = useAppSelector(getUserSelector);
+  const { loading } = useAppSelector(getAuthSelector);
   const { changePassword } = useActions();
   const {
     handleSubmit,
     watch,
+    reset,
     control,
     getValues,
     formState: { errors, isValid },
@@ -43,10 +44,11 @@ export const ProfileSettings: FC<IProfileSettings> = ({
     const { oldPassword, password } = data;
 
     changePassword({ oldPassword, newPassword: password });
-
     if (loading === LOADING_STATUS.FULFILLED) {
       setCurrentComponent(SETTINGS.NOTIFICATION);
     }
+
+    reset();
   };
 
   return (
@@ -60,7 +62,7 @@ export const ProfileSettings: FC<IProfileSettings> = ({
       />
       <Typography
         color={theme.palette.black}
-        sx={{ m: "72px 0 16px", lineHeight: "55px" }}
+        sx={{ m: "72px 0 32px" }}
         variant="h4"
       >
         Change Password
@@ -108,7 +110,7 @@ export const ProfileSettings: FC<IProfileSettings> = ({
             type="submit"
             disabled={!isValid}
           >
-            Save Changes
+            {loading === LOADING_STATUS.PENDING ? "Loading" : "Save Changes"}
           </StyledPrimaryButton>
         </form>
       </FormControl>

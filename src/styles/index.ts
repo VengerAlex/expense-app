@@ -8,7 +8,6 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   styled,
   TextField,
@@ -122,11 +121,11 @@ type NotificationBoxProps = {
 };
 
 export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
-  ({ theme, light = false }) => ({
-    color: light ? theme.palette.black : theme.palette.white,
+  ({ theme }) => ({
+    color: theme.palette.white,
     maxWidth: "330px",
-    borderRadius: light ? "8px" : "0px",
-    backgroundColor: light ? theme.palette.green.lighter : "transparent",
+    borderRadius: "8px",
+    backgroundColor: "transparent",
   }),
 );
 
@@ -227,38 +226,42 @@ export const StyledList = styled(List)(() => ({
   textAlign: "center",
 }));
 
-export const StyledListItem = styled(ListItem, {
+export const StyledListItem = styled(ListItem)(() => ({
+  cursor: "pointer",
+}));
+
+export const StyledListItemIcon = styled(ListItemIcon, {
   shouldForwardProp: (prop) => prop !== "isActive",
 })<{ isActive?: boolean }>(({ isActive }) => ({
+  color: theme.palette.white,
+  opacity: `${isActive ? "1" : "0.7"}`,
+}));
+
+export const StyledListItemButton = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isActive",
+})<{ isActive?: boolean }>(({ isActive }) => ({
+  transition: "all 250ms",
   borderBottom: isActive
     ? `2px solid ${theme.palette.green.main}`
     : "2px solid transparent",
-  transition: "all 250ms",
+  display: "flex",
+  padding: "10px 10px 10px 0",
   "&:hover": {
     transition: "all 250ms",
     borderBottom: `2px solid ${theme.palette.white}`,
   },
   "&:active": {
+    transition: "all 250ms",
     borderBottom: `2px solid ${theme.palette.green.main}`,
   },
 }));
 
-export const StyledListItemIcon = styled(ListItemIcon)(() => ({
-  color: theme.palette.white,
-  opacity: 0.7,
-}));
-
-export const StyledListItemButton = styled(ListItemButton)(() => ({
-  paddingLeft: 0,
-  "&:hover": {
-    backgroundColor: "transparent",
-  },
-}));
-
-export const StyledMenu = styled(Typography)(() => ({
+export const StyledMenu = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "isActive",
+})<{ isActive?: boolean }>(({ isActive }) => ({
   color: theme.palette.white,
   marginLeft: "-20px",
-  fontWeight: 300,
+  fontWeight: `${isActive ? 600 : 300}`,
 }));
 
 export const StyledDivider = styled(Divider)(() => ({
@@ -276,6 +279,7 @@ export const StyledBoxSettingsWrapper = styled(Box)(() => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+  overflowY: "auto",
 }));
 
 export const StyledNotifWrapper = styled(Paper)(() => ({

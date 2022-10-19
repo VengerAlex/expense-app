@@ -1,15 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { FormControl, Typography } from "@mui/material";
+import { FormControl } from "@mui/material";
 import Input from "../../../../components/Input";
-import {
-  IExtendedSettingsForm,
-  ISignInForm,
-  ROUTES,
-  SETTINGS,
-} from "../../../../utils/types";
+import { IExtendedSettingsForm, SETTINGS } from "../../../../utils/types";
 import { extendedSettingsSchema } from "../../../../utils/schema";
 import {
   StyledLogoutButton,
@@ -20,9 +14,8 @@ import { ProfileAvatar } from "../../../../components/ProfileAvatar";
 import { theme } from "../../../../providers/ThemeProvider";
 import { showErrorText } from "../../../../utils/helpers";
 import { useActions } from "../../../../hooks/useActions";
-import { localstorageAuthService } from "../../../../services/localstorage.service";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { getUserState } from "../../../../store/reducers/user/userSlice";
+import { getUserSelector } from "../../../../store/slices/user/userSlice";
 
 interface IExtendedSettings {
   setCurrentComponent: (component: SETTINGS) => void;
@@ -30,30 +23,32 @@ interface IExtendedSettings {
 export const ExtendedSettings: FC<IExtendedSettings> = ({
   setCurrentComponent,
 }) => {
-  const token = localstorageAuthService.getAccessToken();
-  const { user } = useAppSelector(getUserState);
-  const navigate = useNavigate();
+  const { user } = useAppSelector(getUserSelector);
   const { logout, changeInformation } = useActions();
   const {
     handleSubmit,
     control,
-    getValues,
+    watch,
+    reset,
     formState: { errors, isValid },
   } = useForm<IExtendedSettingsForm>({
     mode: "onChange",
     resolver: yupResolver(extendedSettingsSchema),
+    defaultValues: { username: "", displayName: "" },
   });
-  const { fullName, userName, phoneNumber } = getValues();
-
-  const logoutHandler = () => {
-    logout();
-  };
+  const { username, displayName } = watch();
 
   const onSubmit = (data: IExtendedSettingsForm) => {
-    const { fullName, userName } = data;
-
-    changeInformation({ username: userName, displayName: fullName });
+    changeInformation(data);
   };
+
+  useEffect(() => {
+    reset({ username: user?.username, displayName: user?.displayName });
+  }, [reset, user]);
+
+  const isBtnDisabled =
+    (username === user?.username && displayName === user?.displayName) ||
+    !isValid;
 
   return (
     <>
@@ -67,33 +62,26 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
       <FormControl sx={{ minWidth: "335px", marginTop: 4 }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
-            helperText={showErrorText(errors, "fullName", fullName)}
-            error={!!errors.fullName && !!fullName}
+            helperText={showErrorText(errors, "displayName", displayName)}
+            error={!!errors.displayName && !!displayName}
             control={control}
-            placeholder="Arafat"
             isBlack
-            formName="fullName"
+            formName="displayName"
             label="Full Name"
           />
           <Input
-            helperText={showErrorText(errors, "userName", userName)}
-            error={!!errors.userName && !!userName}
+            helperText={showErrorText(errors, "username", username)}
+            error={!!errors.username && !!username}
             control={control}
-            placeholder="Arafat1488"
             isBlack
-            formName="userName"
+            formName="username"
             label="UserName"
           />
-          <Input
-            helperText={showErrorText(errors, "phoneNumber", phoneNumber)}
-            error={!!errors.phoneNumber && !!phoneNumber}
-            control={control}
-            placeholder="380937654671"
-            isBlack
-            formName="phoneNumber"
-            label="Phone Number"
-          />
-          <StyledPrimaryButton type="submit" disabled={!isValid} sx={{ mb: 2 }}>
+          <StyledPrimaryButton
+            type="submit"
+            disabled={isBtnDisabled}
+            sx={{ mb: 2 }}
+          >
             Save Changes
           </StyledPrimaryButton>
           <StyledSecondaryButton
@@ -103,7 +91,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
           >
             Reset Password
           </StyledSecondaryButton>
-          <StyledLogoutButton onClick={logoutHandler}>
+          <StyledLogoutButton onClick={() => logout()}>
             Log Out
           </StyledLogoutButton>
         </form>

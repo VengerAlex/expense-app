@@ -33,7 +33,7 @@ export const Sidebar = () => {
   return (
     <StyledGridNavbar>
       <Logo sx={{ mb: "160px" }} />
-      <StyledList sx={{ pb: "340px" }}>
+      <StyledList>
         {LIST_ITEMS.map((item) => (
           <StyledListItem key={item.text} disablePadding>
             <StyledListItemButton
@@ -46,7 +46,7 @@ export const Sidebar = () => {
           </StyledListItem>
         ))}
       </StyledList>
-      <StyledProvideWrapper sx={{ maxWidth: "132px" }}>
+      <StyledProvideWrapper sx={{ maxWidth: "132px", marginTop: "auto" }}>
         <StyledDivider />
         <ProfileAvatar
           isBig={false}

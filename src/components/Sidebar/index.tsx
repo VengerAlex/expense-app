@@ -12,11 +12,10 @@ import {
   StyledList,
   StyledListItem,
   StyledListItemButton,
-  StyledListItemIcon,
-  StyledMenu,
   StyledProvideWrapper,
 } from "../../styles";
 import { Logo } from "../Logo";
+import { ListItemIcon, Typography } from "@mui/material";
 
 const LIST_ITEMS = [
   { text: "DashBoard", to: ROUTES.HOME, icon: <GridViewRoundedIcon /> },
@@ -41,12 +40,8 @@ export const Sidebar = () => {
               isActive={isActivePage(item.to)}
               onClick={() => navigate(item.to)}
             >
-              <StyledListItemIcon isActive={isActivePage(item.to)}>
-                {item.icon}
-              </StyledListItemIcon>
-              <StyledMenu isActive={isActivePage(item.to)} variant="body2">
-                {item.text}
-              </StyledMenu>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <Typography variant="body2">{item.text}</Typography>
             </StyledListItemButton>
           </StyledListItem>
         ))}

@@ -8,7 +8,6 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemIcon,
   styled,
   TextField,
   FormControl,
@@ -230,38 +229,36 @@ export const StyledListItem = styled(ListItem)(() => ({
   cursor: "pointer",
 }));
 
-export const StyledListItemIcon = styled(ListItemIcon, {
-  shouldForwardProp: (prop) => prop !== "isActive",
-})<{ isActive?: boolean }>(({ isActive }) => ({
-  color: theme.palette.white,
-  opacity: `${isActive ? "1" : "0.7"}`,
-}));
-
 export const StyledListItemButton = styled(Box, {
   shouldForwardProp: (prop) => prop !== "isActive",
 })<{ isActive?: boolean }>(({ isActive }) => ({
   transition: "all 250ms",
+  padding: "10px 10px 4px 0",
   borderBottom: isActive
     ? `2px solid ${theme.palette.green.main}`
     : "2px solid transparent",
   display: "flex",
-  padding: "10px 10px 10px 0",
   "&:hover": {
     transition: "all 250ms",
     borderBottom: `2px solid ${theme.palette.white}`,
+    "& .MuiSvgIcon-root": {
+      color: theme.palette.white,
+      opacity: `${isActive ? "1" : "0.7"}`,
+    },
   },
   "&:active": {
     transition: "all 250ms",
     borderBottom: `2px solid ${theme.palette.green.main}`,
   },
-}));
-
-export const StyledMenu = styled(Typography, {
-  shouldForwardProp: (prop) => prop !== "isActive",
-})<{ isActive?: boolean }>(({ isActive }) => ({
-  color: theme.palette.white,
-  marginLeft: "-20px",
-  fontWeight: `${isActive ? 600 : 300}`,
+  "& .MuiSvgIcon-root": {
+    color: theme.palette.white,
+    opacity: isActive ? "1" : "0.7",
+  },
+  "& .MuiTypography-root": {
+    color: theme.palette.white,
+    marginLeft: "-20px",
+    fontWeight: `${isActive ? 600 : 300}`,
+  },
 }));
 
 export const StyledDivider = styled(Divider)(() => ({

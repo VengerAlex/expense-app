@@ -11,7 +11,7 @@ import signInCover from "../../../assets/images/cover-login.jpg";
 import { StyledPrimaryButton, StyledFormControl } from "../../../styles/index";
 import { useActions } from "../../../hooks/useActions";
 import { useAppSelector } from "../../../hooks/useAppSelector";
-import { getAuthSelector } from "../../../store/slices/auth/authSlice";
+import { authSelector } from "../../../store/slices/auth/authSlice";
 import { signInSchema } from "../../../utils/schema";
 import { showErrorText } from "../../../utils/helpers";
 import { localstorageAuthService } from "../../../services/localstorage.service";
@@ -22,7 +22,7 @@ const SignIn: FC = () => {
   const from = location.state?.from?.pathname || ROUTES.HOME;
   const isAuth = localstorageAuthService.getAccessToken();
   const { login } = useActions();
-  const { loading } = useAppSelector(getAuthSelector);
+  const { loading } = useAppSelector(authSelector);
 
   const {
     control,

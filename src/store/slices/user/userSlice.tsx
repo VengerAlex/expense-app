@@ -44,7 +44,7 @@ const userSlice = createSlice({
         state.loading = LOADING_STATUS.PENDING;
       })
       .addCase(logout.fulfilled, (state) => {
-        state.loading = LOADING_STATUS.REJECTED;
+        state.loading = LOADING_STATUS.FULFILLED;
         state.user = null;
       })
       .addCase(logout.rejected, (state) => {
@@ -53,6 +53,6 @@ const userSlice = createSlice({
   },
 });
 
-export const getUserSelector = (state: RootState) => state.user;
+export const userSelector = (state: RootState) => state.user;
 
 export default userSlice.reducer;

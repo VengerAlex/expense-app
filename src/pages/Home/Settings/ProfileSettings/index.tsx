@@ -15,7 +15,7 @@ import { ProfileAvatar } from "../../../../components/ProfileAvatar";
 import { showErrorText } from "../../../../utils/helpers";
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { getAuthSelector } from "../../../../store/slices/auth/authSlice";
+import { authSelector } from "../../../../store/slices/auth/authSlice";
 
 interface IProfileSettings {
   setCurrentComponent: (component: SETTINGS) => void;
@@ -24,7 +24,7 @@ interface IProfileSettings {
 export const ProfileSettings: FC<IProfileSettings> = ({
   setCurrentComponent,
 }) => {
-  const { loading } = useAppSelector(getAuthSelector);
+  const { loading } = useAppSelector(authSelector);
   const { changePassword } = useActions();
   const {
     handleSubmit,
@@ -55,10 +55,8 @@ export const ProfileSettings: FC<IProfileSettings> = ({
     <>
       <ProfileAvatar
         sx={{ width: "72px", height: "72px" }}
-        circleText="h4"
         myVariant="h4"
         color={theme.palette.black}
-        bgColor={theme.palette.red}
       />
       <Typography
         color={theme.palette.black}

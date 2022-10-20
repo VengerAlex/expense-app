@@ -12,7 +12,6 @@ export const getMe = createAsyncThunk<IUser>(
 
       return response.data;
     } catch (error: any) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
@@ -37,5 +36,5 @@ export const changeInformation = createAsyncThunk<any, any>(
 );
 
 export const logout = createAsyncThunk("auth/logout", async () => {
-  await AuthService.logout();
+  AuthService.logout();
 });

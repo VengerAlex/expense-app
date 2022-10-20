@@ -44,11 +44,8 @@ class AuthService {
     return response;
   }
 
-  async logout() {
+  logout() {
     localstorageAuthService.clearStorage();
-
-    const response = await axios.get(getAuthUrl("logout"));
-    return response;
   }
 
   async changePassword(oldPassword: string, newPassword: string) {
@@ -56,8 +53,6 @@ class AuthService {
       oldPassword,
       newPassword,
     });
-
-    console.log(response);
 
     return response;
   }

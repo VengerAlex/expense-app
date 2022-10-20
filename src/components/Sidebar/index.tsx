@@ -54,11 +54,9 @@ export const Sidebar = () => {
       <StyledProvideWrapper sx={{ maxWidth: "132px" }}>
         <StyledDivider />
         <ProfileAvatar
-          sx={{ width: "32px", height: "32px" }}
-          circleText="h5"
+          isBig={false}
           myVariant="subtitle1"
           color={theme.palette.white}
-          bgColor={theme.palette.white}
         />
       </StyledProvideWrapper>
     </StyledGridNavbar>

@@ -19,7 +19,7 @@ import { theme } from "../../../../providers/ThemeProvider";
 import { showErrorText } from "../../../../utils/helpers";
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { getUserSelector } from "../../../../store/slices/user/userSlice";
+import { userSelector } from "../../../../store/slices/user/userSlice";
 
 interface IExtendedSettings {
   setCurrentComponent: (component: SETTINGS) => void;
@@ -27,7 +27,7 @@ interface IExtendedSettings {
 export const ExtendedSettings: FC<IExtendedSettings> = ({
   setCurrentComponent,
 }) => {
-  const { user, loading } = useAppSelector(getUserSelector);
+  const { user, loading } = useAppSelector(userSelector);
   const { logout, changeInformation } = useActions();
   const {
     handleSubmit,
@@ -64,13 +64,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
 
   return (
     <>
-      <ProfileAvatar
-        sx={{ width: "72px", height: "72px" }}
-        circleText="h4"
-        myVariant="h4"
-        color={theme.palette.black}
-        bgColor={theme.palette.red}
-      />
+      <ProfileAvatar isBig myVariant="h4" color={theme.palette.black} />
       <FormControl sx={{ minWidth: "335px", marginTop: 4 }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input

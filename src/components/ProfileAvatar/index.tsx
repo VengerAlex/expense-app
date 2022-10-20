@@ -1,25 +1,21 @@
 import { FC } from "react";
 import { AvatarProps, Typography } from "@mui/material";
-import { StyledBoxFlex, StyledAvatar } from "../../styles";
-import { theme } from "../../providers/ThemeProvider";
-import { getUserSelector } from "../../store/slices/user/userSlice";
+import { StyledAvatar, AvatarWrapper } from "../../styles";
+import { userSelector } from "../../store/slices/user/userSlice";
 import { useAppSelector } from "../../hooks/useAppSelector";
 
 type IProfileAvatar = AvatarProps & {
   color: string;
-  bgColor: string;
+  isBig?: boolean;
   myVariant: "subtitle1" | "h4";
-  circleText: "h5" | "h4";
 };
 
 export const ProfileAvatar: FC<IProfileAvatar> = ({
   myVariant,
+  isBig,
   color,
-  bgColor,
-  circleText,
-  ...props
 }) => {
-  const { user } = useAppSelector(getUserSelector);
+  const { user } = useAppSelector(userSelector);
 
   const INITIALS = user?.displayName
     .split(" ")
@@ -27,15 +23,11 @@ export const ProfileAvatar: FC<IProfileAvatar> = ({
     .join("");
 
   return (
-    <StyledBoxFlex>
-      <StyledAvatar bgColor={bgColor} {...props}>
-        <Typography color={theme.palette.black} variant={circleText}>
-          {INITIALS}
-        </Typography>
-      </StyledAvatar>
+    <AvatarWrapper>
+      <StyledAvatar isBig={isBig}>{INITIALS}</StyledAvatar>
       <Typography color={color} variant={myVariant}>
         {user?.displayName}
       </Typography>
-    </StyledBoxFlex>
+    </AvatarWrapper>
   );
 };

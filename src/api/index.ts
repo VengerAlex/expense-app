@@ -20,28 +20,28 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
   return config;
 });
 
-// instance.interceptors.response.use(
-//   (config) => config,
-//   async (error) => {
-//     const originalRequest = error.config;
-//
-//     if (
-//       error.response.status === 401 &&
-//       error.config &&
-//       !error.config._isRetry
-//     ) {
-//       originalRequest._isRetry = true;
-//       try {
-//         await AuthService.getNewTokens();
-//
-//         return instance.request(originalRequest);
-//       } catch (error) {
-//         await AuthService.logout();
-//       }
-//     }
-//
-//     throw error;
-//   },
-// );
+instance.interceptors.response.use(
+  (config) => config,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (
+      error.response.status === 401 &&
+      error.config &&
+      !error.config._isRetry
+    ) {
+      originalRequest._isRetry = true;
+      try {
+        await AuthService.getNewTokens();
+
+        return instance.request(originalRequest);
+      } catch (error) {
+        AuthService.logout();
+      }
+    }
+
+    throw error;
+  },
+);
 
 export default instance;

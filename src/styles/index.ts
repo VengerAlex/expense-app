@@ -16,11 +16,7 @@ import {
 } from "@mui/material";
 import { theme } from "../providers/ThemeProvider";
 
-type PropsButton = {
-  p?: string;
-};
-
-export const StyledPrimaryButton = styled(Button)<PropsButton>(
+export const StyledPrimaryButton = styled(Button)<{ p?: string }>(
   ({ p = "9.5px 125.5px" }) => ({
     color: theme.palette.white,
     fontSize: "16px",
@@ -80,23 +76,38 @@ export const StyledSecondaryButton = styled(Button)(() => ({
   },
 }));
 
-export const StyledBoxFlex = styled(Box)(() => ({
+export const StyledAvatar = styled(Avatar, {
+  shouldForwardProp: (prop) => prop !== "isBig",
+})<{ isBig?: boolean }>(({ isBig }) => ({
+  backgroundColor: isBig ? theme.palette.red : theme.palette.bgr,
+  color: theme.palette.black,
+  width: isBig ? "72px" : "32px",
+  height: isBig ? "72px" : "32px",
+  fontSize: isBig ? "24px" : "16px",
+  fontWeight: "600",
+  lineHeight: isBig ? "36px" : "24.8px",
+  marginRight: "10px",
+  border: isBig ? "3px solid transparent" : "1px solid transparent",
+  transition: "all 150ms",
+}));
+
+export const AvatarWrapper = styled(Box)(() => ({
   marginTop: "20px",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  cursor: "pointer",
+  "&:hover": {
+    "& .MuiAvatar-root": {
+      transition: "all 150ms",
+      borderColor: theme.palette.green.main,
+    },
+  },
 }));
 
 export const StyledLabel = styled(Typography)(() => ({
   color: theme.palette.bgr,
   opacity: 0.8,
-}));
-
-export const ErrorMessage = styled(Typography)(() => ({
-  fontSize: "14px",
-  alignItems: "center",
-  margin: "0 auto 10px",
-  color: theme.palette.red,
 }));
 
 export const StyledFormControl = styled(FormControl)(() => ({
@@ -128,17 +139,6 @@ export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
     backgroundColor: "transparent",
   }),
 );
-
-export const StyledAvatar = styled(Avatar, {
-  shouldForwardProp: (prop) => prop !== "bgColor",
-})<{ bgColor?: string }>(({ bgColor }) => ({
-  backgroundColor: bgColor,
-  color: theme.palette.black,
-  fontSize: "16px",
-  fontWeight: "600",
-  lineHeight: "24.8px",
-  marginRight: "10px",
-}));
 
 export const StyledInput = styled(TextField, {
   shouldForwardProp: (prop) => prop !== "isBlack",

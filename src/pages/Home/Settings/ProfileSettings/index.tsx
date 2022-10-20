@@ -62,7 +62,7 @@ export const ProfileSettings: FC<IProfileSettings> = ({
         Change Password
       </Typography>
 
-      <FormControl sx={{ maxWidth: "335px" }}>
+      <FormControl sx={{ maxWidth: "335px", overflowY: "auto" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             helperText={showErrorText(errors, "oldPassword", oldPassword)}

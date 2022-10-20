@@ -65,7 +65,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
   return (
     <>
       <ProfileAvatar isBig myVariant="h4" color={theme.palette.black} />
-      <FormControl sx={{ minWidth: "335px", marginTop: 4 }}>
+      <FormControl sx={{ minWidth: "335px", marginTop: 4, overflowY: "auto" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             helperText={showErrorText(errors, "displayName", displayName)}

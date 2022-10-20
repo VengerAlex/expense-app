@@ -276,7 +276,6 @@ export const StyledBoxSettingsWrapper = styled(Box)(() => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  overflowY: "auto",
 }));
 
 export const StyledNotifWrapper = styled(Paper)(() => ({

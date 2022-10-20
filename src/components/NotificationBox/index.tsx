@@ -28,14 +28,14 @@ export const NotificationBox = ({
   return (
     <StyledNotificationBox {...props}>
       <Box
-        pb="24px"
+        pb={3}
         component="img"
         alt="notification-image"
         src={illustrationImage}
       />
       <Typography
         color={color}
-        pb="24px"
+        pb={3}
         variant="h5"
         sx={{ maxWidth: "267px", m: "0 auto" }}
       >

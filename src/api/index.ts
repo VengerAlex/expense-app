@@ -2,8 +2,18 @@ import axios, { AxiosRequestConfig } from "axios";
 import AuthService from "../services/auth.service";
 import { localstorageAuthService } from "../services/localstorage.service";
 
-export const getAuthUrl = (string: string) => `/auth/${string}`;
-export const getUserUrl = (string: string) => `/users/${string}`;
+const AuthUrlRoute = "/auth";
+const UserUrlRoute = "/users";
+
+export const URL_TEMPLATES = {
+  LOGIN: `${AuthUrlRoute}/login`,
+  REGISTER: `${AuthUrlRoute}/register`,
+  REFRESH: `${AuthUrlRoute}/refresh`,
+  CHANGE_PASSWORD: `${AuthUrlRoute}/changePassword`,
+
+  CHANGE_INFORMATION: `${UserUrlRoute}/self`,
+  GET_ME: `${UserUrlRoute}/self`,
+};
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,

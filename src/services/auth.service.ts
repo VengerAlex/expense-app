@@ -1,4 +1,4 @@
-import axios, { getAuthUrl } from "../api/index";
+import axios, { URL_TEMPLATES } from "../api/index";
 import { localstorageAuthService } from "./localstorage.service";
 import {
   ILoginResponse,
@@ -8,7 +8,7 @@ import {
 class AuthService {
   async register(username: string, password: string, displayName: string) {
     const response = await axios.post<IRegisterThunkResponse>(
-      getAuthUrl("register"),
+      URL_TEMPLATES.REGISTER,
       { username, password, displayName },
     );
 
@@ -16,7 +16,7 @@ class AuthService {
   }
 
   async login(username: string, password: string) {
-    const response = await axios.post<ILoginResponse>(getAuthUrl("login"), {
+    const response = await axios.post<ILoginResponse>(URL_TEMPLATES.LOGIN, {
       username,
       password,
     });
@@ -32,7 +32,7 @@ class AuthService {
   async getNewTokens() {
     const refreshToken = localstorageAuthService.getRefreshToken();
 
-    const response = await axios.post(getAuthUrl("refresh"), {
+    const response = await axios.post(URL_TEMPLATES.REFRESH, {
       refreshToken,
     });
 
@@ -49,7 +49,7 @@ class AuthService {
   }
 
   async changePassword(oldPassword: string, newPassword: string) {
-    const response = await axios.patch(getAuthUrl("changePassword"), {
+    const response = await axios.patch(URL_TEMPLATES.CHANGE_PASSWORD, {
       oldPassword,
       newPassword,
     });

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, ReactElement, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { MainLayout } from "../../../components/MainLayout";
 import { ROUTES, SETTINGS } from "../../../utils/types";
@@ -8,36 +8,51 @@ import { StyledBoxSettingsWrapper, StyledNotifWrapper } from "../../../styles";
 import { ProfileSettings } from "./ProfileSettings";
 import { NotificationBox } from "../../../components/NotificationBox";
 
-interface ISettings {}
-export const Settings: FC<ISettings> = () => {
-  const [currentComponent, setCurrentComponent] = useState(SETTINGS.EXTENDED);
+type ISteps = Record<
+  SETTINGS,
+  { showTitle?: boolean; component: ReactElement }
+>;
+
+export const Settings: FC = () => {
+  const [currentComponent, setCurrentComponent] = useState<SETTINGS>(
+    SETTINGS.EXTENDED,
+  );
+
+  const STEPS: ISteps = {
+    [SETTINGS.EXTENDED]: {
+      showTitle: true,
+      component: <ExtendedSettings setCurrentComponent={setCurrentComponent} />,
+    },
+    [SETTINGS.PASSWORDS]: {
+      showTitle: true,
+      component: <ProfileSettings setCurrentComponent={setCurrentComponent} />,
+    },
+    [SETTINGS.NOTIFICATION]: {
+      showTitle: true,
+      component: (
+        <StyledNotifWrapper>
+          <NotificationBox
+            color={theme.palette.black}
+            navigateTo={ROUTES.HOME}
+            btnTitle="Back to dashboard"
+            title="your changes are saved"
+            p="6px 82px"
+          />
+        </StyledNotifWrapper>
+      ),
+    },
+  };
 
   return (
     <MainLayout>
       <Box sx={{ p: "48px" }}>
-        {currentComponent !== SETTINGS.NOTIFICATION && (
+        {STEPS[currentComponent].showTitle && (
           <Typography color={theme.palette.black} variant="h4">
             Profile Settings
           </Typography>
         )}
         <StyledBoxSettingsWrapper>
-          {currentComponent === SETTINGS.EXTENDED && (
-            <ExtendedSettings setCurrentComponent={setCurrentComponent} />
-          )}
-          {currentComponent === SETTINGS.PASSWORDS && (
-            <ProfileSettings setCurrentComponent={setCurrentComponent} />
-          )}
-          {currentComponent === SETTINGS.NOTIFICATION && (
-            <StyledNotifWrapper>
-              <NotificationBox
-                color={theme.palette.black}
-                navigateTo={ROUTES.HOME}
-                btnTitle="Back to dashboard"
-                title="your changes are saved"
-                p="6px 82px"
-              />
-            </StyledNotifWrapper>
-          )}
+          {STEPS[currentComponent].component}
         </StyledBoxSettingsWrapper>
       </Box>
     </MainLayout>

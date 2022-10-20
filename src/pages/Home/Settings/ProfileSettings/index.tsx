@@ -53,11 +53,7 @@ export const ProfileSettings: FC<IProfileSettings> = ({
 
   return (
     <>
-      <ProfileAvatar
-        sx={{ width: "72px", height: "72px" }}
-        myVariant="h4"
-        color={theme.palette.black}
-      />
+      <ProfileAvatar isBig myVariant="h4" color={theme.palette.black} />
       <Typography
         color={theme.palette.black}
         sx={{ m: "72px 0 32px" }}

@@ -5,6 +5,7 @@ declare module "@mui/material/styles" {
     black: string;
     violet: string;
     blue: string;
+    lightBlue: string;
     orange: string;
     red: string;
     green: {
@@ -21,6 +22,7 @@ declare module "@mui/material/styles" {
     black: string;
     violet: string;
     blue: string;
+    lightBlue: string;
     orange: string;
     red: string;
     green: {
@@ -42,6 +44,7 @@ export const theme = createTheme({
     black: "#1d283a",
     violet: "#d4ccf1",
     blue: "#69b0ff",
+    lightBlue: "#D9E7F8",
     orange: "#f08e5b",
     red: "#ee5e5e",
     green: {

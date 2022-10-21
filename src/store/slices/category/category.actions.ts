@@ -9,7 +9,24 @@ export const getCategories = createAsyncThunk<any>(
 
       return response.data;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    }
+  },
+);
+
+export const deleteCategory = createAsyncThunk<any, { id: number }>(
+  "categories/delete",
+  async ({ id }, thunkAPI) => {
+    try {
+      const response = await CategoryService.deleteOne(id);
+
+      return response;
+    } catch (error: any) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
     }
   },
 );

@@ -13,6 +13,7 @@ import {
   TextField,
   FormControl,
   Typography,
+  Stack,
 } from "@mui/material";
 import { theme } from "../providers/ThemeProvider";
 
@@ -54,20 +55,39 @@ export const StyledLogoutButton = styled(Button)(() => ({
   },
 }));
 
-export const StyledSecondaryButton = styled(Button)(() => ({
+export const StyledSecondaryButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "isEdit" && prop !== "isDelete",
+})<{
+  isEdit?: boolean;
+  isDelete?: boolean;
+}>(({ isEdit, isDelete }) => ({
+  borderRadius: "2px",
+  padding: "4px 47.5px",
   color: theme.palette.white,
   fontSize: "16px",
   lineHeight: "24.8px",
   fontWeight: 600,
-  backgroundColor: theme.palette.black,
+  backgroundColor: isEdit
+    ? theme.palette.green.lighter
+    : isDelete
+    ? theme.palette.red
+    : theme.palette.green.main,
   textTransform: "none",
   "&:hover": {
-    backgroundColor: theme.palette.black,
-    color: theme.palette.green.main,
+    backgroundColor: isEdit
+      ? theme.palette.green.lighter
+      : isDelete
+      ? theme.palette.red
+      : theme.palette.black,
+    color: isEdit || isDelete ? theme.palette.black : theme.palette.green.main,
   },
   "&:active": {
     opacity: 0.7,
-    backgroundColor: theme.palette.black,
+    backgroundColor: isEdit
+      ? theme.palette.green.lighter
+      : isDelete
+      ? theme.palette.red
+      : theme.palette.black,
   },
   "&:disabled": {
     color: theme.palette.white,
@@ -427,4 +447,9 @@ export const StyledGridItem = styled(Grid)(() => ({
     paddingLeft: "24px",
     paddingTop: "24px",
   },
+}));
+
+export const ActionButtons = styled(Stack)(() => ({
+  position: "absolute",
+  right: "14px",
 }));

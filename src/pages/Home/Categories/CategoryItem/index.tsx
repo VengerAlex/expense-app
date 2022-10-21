@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { Typography } from "@mui/material";
+import { FC, useRef, useState } from "react";
+import { Typography, Box } from "@mui/material";
 import {
   CategoryWrapper,
   ActionIcon,
@@ -8,17 +8,56 @@ import {
   CategoryPriceWrapper,
   CategoryTitle,
   StyledGridItem,
+  StyledSecondaryButton,
+  ActionButtons,
 } from "../../../../styles";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { ICategory } from "../../../../store/slices/category/category.interface";
+import { useOnClickOutside } from "../../../../hooks/useOnClickOutside";
+import { useActions } from "../../../../hooks/useActions";
 
-export const CategoryItem: FC<ICategory> = ({ label }) => {
+export const CategoryItem: FC<ICategory> = ({ label, id }) => {
+  const { deleteCategory } = useActions();
+  const [isShowBtnAction, setIsShownBtnActions] = useState(false);
+  const clickRef = useRef<HTMLSpanElement>(null);
+  useOnClickOutside(clickRef, () => setIsShownBtnActions(false));
+
+  const editHandler = () => {
+    console.log("editHandler");
+
+    setIsShownBtnActions(false);
+  };
+
+  const deleteHandler = () => {
+    deleteCategory({ id });
+    console.log("deleteHandler", id);
+
+    setIsShownBtnActions(false);
+  };
+
   return (
     <StyledGridItem item xs={4}>
       <CategoryWrapper>
-        <ActionIcon>
-          <MoreHorizIcon />
-        </ActionIcon>
+        <Box ref={clickRef}>
+          <ActionIcon onClick={() => setIsShownBtnActions(true)}>
+            <MoreHorizIcon />
+          </ActionIcon>
+          {isShowBtnAction && (
+            <ActionButtons>
+              <StyledSecondaryButton onClick={editHandler} isEdit>
+                Edit
+              </StyledSecondaryButton>
+              <StyledSecondaryButton
+                onClick={deleteHandler}
+                sx={{ mt: "2px", px: "37px" }}
+                isDelete
+              >
+                Delete
+              </StyledSecondaryButton>
+            </ActionButtons>
+          )}
+        </Box>
+
         <CategoryAvatar />
         <CategoryTitle variant="h5">{label}</CategoryTitle>
         <Typography variant="subtitle2" sx={{ color: "#1D283A" }}>

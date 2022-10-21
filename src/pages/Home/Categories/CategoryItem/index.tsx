@@ -30,7 +30,6 @@ export const CategoryItem: FC<ICategory> = ({ label, id }) => {
 
   const deleteHandler = () => {
     deleteCategory({ id });
-    console.log("deleteHandler", id);
 
     setIsShownBtnActions(false);
   };

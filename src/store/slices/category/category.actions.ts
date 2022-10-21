@@ -22,7 +22,7 @@ export const deleteCategory = createAsyncThunk<any, { id: number }>(
     try {
       const response = await CategoryService.deleteOne(id);
 
-      return response;
+      return response.data.id;
     } catch (error: any) {
       if (error.response) {
         return thunkAPI.rejectWithValue(error.response.data.message);

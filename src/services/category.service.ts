@@ -9,10 +9,8 @@ class CategoryService {
   }
 
   async deleteOne(id: number) {
-    console.log(URL_TEMPLATES.DELETE_CATEGORY(id));
     const response = await axios.delete(URL_TEMPLATES.DELETE_CATEGORY(id));
 
-    console.log(response, "response");
     return response;
   }
 }

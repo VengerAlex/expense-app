@@ -6,6 +6,7 @@ import { StyledNotificationBox, StyledPrimaryButton } from "../../styles";
 type INotificationBoxProps = BoxProps & {
   title: string;
   btnTitle: string;
+  color?: string;
   p?: string;
   navigateTo: string;
 };
@@ -13,6 +14,7 @@ type INotificationBoxProps = BoxProps & {
 export const NotificationBox = ({
   title,
   navigateTo,
+  color,
   p,
   btnTitle,
   ...props
@@ -22,16 +24,18 @@ export const NotificationBox = ({
   const navigateToHandler = () => {
     navigate(navigateTo);
   };
+
   return (
     <StyledNotificationBox {...props}>
       <Box
-        pb="24px"
+        pb={3}
         component="img"
         alt="notification-image"
         src={illustrationImage}
       />
       <Typography
-        pb="24px"
+        color={color}
+        pb={3}
         variant="h5"
         sx={{ maxWidth: "267px", m: "0 auto" }}
       >

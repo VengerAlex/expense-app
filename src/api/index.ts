@@ -1,29 +1,34 @@
 import axios, { AxiosRequestConfig } from "axios";
 import AuthService from "../services/auth.service";
-import { errorCatch } from "../utils/helpers";
 import { localstorageAuthService } from "../services/localstorage.service";
 
-export const getAuthUrl = (string: string) => `/auth/${string}`;
+const AuthUrlRoute = "/auth";
+const UserUrlRoute = "/users";
+
+export const URL_TEMPLATES = {
+  LOGIN: `${AuthUrlRoute}/login`,
+  REGISTER: `${AuthUrlRoute}/register`,
+  REFRESH: `${AuthUrlRoute}/refresh`,
+  CHANGE_PASSWORD: `${AuthUrlRoute}/changePassword`,
+
+  CHANGE_INFORMATION: `${UserUrlRoute}/self`,
+  GET_ME: `${UserUrlRoute}/self`,
+};
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   headers: { "Content-Type": "application/json" },
 });
 
-instance.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
-    const token = localStorage.getItem("accessToken");
+instance.interceptors.request.use((config: AxiosRequestConfig) => {
+  const token = localstorageAuthService.getAccessToken();
 
-    if (token) {
-      config.headers!.Authorization = `Bearer ${token}`;
-    }
+  if (token) {
+    config.headers!.Authorization = `Bearer ${token}`;
+  }
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
+  return config;
+});
 
 instance.interceptors.response.use(
   (config) => config,
@@ -41,9 +46,7 @@ instance.interceptors.response.use(
 
         return instance.request(originalRequest);
       } catch (error) {
-        if (errorCatch(error) === "jwt expired") {
-          AuthService.logout();
-        }
+        AuthService.logout();
       }
     }
 

@@ -6,7 +6,7 @@ export const PublicRoute = () => {
   const { state } = useLocation();
   const token = localstorageAuthService.getAccessToken();
 
-  const pathGoBack = state?.from.path || ROUTES.Home;
+  const pathGoBack = state?.from.path || ROUTES.HOME;
 
   if (token) return <Navigate to={pathGoBack} />;
 

@@ -1,27 +1,29 @@
 import {
+  Divider,
   Box,
+  Paper,
+  Avatar,
   Button,
   Checkbox,
-  FormControl,
+  Grid,
+  List,
+  ListItem,
   styled,
   TextField,
+  FormControl,
   Typography,
 } from "@mui/material";
 import { theme } from "../providers/ThemeProvider";
 
-type PropsButton = {
-  p?: string;
-};
-
-export const StyledPrimaryButton = styled(Button)<PropsButton>(
+export const StyledPrimaryButton = styled(Button)<{ p?: string }>(
   ({ p = "9.5px 125.5px" }) => ({
     color: theme.palette.white,
     fontSize: "16px",
     lineHeight: "24.8px",
     fontWeight: 600,
+    textTransform: "none",
     backgroundColor: theme.palette.green.main,
     border: "1px solid #539713",
-    textTransform: "none",
     padding: p,
     "&:hover": {
       backgroundColor: theme.palette.green.main,
@@ -29,7 +31,7 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
     },
     "&:active": {
       border: `1px solid ${theme.palette.green.main}`,
-      backgroundColor: theme.palette.green.main,
+      backgroundColor: theme.palette.green.lighter,
     },
     "&:disabled": {
       color: theme.palette.white,
@@ -39,32 +41,72 @@ export const StyledPrimaryButton = styled(Button)<PropsButton>(
   }),
 );
 
-enum btnVariant {
-  PRIMARY,
-  SECONDARY,
-}
+export const StyledLogoutButton = styled(Button)(() => ({
+  backgroundColor: theme.palette.green.lighter,
+  color: theme.palette.white,
+  fontSize: "16px",
+  lineHeight: "24.8px",
+  fontWeight: 600,
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: theme.palette.green.lighter,
+  },
+}));
 
-interface IBtnProps {
-  variant: btnVariant;
-}
+export const StyledSecondaryButton = styled(Button)(() => ({
+  color: theme.palette.white,
+  fontSize: "16px",
+  lineHeight: "24.8px",
+  fontWeight: 600,
+  backgroundColor: theme.palette.black,
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: theme.palette.black,
+    color: theme.palette.green.main,
+  },
+  "&:active": {
+    opacity: 0.7,
+    backgroundColor: theme.palette.black,
+  },
+  "&:disabled": {
+    color: theme.palette.white,
+    opacity: 0.7,
+    backgroundColor: theme.palette.disabled,
+  },
+}));
 
-export const StyledBoxFlex = styled(Box)(() => ({
+export const StyledAvatar = styled(Avatar, {
+  shouldForwardProp: (prop) => prop !== "isBig",
+})<{ isBig?: boolean }>(({ isBig }) => ({
+  backgroundColor: isBig ? theme.palette.red : theme.palette.bgr,
+  color: theme.palette.black,
+  width: isBig ? "72px" : "32px",
+  height: isBig ? "72px" : "32px",
+  fontSize: isBig ? "24px" : "16px",
+  fontWeight: "600",
+  lineHeight: isBig ? "36px" : "24.8px",
+  marginRight: "10px",
+  border: isBig ? "3px solid transparent" : "1px solid transparent",
+  transition: "all 150ms",
+}));
+
+export const AvatarWrapper = styled(Box)(() => ({
   marginTop: "20px",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  cursor: "pointer",
+  "&:hover": {
+    "& .MuiAvatar-root": {
+      transition: "all 150ms",
+      borderColor: theme.palette.green.main,
+    },
+  },
 }));
 
 export const StyledLabel = styled(Typography)(() => ({
   color: theme.palette.bgr,
   opacity: 0.8,
-}));
-
-export const ErrorMessage = styled(Typography)(() => ({
-  fontSize: "14px",
-  alignItems: "center",
-  margin: "0 auto 10px",
-  color: theme.palette.red,
 }));
 
 export const StyledFormControl = styled(FormControl)(() => ({
@@ -89,16 +131,17 @@ type NotificationBoxProps = {
 };
 
 export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
-  ({ theme, light = false }) => ({
-    color: light ? theme.palette.black : theme.palette.white,
+  ({ theme }) => ({
+    color: theme.palette.white,
     maxWidth: "330px",
-    height: "381px",
-    borderRadius: light ? "8px" : "0px",
-    backgroundColor: light ? theme.palette.green.lighter : "transparent",
+    borderRadius: "8px",
+    backgroundColor: "transparent",
   }),
 );
 
-export const StyledInput = styled(TextField)(({ theme }) => ({
+export const StyledInput = styled(TextField, {
+  shouldForwardProp: (prop) => prop !== "isBlack",
+})<{ isBlack?: boolean }>(({ theme, isBlack }) => ({
   marginBottom: theme.spacing(1),
   "&.MuiTextField-root": {
     marginTop: "0px",
@@ -109,13 +152,13 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
     fontSize: "14px",
     lineHeight: "21.7px",
     fontWeight: 400,
-    color: theme.palette.white,
+    color: isBlack ? theme.palette.black : theme.palette.white,
     "&.Mui-focused": {
-      color: theme.palette.white,
+      color: isBlack ? theme.palette.black : theme.palette.white,
     },
 
     "&.Mui-error": {
-      color: theme.palette.white,
+      color: isBlack ? theme.palette.black : theme.palette.white,
     },
   },
   "& .MuiFormHelperText-root": {
@@ -130,7 +173,7 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
   },
   input: {
     "&::placeholder": {
-      color: theme.palette.white,
+      color: isBlack ? theme.palette.black : theme.palette.white,
       fontWeight: 600,
       opacity: 0.7,
       fontSize: "16px",
@@ -138,10 +181,10 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
     },
   },
   "& .MuiInputBase-root": {
-    color: theme.palette.white,
+    color: isBlack ? theme.palette.black : theme.palette.white,
     fontSize: "16px",
     opacity: 0.7,
-    borderColor: theme.palette.white,
+    borderColor: isBlack ? theme.palette.black : theme.palette.white,
     "&:hover": {
       "&:not(.Mui-disabled)": {
         "&:before": {
@@ -150,11 +193,11 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
       },
     },
     "&:before": {
-      borderColor: theme.palette.white,
+      borderColor: isBlack ? theme.palette.black : theme.palette.white,
     },
 
     "&:after": {
-      borderColor: theme.palette.white,
+      borderColor: isBlack ? theme.palette.black : theme.palette.white,
     },
 
     "&.Mui-focused": {
@@ -163,7 +206,7 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
       },
     },
     "& .MuiFormLabel-root": {
-      color: theme.palette.white,
+      color: isBlack ? theme.palette.black : theme.palette.white,
       fontWeight: 400,
       fontSize: "14px",
       lineHeight: "24.8px",
@@ -175,4 +218,90 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
       },
     },
   },
+}));
+
+export const StyledList = styled(List)(() => ({
+  margin: "0 auto",
+  textAlign: "center",
+}));
+
+export const StyledListItem = styled(ListItem)(() => ({
+  cursor: "pointer",
+}));
+
+export const StyledListItemButton = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isActive",
+})<{ isActive?: boolean }>(({ isActive }) => ({
+  transition: "all 250ms",
+  padding: "10px 10px 4px 0",
+  borderBottom: isActive
+    ? `2px solid ${theme.palette.green.main}`
+    : "2px solid transparent",
+  display: "flex",
+  "&:hover": {
+    transition: "all 250ms",
+    borderBottom: `2px solid ${theme.palette.white}`,
+    "& .MuiSvgIcon-root": {
+      color: theme.palette.white,
+      opacity: `${isActive ? "1" : "0.7"}`,
+    },
+  },
+  "&:active": {
+    transition: "all 250ms",
+    borderBottom: `2px solid ${theme.palette.green.main}`,
+  },
+  "& .MuiSvgIcon-root": {
+    color: theme.palette.white,
+    opacity: isActive ? "1" : "0.7",
+  },
+  "& .MuiTypography-root": {
+    color: theme.palette.white,
+    marginLeft: "-20px",
+    fontWeight: `${isActive ? 600 : 300}`,
+  },
+}));
+
+export const StyledDivider = styled(Divider)(() => ({
+  backgroundColor: theme.palette.bgr,
+  opacity: 0.3,
+}));
+
+export const StyledProvideWrapper = styled(Box)(() => ({
+  margin: "0 auto",
+}));
+
+export const StyledBoxSettingsWrapper = styled(Box)(() => ({
+  height: "calc(100vh - 140px)",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+export const StyledNotifWrapper = styled(Paper)(() => ({
+  padding: theme.spacing(4),
+  borderRadius: "8px",
+  backgroundColor: theme.palette.green.lighter,
+  minWidth: "394px",
+  minHeight: "369px",
+  textAlign: "center",
+}));
+
+export const MainWrapper = styled(Box)(() => ({
+  display: "flex",
+  height: "100vh",
+}));
+
+export const MainContent = styled(Box)(() => ({
+  width: "calc(100vw - 260px)",
+  backgroundColor: theme.palette.bgr,
+}));
+
+export const StyledGridNavbar = styled(Grid)(() => ({
+  backgroundColor: theme.palette.black,
+  width: "260px",
+  textAlign: "center",
+  padding: "48px 0",
+  display: "flex",
+  flexDirection: "column",
 }));

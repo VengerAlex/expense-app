@@ -1,17 +1,17 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input";
 import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
-import { ISignInForm, ROUTES } from "../../../utils/types";
+import { ISignInForm, LOADING_STATUS, ROUTES } from "../../../utils/types";
 import { MyLink } from "../../../components/MyLink";
 import signInCover from "../../../assets/images/cover-login.jpg";
 import { StyledPrimaryButton, StyledFormControl } from "../../../styles/index";
 import { useActions } from "../../../hooks/useActions";
 import { useAppSelector } from "../../../hooks/useAppSelector";
-import { getAuthState } from "../../../store/reducers/auth/authSlice";
+import { authSelector } from "../../../store/slices/auth/authSlice";
 import { signInSchema } from "../../../utils/schema";
 import { showErrorText } from "../../../utils/helpers";
 import { localstorageAuthService } from "../../../services/localstorage.service";
@@ -19,10 +19,10 @@ import { localstorageAuthService } from "../../../services/localstorage.service"
 const SignIn: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || ROUTES.Home;
+  const from = location.state?.from?.pathname || ROUTES.HOME;
   const isAuth = localstorageAuthService.getAccessToken();
   const { login } = useActions();
-  const { loading } = useAppSelector(getAuthState);
+  const { loading } = useAppSelector(authSelector);
 
   const {
     control,
@@ -43,9 +43,11 @@ const SignIn: FC = () => {
     reset();
   };
 
-  if (isAuth) {
-    navigate(from, { replace: true });
-  }
+  useEffect(() => {
+    if (isAuth) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuth]);
 
   return (
     <AuthPageWrapper bgImage={signInCover}>
@@ -75,7 +77,7 @@ const SignIn: FC = () => {
             isPassword
           />
           <StyledPrimaryButton sx={{ mb: 3 }} type="submit" disabled={!isValid}>
-            {loading ? "Loading" : "Login"}
+            {loading === LOADING_STATUS.PENDING ? "Loading" : "Login"}
           </StyledPrimaryButton>
         </form>
       </StyledFormControl>

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 import SignIn from "./pages/Auth/SignIn";
 import SignUp from "./pages/Auth/SignUp";
 import NotFound from "./pages/NotFound";
@@ -8,12 +7,19 @@ import Reset from "./pages/Auth/Reset";
 import { ROUTES } from "./utils/types";
 import { PublicRoute } from "./components/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { Analytics } from "./pages/Home/Analytics";
+import { Categories } from "./pages/Home/Categories";
+import { Settings } from "./pages/Home/Settings";
+import { Dashboard } from "./pages/Home/Dashboard";
 
 const App: FC = () => {
   return (
     <Routes>
       <Route element={<PrivateRoute />}>
-        <Route path={ROUTES.Home} element={<Home />} />
+        <Route path={ROUTES.HOME} element={<Dashboard />} />
+        <Route path={ROUTES.ANALYTICS} element={<Analytics />} />
+        <Route path={ROUTES.CATEGORIES} element={<Categories />} />
+        <Route path={ROUTES.SETTINGS} element={<Settings />} />
       </Route>
 
       <Route element={<PublicRoute />}>

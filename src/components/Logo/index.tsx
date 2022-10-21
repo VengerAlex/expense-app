@@ -1,11 +1,14 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
+import { BoxProps, Box } from "@mui/material";
 import companyLogo from "../../assets/images/logo.svg";
 
-export const Logo = () => {
+type ILogo = BoxProps;
+
+export const Logo: FC<ILogo> = ({ ...props }) => {
   return (
     <Link to="/">
-      <Box component="img" alt="Company logo" src={companyLogo} />
+      <Box {...props} component="img" alt="Company logo" src={companyLogo} />
     </Link>
   );
 };

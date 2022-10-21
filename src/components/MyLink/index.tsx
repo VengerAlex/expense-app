@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
-import { theme } from "../../providers/ThemeProvider";
+import { Typography, useTheme } from "@mui/material";
 
 interface ILink {
   to: string;
@@ -9,6 +8,8 @@ interface ILink {
 }
 
 export const MyLink: FC<ILink> = ({ to, children }) => {
+  const theme = useTheme();
+
   return (
     <Link to={to}>
       <Typography

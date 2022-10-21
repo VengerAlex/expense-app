@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { FormControl } from "@mui/material";
+import { FormControl, useTheme } from "@mui/material";
 import Input from "../../../../components/Input";
 import {
   IExtendedSettingsForm,
@@ -15,7 +15,6 @@ import {
   StyledSecondaryButton,
 } from "../../../../styles";
 import { ProfileAvatar } from "../../../../components/ProfileAvatar";
-import { theme } from "../../../../providers/ThemeProvider";
 import { showErrorText } from "../../../../utils/helpers";
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
@@ -27,6 +26,7 @@ interface IExtendedSettings {
 export const ExtendedSettings: FC<IExtendedSettings> = ({
   setCurrentComponent,
 }) => {
+  const theme = useTheme();
   const { user, loading } = useAppSelector(userSelector);
   const { logout, changeInformation } = useActions();
   const {

@@ -3,9 +3,9 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import ArticleIcon from "@mui/icons-material/Article";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
-import { theme } from "../../providers/ThemeProvider";
 import { ProfileAvatar } from "../ProfileAvatar";
 import { ROUTES } from "../../utils/types";
+import { ListItemIcon, Typography, useTheme } from "@mui/material";
 import {
   StyledDivider,
   StyledGridNavbar,
@@ -15,7 +15,6 @@ import {
   StyledProvideWrapper,
 } from "../../styles";
 import { Logo } from "../Logo";
-import { ListItemIcon, Typography } from "@mui/material";
 
 const LIST_ITEMS = [
   { text: "DashBoard", to: ROUTES.HOME, icon: <GridViewRoundedIcon /> },
@@ -25,6 +24,7 @@ const LIST_ITEMS = [
 ];
 
 export const Sidebar = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 

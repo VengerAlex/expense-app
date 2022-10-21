@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FormControl, Typography } from "@mui/material";
+import { FormControl, Typography, useTheme } from "@mui/material";
 import Input from "../../../../components/Input";
 import {
   IResetProfileForm,
@@ -10,7 +10,6 @@ import { StyledPrimaryButton } from "../../../../styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { profileSettingsSchema } from "../../../../utils/schema";
-import { theme } from "../../../../providers/ThemeProvider";
 import { ProfileAvatar } from "../../../../components/ProfileAvatar";
 import { showErrorText } from "../../../../utils/helpers";
 import { useActions } from "../../../../hooks/useActions";
@@ -24,6 +23,7 @@ interface IProfileSettings {
 export const ProfileSettings: FC<IProfileSettings> = ({
   setCurrentComponent,
 }) => {
+  const theme = useTheme();
   const { loading } = useAppSelector(authSelector);
   const { changePassword } = useActions();
   const {

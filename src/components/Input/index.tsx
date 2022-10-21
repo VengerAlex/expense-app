@@ -1,9 +1,13 @@
 import { FC, FormEvent, useState } from "react";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-import { IconButton, InputAdornment, TextFieldProps } from "@mui/material";
+import {
+  IconButton,
+  InputAdornment,
+  TextFieldProps,
+  useTheme,
+} from "@mui/material";
 import { StyledInput } from "../../styles";
-import { theme } from "../../providers/ThemeProvider";
 
 type IInput = TextFieldProps & {
   isPassword?: boolean;
@@ -21,6 +25,7 @@ const Input: FC<IInput> = ({
   isBlack = false,
   ...props
 }) => {
+  const theme = useTheme();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {

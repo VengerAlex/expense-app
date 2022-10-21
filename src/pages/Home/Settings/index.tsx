@@ -1,8 +1,7 @@
 import { FC, ReactElement, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { MainLayout } from "../../../components/MainLayout";
 import { ROUTES, SETTINGS } from "../../../utils/types";
-import { theme } from "../../../providers/ThemeProvider";
 import { ExtendedSettings } from "./ExtendedSettings";
 import { StyledBoxSettingsWrapper, StyledNotifWrapper } from "../../../styles";
 import { ProfileSettings } from "./ProfileSettings";
@@ -14,6 +13,8 @@ type ISteps = Record<
 >;
 
 export const Settings: FC = () => {
+  const theme = useTheme();
+
   const [currentComponent, setCurrentComponent] = useState<SETTINGS>(
     SETTINGS.EXTENDED,
   );

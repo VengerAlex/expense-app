@@ -10,10 +10,9 @@ import {
   StyledGridItem,
 } from "../../../../styles";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { ICategory } from "../../../../store/slices/category/category.interface";
 
-interface ICategoryItem {}
-
-export const CategoryItem: FC<ICategoryItem> = () => {
+export const CategoryItem: FC<ICategory> = ({ label }) => {
   return (
     <StyledGridItem item xs={4}>
       <CategoryWrapper>
@@ -21,7 +20,7 @@ export const CategoryItem: FC<ICategoryItem> = () => {
           <MoreHorizIcon />
         </ActionIcon>
         <CategoryAvatar />
-        <CategoryTitle variant="h5">Family</CategoryTitle>
+        <CategoryTitle variant="h5">{label}</CategoryTitle>
         <Typography variant="subtitle2" sx={{ color: "#1D283A" }}>
           Total Transactions
         </Typography>

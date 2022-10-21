@@ -1,14 +1,21 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { MainLayout } from "../../../components/MainLayout";
 import { theme } from "../../../providers/ThemeProvider";
 import { CategoryHeader } from "../../../styles";
 import { SearchInput } from "../../../components/SearchInput";
 import { CategoryList } from "./CategoryList";
+import { useActions } from "../../../hooks/useActions";
 
 interface ICategories {}
 
 export const Categories: FC<ICategories> = () => {
+  const { getCategories } = useActions();
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   return (
     <MainLayout>
       <Box

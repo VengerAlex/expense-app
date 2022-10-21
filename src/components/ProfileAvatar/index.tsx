@@ -18,7 +18,7 @@ export const ProfileAvatar: FC<IProfileAvatar> = ({
   const { user } = useAppSelector(userSelector);
 
   const INITIALS = user?.displayName
-    .split(" ")
+    ?.split(" ")
     .map((value) => value[0])
     .join("");
 
@@ -26,7 +26,7 @@ export const ProfileAvatar: FC<IProfileAvatar> = ({
     <AvatarWrapper>
       <StyledAvatar isBig={isBig}>{INITIALS}</StyledAvatar>
       <Typography color={color} variant={myVariant}>
-        {user?.displayName}
+        {user && user?.displayName}
       </Typography>
     </AvatarWrapper>
   );

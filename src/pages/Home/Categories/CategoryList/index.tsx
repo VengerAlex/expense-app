@@ -1,23 +1,19 @@
 import { FC } from "react";
 import { Grid } from "@mui/material";
 import { CategoryItem } from "../CategoryItem";
-
-const LISTS = [
-  { title: "Family", id: 1, userId: 1285 },
-  { title: "Sport", id: 2, userId: 1285 },
-  { title: "Education", id: 3, userId: 1285 },
-  { title: "Fun", id: 4, userId: 1285 },
-  { title: "Game", id: 5, userId: 1285 },
-  { title: "Game", id: 6, userId: 1285 },
-];
+import { useAppSelector } from "../../../../hooks/useAppSelector";
+import { categorySelector } from "../../../../store/slices/category/categorySlice";
 
 interface ICategoryList {}
 export const CategoryList: FC<ICategoryList> = () => {
+  const { categories } = useAppSelector(categorySelector);
+
   return (
     <Grid container spacing={2} sx={{ mt: "40px" }}>
-      {LISTS.map((category) => (
-        <CategoryItem key={category.id} {...category} />
-      ))}
+      {categories &&
+        categories.map((category) => (
+          <CategoryItem key={category.id} {...category} />
+        ))}
     </Grid>
   );
 };

@@ -324,6 +324,7 @@ export const StyledDashboardHeader = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  marginBottom: "40px",
 }));
 
 export const CircledInfoCard = styled(Box, {
@@ -346,4 +347,48 @@ export const InfoCardWrapper = styled(Box)(() => ({
 export const ResultNumber = styled(Typography)(() => ({
   color: theme.palette.black,
   lineHeight: "30px",
+}));
+
+export const CategoryWrapper = styled(Box)(() => ({
+  padding: "24px",
+  borderRadius: "4px",
+  backgroundColor: theme.palette.purple.lighter,
+  width: "310px",
+}));
+
+export const AddImageBtn = styled("label")(() => ({
+  border: `1px solid ${theme.palette.defaultBlack}`,
+  padding: "13px 24px",
+  borderRadius: "2px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  fontWeight: 600,
+  fontSize: "16px",
+  lineHeight: "25px",
+  backgroundColor: "transparent",
+  color: theme.palette.black,
+  textTransform: "none",
+  marginBottom: 2,
+  transition: "all 250ms",
+  "&:hover": {
+    transition: "all 250ms",
+    backgroundColor: "transparent",
+    border: `1px solid ${theme.palette.green.main}`,
+    "& .MuiSvgIcon-root": {
+      color: theme.palette.green.main,
+    },
+  },
+  "&:active": {
+    backgroundColor: "transparent",
+    opacity: "0.7px",
+    border: `1px solid ${theme.palette.green.lighter}`,
+    "& .MuiSvgIcon-root": {
+      color: theme.palette.black,
+    },
+  },
+}));
+
+export const StylebBtn = styled(Button)(() => ({
+  backgroundColor: "red",
 }));

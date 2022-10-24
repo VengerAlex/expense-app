@@ -7,6 +7,7 @@ import {
   DashboardWrapper,
 } from "../../../styles";
 import { DashboardHeader } from "./DashboardHeader";
+import { NewCategory } from "../../../components/NewCategory";
 
 interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
@@ -15,6 +16,7 @@ export const Dashboard: FC<IDashboard> = () => {
       <DashboardWrapper>
         <DashboardLeftSide>
           <DashboardHeader />
+          <NewCategory />
         </DashboardLeftSide>
         <DashboardRightSide>
           <Typography>RIGHT SIDE</Typography>

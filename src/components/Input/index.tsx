@@ -8,13 +8,14 @@ import {
   useTheme,
 } from "@mui/material";
 import { StyledInput } from "../../styles";
+import { register } from "../../store/slices/auth/auth.actions";
 
 type IInput = TextFieldProps & {
   isPassword?: boolean;
   isResetPassword?: boolean;
-  control: any;
+  control?: any;
   isBlack?: boolean;
-  formName: string;
+  formName?: string;
 };
 
 const Input: FC<IInput> = ({
@@ -34,9 +35,11 @@ const Input: FC<IInput> = ({
     }
   };
 
+  const isRegister = control && { ...control.register(formName) };
+
   return (
     <StyledInput
-      {...control.register(formName)}
+      {...isRegister}
       {...props}
       isBlack={isBlack}
       InputLabelProps={{ shrink: true }}

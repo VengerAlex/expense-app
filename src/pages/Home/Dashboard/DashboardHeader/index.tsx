@@ -27,7 +27,7 @@ export const DashboardHeader = () => {
       isBig: true,
       number: "1235",
       bgColor: theme.palette.violet,
-      iconColor: theme.palette.purple,
+      iconColor: theme.palette.purple.main,
       icon: <DescriptionIcon />,
     },
   ];
@@ -36,6 +36,7 @@ export const DashboardHeader = () => {
     <StyledDashboardHeader>
       {INFO_CARDS.map((cardItem) => (
         <InfoCard
+          key={cardItem.number}
           isBig={cardItem.isBig}
           number={cardItem.number}
           bgColor={cardItem.bgColor}

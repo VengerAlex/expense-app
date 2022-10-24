@@ -3,11 +3,16 @@ import { createTheme } from "@mui/material";
 declare module "@mui/material/styles" {
   interface Palette {
     black: string;
-    purple: string;
+    purple: {
+      main: string;
+      lighter: string;
+    };
+    defaultBlack: string;
     violet: string;
     blue: string;
     orange: string;
     lightOrange: string;
+    darkBlack: string;
     red: string;
     green: {
       main: string;
@@ -21,8 +26,13 @@ declare module "@mui/material/styles" {
 
   interface PaletteOptions {
     black: string;
-    purple: string;
+    purple: {
+      main: string;
+      lighter: string;
+    };
+    defaultBlack: string;
     violet: string;
+    darkBlack: string;
     blue: string;
     orange: string;
     lightOrange: string;
@@ -43,8 +53,13 @@ export const theme = createTheme({
     success: {
       main: "#539713",
     },
+    darkBlack: "#010025",
+    defaultBlack: "#000000",
     black: "#1d283a",
-    purple: "#cca9ff",
+    purple: {
+      main: "#cca9ff",
+      lighter: "#d9e7f8",
+    },
     violet: "#d4ccf1",
     blue: "#69b0ff",
     orange: "#f08e5b",

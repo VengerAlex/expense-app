@@ -30,3 +30,18 @@ export const deleteCategory = createAsyncThunk<any, { id: number }>(
     }
   },
 );
+
+export const updateCategory = createAsyncThunk<any, { id: number }>(
+  "categories/delete",
+  async ({ id }, thunkAPI) => {
+    try {
+      const response = await CategoryService.update(id);
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    }
+  },
+);

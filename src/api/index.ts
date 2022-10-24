@@ -17,6 +17,7 @@ export const URL_TEMPLATES = {
 
   GET_CATEGORIES: `${CategoryUrlRoute}`,
   DELETE_CATEGORY: (id: number) => `${CategoryUrlRoute}/${id}`,
+  UPDATE_CATEGORY: (id: number) => `${CategoryUrlRoute}/${id}`,
 };
 
 const instance = axios.create({

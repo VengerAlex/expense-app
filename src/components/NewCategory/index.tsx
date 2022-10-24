@@ -1,12 +1,17 @@
 import { FC } from "react";
-import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
-import { NewCategoryWrapper } from "../../styles";
+import { Stack, Typography, useTheme } from "@mui/material";
+import { NewCategoryWrapper, StyledSecondaryButton } from "../../styles";
 import Input from "../Input";
 import { ImageButton } from "../ImageButton";
+import { ColorPicker } from "../ColorPicker";
 
 interface INewCategory {}
 export const NewCategory: FC<INewCategory> = () => {
   const theme = useTheme();
+
+  const send = () => {
+    console.log("SEND");
+  };
 
   return (
     <NewCategoryWrapper>
@@ -21,10 +26,16 @@ export const NewCategory: FC<INewCategory> = () => {
         isBlack
       />
       <ImageButton />
-      <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Typography>Color</Typography>
-        <Button>ADD</Button>
-      </Box>
+      <Stack
+        alignItems="flex-end"
+        direction="row"
+        justifyContent="space-between"
+      >
+        <ColorPicker />
+        <StyledSecondaryButton onClick={send} sx={{ p: "4px 45px" }}>
+          ADD
+        </StyledSecondaryButton>
+      </Stack>
     </NewCategoryWrapper>
   );
 };

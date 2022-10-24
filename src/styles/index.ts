@@ -71,7 +71,7 @@ export const StyledSecondaryButton = styled(Button, {
     ? theme.palette.green.lighter
     : isDelete
     ? theme.palette.red
-    : theme.palette.green.main,
+    : theme.palette.black,
   textTransform: "none",
   "&:hover": {
     backgroundColor: isEdit
@@ -517,7 +517,7 @@ export const AddImageBtn = styled("label")(() => ({
   backgroundColor: "transparent",
   color: theme.palette.black,
   textTransform: "none",
-  marginBottom: 2,
+  marginBottom: theme.spacing(2),
   transition: "all 250ms",
   "&:hover": {
     transition: "all 250ms",
@@ -537,6 +537,25 @@ export const AddImageBtn = styled("label")(() => ({
   },
 }));
 
-export const StylebBtn = styled(Button)(() => ({
-  backgroundColor: "red",
+export const ColorPickerWrapper = styled(Box)(() => ({
+  width: "104px",
+  "&:hover": {
+    "& .MuiDivider-root": {
+      borderColor: theme.palette.green.lighter,
+    },
+  },
+}));
+
+export const Picker = styled(Box)(() => ({
+  width: "80px",
+  height: "23px",
+  marginLeft: "-7px",
+  cursor: "pointer",
+}));
+
+export const ColorPickerBox = styled(Box)(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  marginBottom: theme.spacing(0),
 }));

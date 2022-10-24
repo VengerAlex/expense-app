@@ -305,3 +305,45 @@ export const StyledGridNavbar = styled(Grid)(() => ({
   display: "flex",
   flexDirection: "column",
 }));
+
+export const DashboardWrapper = styled(Box)(() => ({
+  padding: "48px 24px 0 24px",
+  display: "flex",
+  minHeight: "100vh",
+}));
+
+export const DashboardLeftSide = styled(Box)(() => ({
+  width: "760px",
+}));
+
+export const DashboardRightSide = styled(Box)(() => ({
+  width: "calc(100% - 760px)",
+}));
+
+export const StyledDashboardHeader = styled(Box)(() => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+}));
+
+export const CircledInfoCard = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isBig" && prop !== "bgColor",
+})<{ isBig?: boolean; bgColor?: string }>(({ isBig, bgColor = "#fff" }) => ({
+  width: isBig ? "48px" : "36px",
+  height: isBig ? "48px" : "36px",
+  marginRight: "16px",
+  borderRadius: "100%",
+  backgroundColor: bgColor,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+export const InfoCardWrapper = styled(Box)(() => ({
+  display: "flex",
+}));
+
+export const ResultNumber = styled(Typography)(() => ({
+  color: theme.palette.black,
+  lineHeight: "30px",
+}));

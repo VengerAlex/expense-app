@@ -1,5 +1,6 @@
 import {
   Divider,
+  Icon,
   Box,
   Paper,
   Avatar,
@@ -12,6 +13,7 @@ import {
   TextField,
   FormControl,
   Typography,
+  Stack,
 } from "@mui/material";
 import { theme } from "../providers/ThemeProvider";
 
@@ -53,20 +55,39 @@ export const StyledLogoutButton = styled(Button)(() => ({
   },
 }));
 
-export const StyledSecondaryButton = styled(Button)(() => ({
+export const StyledSecondaryButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "isEdit" && prop !== "isDelete",
+})<{
+  isEdit?: boolean;
+  isDelete?: boolean;
+}>(({ isEdit, isDelete }) => ({
+  borderRadius: "2px",
+  padding: "4px 47.5px",
   color: theme.palette.white,
   fontSize: "16px",
   lineHeight: "24.8px",
   fontWeight: 600,
-  backgroundColor: theme.palette.black,
+  backgroundColor: isEdit
+    ? theme.palette.green.lighter
+    : isDelete
+    ? theme.palette.red
+    : theme.palette.green.main,
   textTransform: "none",
   "&:hover": {
-    backgroundColor: theme.palette.black,
-    color: theme.palette.green.main,
+    backgroundColor: isEdit
+      ? theme.palette.green.lighter
+      : isDelete
+      ? theme.palette.red
+      : theme.palette.black,
+    color: isEdit || isDelete ? theme.palette.black : theme.palette.green.main,
   },
   "&:active": {
     opacity: 0.7,
-    backgroundColor: theme.palette.black,
+    backgroundColor: isEdit
+      ? theme.palette.green.lighter
+      : isDelete
+      ? theme.palette.red
+      : theme.palette.black,
   },
   "&:disabled": {
     color: theme.palette.white,
@@ -306,6 +327,133 @@ export const StyledGridNavbar = styled(Grid)(() => ({
   flexDirection: "column",
 }));
 
+export const CategoryHeader = styled(Box)(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+
+export const SearchField = styled(TextField)(() => ({
+  "&.MuiTextField-root": {
+    borderColor: "red",
+    "&:hover": {
+      "&:after": {
+        borderColor: "#1D283A !important",
+      },
+    },
+    "&:after": {
+      borderColor: "#1D283A !important",
+    },
+  },
+  "&.InputDecoration": {
+    borderColor: "red",
+  },
+  "& .MuiInputBase-root": {
+    color: "black",
+    fontWeight: 400,
+    fontSize: "14px",
+    lineHeight: "21.7px",
+    "&:before": {
+      borderColor: "#1D283A !important",
+    },
+    "&:after": {
+      borderColor: "#1D283A",
+    },
+    "&:hover": {
+      "&:before": {
+        borderColor: "#1D283A !important",
+      },
+      "&:after": {
+        borderColor: "#1D283A !important",
+      },
+    },
+    "&.Mui-focused": {
+      "& .MuiIconButton-root": {
+        display: "none",
+      },
+    },
+  },
+  input: {
+    padding: "4px 0 0",
+  },
+  "& .MuiIconButton-root": {
+    padding: "0px 5px 2px 0",
+  },
+  "& .MuiSvgIcon-root": {
+    fontSize: "1rem",
+  },
+}));
+
+export const CategoryWrapper = styled(Grid)(() => ({
+  position: "relative",
+  // width: "312px",
+  // minHeight: "284px",
+  backgroundColor: "#fff",
+  borderRadius: "8px",
+  padding: "24px 16px 22px",
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+}));
+
+export const CategoryAvatar = styled(Box)(() => ({
+  width: "40px",
+  height: "40px",
+  backgroundColor: "#F8E4B2",
+  border: "1px solid #fff",
+  borderRadius: "120px",
+  marginBottom: "8px",
+}));
+
+export const CategoryTitle = styled(Typography)(() => ({
+  color: "#000000",
+  marginBottom: "42px",
+}));
+
+export const SliderWrapper = styled(Box)(() => ({
+  backgroundColor: "#F08E5B",
+  height: "9px",
+  width: "280px",
+  borderRadius: "4px",
+  marginBottom: "8px",
+  "&::before": {
+    content: "''",
+    borderRadius: "4px",
+    height: "9px",
+    display: "block",
+    width: "40%",
+    backgroundColor: "#539713",
+  },
+}));
+
+export const CategoryPriceWrapper = styled(Box)(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "100%",
+}));
+
+export const ActionIcon = styled(Icon)(() => ({
+  cursor: "pointer",
+  position: "absolute",
+  right: "14px",
+  top: "7px",
+  fontSize: "20px",
+}));
+
+export const StyledGridItem = styled(Grid)(() => ({
+  "&.MuiGrid-item": {
+    paddingLeft: "24px",
+    paddingTop: "24px",
+  },
+}));
+
+export const ActionButtons = styled(Stack)(() => ({
+  position: "absolute",
+  right: "14px",
+}));
+
 export const DashboardWrapper = styled(Box)(() => ({
   padding: "48px 24px 0 24px",
   display: "flex",
@@ -349,7 +497,7 @@ export const ResultNumber = styled(Typography)(() => ({
   lineHeight: "30px",
 }));
 
-export const CategoryWrapper = styled(Box)(() => ({
+export const NewCategoryWrapper = styled(Box)(() => ({
   padding: "24px",
   borderRadius: "4px",
   backgroundColor: theme.palette.purple.lighter,

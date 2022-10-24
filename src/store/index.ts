@@ -2,12 +2,14 @@ import { reducer as toastrReducer } from "react-redux-toastr";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userSlice from "./slices/user/userSlice";
 import authSlice from "./slices/auth/authSlice";
+import categorySlice from "./slices/category/categorySlice";
 import dashboardSlice from "./slices/dashboard/dashboardSlice";
 
 const rootReducer = combineReducers({
   user: userSlice,
   auth: authSlice,
   dashboard: dashboardSlice,
+  category: categorySlice,
   toastr: toastrReducer,
 });
 

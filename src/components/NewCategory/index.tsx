@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
-import { CategoryWrapper } from "../../styles";
+import { NewCategoryWrapper } from "../../styles";
 import Input from "../Input";
 import { ImageButton } from "../ImageButton";
 
@@ -9,7 +9,7 @@ export const NewCategory: FC<INewCategory> = () => {
   const theme = useTheme();
 
   return (
-    <CategoryWrapper>
+    <NewCategoryWrapper>
       <Typography variant="h4" mb={2} color={theme.palette.darkBlack}>
         Add Category
       </Typography>
@@ -25,6 +25,6 @@ export const NewCategory: FC<INewCategory> = () => {
         <Typography>Color</Typography>
         <Button>ADD</Button>
       </Box>
-    </CategoryWrapper>
+    </NewCategoryWrapper>
   );
 };

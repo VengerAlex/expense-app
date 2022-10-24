@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { MainLayout } from "../../../components/MainLayout";
 import {
   DashboardLeftSide,
@@ -8,6 +8,7 @@ import {
 } from "../../../styles";
 import { DashboardHeader } from "./DashboardHeader";
 import { NewCategory } from "../../../components/NewCategory";
+import { NewTransaction } from "../../../components/NewTransaction";
 
 interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
@@ -16,7 +17,10 @@ export const Dashboard: FC<IDashboard> = () => {
       <DashboardWrapper>
         <DashboardLeftSide>
           <DashboardHeader />
-          <NewCategory />
+          <Stack spacing={2} direction="row">
+            <NewTransaction />
+            <NewCategory />
+          </Stack>
         </DashboardLeftSide>
         <DashboardRightSide>
           <Typography>RIGHT SIDE</Typography>

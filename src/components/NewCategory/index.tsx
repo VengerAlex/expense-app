@@ -22,7 +22,7 @@ export const NewCategory: FC<INewCategory> = () => {
         sx={{ mb: 2 }}
         fullWidth
         label="Name of Category"
-        placeholder="Example123"
+        placeholder="Cars & Coffee"
         isBlack
       />
       <ImageButton />

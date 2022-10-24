@@ -501,7 +501,7 @@ export const NewCategoryWrapper = styled(Box)(() => ({
   padding: "24px",
   borderRadius: "4px",
   backgroundColor: theme.palette.purple.lighter,
-  width: "310px",
+  width: "calc(100% - 426px)",
 }));
 
 export const AddImageBtn = styled("label")(() => ({
@@ -558,4 +558,11 @@ export const ColorPickerBox = styled(Box)(() => ({
   justifyContent: "center",
   alignItems: "center",
   marginBottom: theme.spacing(0),
+}));
+
+export const NewTransactionWrapper = styled(Box)(() => ({
+  padding: "24px",
+  borderRadius: "4px",
+  backgroundColor: theme.palette.violet,
+  width: "426px",
 }));

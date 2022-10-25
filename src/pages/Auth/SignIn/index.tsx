@@ -19,8 +19,8 @@ import { localstorageAuthService } from "../../../services/localstorage.service"
 const SignIn: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const token = localstorageAuthService.getAccessToken();
   const from = location.state?.from?.pathname || ROUTES.HOME;
-  const isAuth = localstorageAuthService.getAccessToken();
   const { login } = useActions();
   const { loading } = useAppSelector(authSelector);
 
@@ -44,10 +44,10 @@ const SignIn: FC = () => {
   };
 
   useEffect(() => {
-    if (isAuth) {
+    if (loading === LOADING_STATUS.FULFILLED && token) {
       navigate(from, { replace: true });
     }
-  }, [isAuth]);
+  }, [loading]);
 
   return (
     <AuthPageWrapper bgImage={signInCover}>

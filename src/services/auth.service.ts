@@ -1,60 +1,61 @@
 import axios, { URL_TEMPLATES } from "../api/index";
 import { localstorageAuthService } from "./localstorage.service";
 import {
+  IChangePassword,
+  ILoginProps,
   ILoginResponse,
-  IRegisterThunkResponse,
+  INewTokenResponse,
+  IRegisterData,
+  IRegisterProps,
 } from "../store/slices/auth/auth.interface";
 
 class AuthService {
-  async register(username: string, password: string, displayName: string) {
-    const response = await axios.post<IRegisterThunkResponse>(
+  async register(dto: IRegisterProps) {
+    const response = await axios.post<IRegisterData>(
       URL_TEMPLATES.REGISTER,
-      { username, password, displayName },
+      dto,
     );
 
-    return response.status;
+    return { data: response.data, status: response.status };
   }
 
-  async login(username: string, password: string) {
-    const response = await axios.post<ILoginResponse>(URL_TEMPLATES.LOGIN, {
-      username,
-      password,
-    });
+  async login(dto: ILoginProps) {
+    const { data } = await axios.post<ILoginProps, { data: ILoginResponse }>(
+      URL_TEMPLATES.LOGIN,
+      dto,
+    );
 
-    if (response.data.accessToken && response.data.refreshToken) {
-      localstorageAuthService.setAccessToken(response.data.accessToken);
-      localstorageAuthService.setRefreshToken(response.data.refreshToken);
+    if (data.accessToken && data.refreshToken) {
+      localstorageAuthService.setAccessToken(data.accessToken);
+      localstorageAuthService.setRefreshToken(data.refreshToken);
     }
 
-    return response;
+    return data;
   }
 
   async getNewTokens() {
     const refreshToken = localstorageAuthService.getRefreshToken();
 
-    const response = await axios.post(URL_TEMPLATES.REFRESH, {
-      refreshToken,
-    });
+    const { data } = await axios.post<void, { data: INewTokenResponse }>(
+      URL_TEMPLATES.REFRESH,
+      {
+        refreshToken,
+      },
+    );
 
-    if (response.data.accessToken) {
-      localstorageAuthService.setAccessToken(response.data.accessToken);
-      localstorageAuthService.setRefreshToken(response.data.refreshToken);
+    if (data.accessToken) {
+      localstorageAuthService.setAccessToken(data.accessToken);
     }
 
-    return response;
+    return data;
   }
 
   logout() {
     localstorageAuthService.clearStorage();
   }
 
-  async changePassword(oldPassword: string, newPassword: string) {
-    const response = await axios.patch(URL_TEMPLATES.CHANGE_PASSWORD, {
-      oldPassword,
-      newPassword,
-    });
-
-    return response;
+  async changePassword(dto: IChangePassword) {
+    await axios.patch<IChangePassword>(URL_TEMPLATES.CHANGE_PASSWORD, dto);
   }
 }
 

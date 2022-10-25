@@ -4,14 +4,21 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { StyledDashboardHeader } from "../../../../styles";
 import { useTheme } from "@mui/material";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
+import { transactionSelector } from "../../../../store/slices/transaction/transactionSlice";
+import { formatNumber } from "../../../../utils/helpers";
 
 export const DashboardHeader = () => {
   const theme = useTheme();
+  const { totalReceipt, totalExpense, transactions } =
+    useAppSelector(transactionSelector);
+
+  console.log("HEADER RENDER");
 
   const INFO_CARDS = [
     {
       isBig: true,
-      number: "2,00,874",
+      number: formatNumber(totalReceipt),
       bgColor: theme.palette.green.lighter,
       iconColor: theme.palette.green.main,
       title: "Total Receipt",
@@ -19,7 +26,7 @@ export const DashboardHeader = () => {
     },
     {
       isBig: true,
-      number: "5,34,888",
+      number: formatNumber(totalExpense),
       bgColor: theme.palette.lightOrange,
       iconColor: theme.palette.orange,
       title: "Total Expense",
@@ -27,7 +34,7 @@ export const DashboardHeader = () => {
     },
     {
       isBig: true,
-      number: "1235",
+      number: transactions?.length || 0,
       bgColor: theme.palette.violet,
       iconColor: theme.palette.purple.main,
       title: "Total Transactions",
@@ -40,7 +47,7 @@ export const DashboardHeader = () => {
       {INFO_CARDS.map((cardItem) => (
         <InfoCard
           title={cardItem.title}
-          key={cardItem.number}
+          key={cardItem.title}
           isBig={cardItem.isBig}
           number={cardItem.number}
           bgColor={cardItem.bgColor}

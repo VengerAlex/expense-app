@@ -3,6 +3,8 @@ import { LOADING_STATUS } from "../../../utils/types";
 export interface ITransactionInitialState {
   transactions: ITransaction[] | null;
   loading: LOADING_STATUS;
+  totalReceipt: number;
+  totalExpense: number;
 }
 
 export interface ITransaction {

@@ -27,7 +27,7 @@ export const InfoCard: FC<IInfoCard> = ({
         <Box sx={{ marginBottom: "-6px", color: iconColor }}>{icon}</Box>
       </CircledInfoCard>
       <Stack>
-        <ResultNumber variant="h4">+$ {number}</ResultNumber>
+        <ResultNumber variant="h4">{number}</ResultNumber>
         <Typography variant="subtitle2" color={theme.palette.black}>
           {title}
         </Typography>

@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import TransactionService from "../../../services/transaction.service";
 
 export const getTransactions = createAsyncThunk<any>(
-  "categories",
+  "transactions",
   async (_, thunkAPI) => {
     try {
       const response = await TransactionService.getAll();

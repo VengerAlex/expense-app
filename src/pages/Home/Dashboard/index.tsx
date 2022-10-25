@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Stack, Typography } from "@mui/material";
 import { MainLayout } from "../../../components/MainLayout";
 import {
@@ -9,9 +9,16 @@ import {
 import { DashboardHeader } from "./DashboardHeader";
 import { NewCategory } from "../../../components/NewCategory";
 import { NewTransaction } from "../../../components/NewTransaction";
+import { useActions } from "../../../hooks/useActions";
 
 interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
+  const { getTransactions } = useActions();
+
+  useEffect(() => {
+    getTransactions();
+  }, []);
+
   return (
     <MainLayout>
       <DashboardWrapper>

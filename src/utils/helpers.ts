@@ -20,3 +20,14 @@ export const toastError = (error: any, title?: string) => {
   toastr.error(title || "Error request", message);
   throw message;
 };
+
+export const formatNumber = (number: number) => {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    signDisplay: "always",
+  })
+    .format(number)
+    .replace(/^(\D+)/, "$1 ");
+};

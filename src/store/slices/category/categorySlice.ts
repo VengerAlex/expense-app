@@ -2,7 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { LOADING_STATUS } from "../../../utils/types";
 import { RootState } from "../../index";
 import { ICategoryInitialState } from "./category.interface";
-import { deleteCategory, getCategories } from "./category.actions";
+import {
+  deleteCategory,
+  getCategories,
+  postCategory,
+} from "./category.actions";
 
 const initialState: ICategoryInitialState = {
   categories: null,
@@ -24,6 +28,17 @@ const categorySlice = createSlice({
         state.categories = action.payload.content;
       })
       .addCase(getCategories.rejected, (state) => {
+        state.loading = LOADING_STATUS.REJECTED;
+      })
+
+      // postCategory
+      .addCase(postCategory.pending, (state) => {
+        state.loading = LOADING_STATUS.PENDING;
+      })
+      .addCase(postCategory.fulfilled, (state) => {
+        state.loading = LOADING_STATUS.FULFILLED;
+      })
+      .addCase(postCategory.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
       })
 

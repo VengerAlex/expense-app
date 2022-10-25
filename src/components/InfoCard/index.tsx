@@ -8,6 +8,7 @@ interface IInfoCard {
   number: string | number;
   iconColor: string;
   icon: any;
+  title: string;
 }
 
 export const InfoCard: FC<IInfoCard> = ({
@@ -16,6 +17,7 @@ export const InfoCard: FC<IInfoCard> = ({
   bgColor,
   iconColor,
   icon,
+  title,
 }) => {
   const theme = useTheme();
 
@@ -27,7 +29,7 @@ export const InfoCard: FC<IInfoCard> = ({
       <Stack>
         <ResultNumber variant="h4">+$ {number}</ResultNumber>
         <Typography variant="subtitle2" color={theme.palette.black}>
-          Total Receipt
+          {title}
         </Typography>
       </Stack>
     </InfoCardWrapper>

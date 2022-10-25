@@ -73,3 +73,12 @@ export const profileSettingsSchema = resetPasswordSchema.shape({
     .min(8)
     .max(30),
 });
+
+export const createCategorySchema = yup.object().shape({
+  label: yup
+    .string()
+    .matches(SPACE_REGEXP, SPACE_WARNING)
+    .required()
+    .min(2)
+    .max(30),
+});

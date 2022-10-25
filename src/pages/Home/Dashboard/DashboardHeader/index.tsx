@@ -14,6 +14,7 @@ export const DashboardHeader = () => {
       number: "2,00,874",
       bgColor: theme.palette.green.lighter,
       iconColor: theme.palette.green.main,
+      title: "Total Receipt",
       icon: <WorkIcon />,
     },
     {
@@ -21,6 +22,7 @@ export const DashboardHeader = () => {
       number: "5,34,888",
       bgColor: theme.palette.lightOrange,
       iconColor: theme.palette.orange,
+      title: "Total Expense",
       icon: <ShoppingCartIcon />,
     },
     {
@@ -28,6 +30,7 @@ export const DashboardHeader = () => {
       number: "1235",
       bgColor: theme.palette.violet,
       iconColor: theme.palette.purple.main,
+      title: "Total Transactions",
       icon: <DescriptionIcon />,
     },
   ];
@@ -36,6 +39,7 @@ export const DashboardHeader = () => {
     <StyledDashboardHeader>
       {INFO_CARDS.map((cardItem) => (
         <InfoCard
+          title={cardItem.title}
           key={cardItem.number}
           isBig={cardItem.isBig}
           number={cardItem.number}

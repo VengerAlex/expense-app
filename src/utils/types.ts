@@ -73,3 +73,7 @@ export interface IResetProfileForm {
   password: string;
   confirmedPassword: string;
 }
+
+export interface ICreateCategoryForm {
+  label: string;
+}

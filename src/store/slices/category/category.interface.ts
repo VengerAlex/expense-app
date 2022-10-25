@@ -8,5 +8,7 @@ export interface ICategoryInitialState {
 export interface ICategory {
   id: number;
   label: string;
-  userId: string;
+  userId: number | undefined;
 }
+
+export type ICategoryDto = Omit<ICategory, "id">;

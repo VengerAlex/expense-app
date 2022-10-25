@@ -16,6 +16,7 @@ export const URL_TEMPLATES = {
   GET_ME: `${UserUrlRoute}/self`,
 
   GET_CATEGORIES: `${CategoryUrlRoute}`,
+  CREATE_CATEGORY: `${CategoryUrlRoute}`,
   DELETE_CATEGORY: (id: number) => `${CategoryUrlRoute}/${id}`,
   UPDATE_CATEGORY: (id: number) => `${CategoryUrlRoute}/${id}`,
 };

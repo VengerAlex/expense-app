@@ -5,6 +5,7 @@ import { localstorageAuthService } from "../services/localstorage.service";
 const AuthUrlRoute = "/auth";
 const UserUrlRoute = "/users";
 const CategoryUrlRoute = "/categories";
+const TransactionUrlRoute = "/transactions";
 
 export const URL_TEMPLATES = {
   LOGIN: `${AuthUrlRoute}/login`,
@@ -15,10 +16,12 @@ export const URL_TEMPLATES = {
   CHANGE_INFORMATION: `${UserUrlRoute}/self`,
   GET_ME: `${UserUrlRoute}/self`,
 
-  GET_CATEGORIES: `${CategoryUrlRoute}`,
+  GET_CATEGORIES: CategoryUrlRoute,
   CREATE_CATEGORY: `${CategoryUrlRoute}`,
   DELETE_CATEGORY: (id: number) => `${CategoryUrlRoute}/${id}`,
   UPDATE_CATEGORY: (id: number) => `${CategoryUrlRoute}/${id}`,
+
+  GET_TRANSACTIONS: TransactionUrlRoute,
 };
 
 const instance = axios.create({

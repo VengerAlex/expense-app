@@ -3,12 +3,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userSlice from "./slices/user/userSlice";
 import authSlice from "./slices/auth/authSlice";
 import categorySlice from "./slices/category/categorySlice";
-import dashboardSlice from "./slices/dashboard/dashboardSlice";
+import transactionSlice from "./slices/transaction/transactionSlice";
 
 const rootReducer = combineReducers({
   user: userSlice,
   auth: authSlice,
-  dashboard: dashboardSlice,
+  transaction: transactionSlice,
   category: categorySlice,
   toastr: toastrReducer,
 });

@@ -566,3 +566,39 @@ export const NewTransactionWrapper = styled(Box)(() => ({
   backgroundColor: theme.palette.violet,
   width: "426px",
 }));
+
+export const SelectWrapper = styled(FormControl)(() => ({
+  "& .MuiFormLabel-root": {
+    fontSize: "14px",
+    lineHeight: "21.7px",
+    color: theme.palette.black,
+    fontWeight: 400,
+  },
+  "& .MuiInput-input": {
+    color: theme.palette.black,
+    fontWeight: 600,
+    fontSize: "16px",
+    lineHeight: "24.8px",
+  },
+  "& .MuiSelect-select": {
+    backgroundColor: "transparent !important",
+  },
+  "& .MuiInputBase-root": {
+    backgroundColor: "transparent",
+
+    "&::after": {
+      borderBottom: `1px solid ${theme.palette.black} !important`,
+    },
+    "&::before": {
+      borderBottom: `1px solid ${theme.palette.black} !important`,
+    },
+    "&:hover": {
+      "&:before": {
+        borderBottom: `1px solid ${theme.palette.black} !important`,
+      },
+      "&:after": {
+        borderBottom: `1px solid ${theme.palette.black} !important`,
+      },
+    },
+  },
+}));

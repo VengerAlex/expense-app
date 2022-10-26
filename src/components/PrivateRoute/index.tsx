@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 export const PrivateRoute = () => {
   const location = useLocation();
-  const { getMe } = useActions();
+  const { getMe, getCategories } = useActions();
 
   const token = localstorageAuthService.getAccessToken();
   const { user } = useAppSelector(userSelector);
@@ -16,6 +16,7 @@ export const PrivateRoute = () => {
   useEffect(() => {
     if (!user && token) {
       getMe();
+      getCategories();
     }
   }, [user, token]);
 

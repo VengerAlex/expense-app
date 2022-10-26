@@ -37,8 +37,6 @@ export const NewCategory: FC<INewCategory> = () => {
     reset();
   };
 
-  console.log(errors);
-
   return (
     <NewCategoryWrapper>
       <Typography variant="h4" mb={2} color={theme.palette.darkBlack}>
@@ -49,6 +47,7 @@ export const NewCategory: FC<INewCategory> = () => {
           helperText={showErrorText(errors, "label", label)}
           error={!!errors.label && !!label}
           control={control}
+          weight={600}
           formName="label"
           fullWidth
           label="Name of Category"

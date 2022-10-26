@@ -20,6 +20,7 @@ export const NewTransaction: FC<INewTransaction> = () => {
         Add Transaction
       </Typography>
       <Input
+        weight={600}
         sx={{ mb: 2 }}
         fullWidth
         label="Transaction Name "

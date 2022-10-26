@@ -161,85 +161,87 @@ export const StyledNotificationBox = styled(Box)<NotificationBoxProps>(
 );
 
 export const StyledInput = styled(TextField, {
-  shouldForwardProp: (prop) => prop !== "isBlack",
-})<{ isBlack?: boolean }>(({ theme, isBlack }) => ({
-  marginBottom: theme.spacing(1),
-  "&.MuiTextField-root": {
-    marginTop: "0px",
-    borderColor: theme.palette.blue,
-  },
-
-  "& label": {
-    fontSize: "14px",
-    lineHeight: "21.7px",
-    fontWeight: 400,
-    color: isBlack ? theme.palette.black : theme.palette.white,
-    "&.Mui-focused": {
-      color: isBlack ? theme.palette.black : theme.palette.white,
+  shouldForwardProp: (prop) => prop !== "isBlack" && prop !== "weight",
+})<{ isBlack?: boolean; weight?: number }>(
+  ({ theme, isBlack, weight = 400 }) => ({
+    marginBottom: theme.spacing(1),
+    "&.MuiTextField-root": {
+      marginTop: "0px",
+      borderColor: theme.palette.blue,
     },
 
-    "&.Mui-error": {
+    "& label": {
+      fontSize: "14px",
+      lineHeight: "21.7px",
+      fontWeight: 400,
       color: isBlack ? theme.palette.black : theme.palette.white,
+      "&.Mui-focused": {
+        color: isBlack ? theme.palette.black : theme.palette.white,
+      },
+
+      "&.Mui-error": {
+        color: isBlack ? theme.palette.black : theme.palette.white,
+      },
     },
-  },
-  "& .MuiFormHelperText-root": {
-    marginTop: "12px",
-    marginBottom: "5px",
-    lineHeight: "0px",
-    fontSize: "12px",
-    color: theme.palette.red,
-    "&.Mui-error": {
+    "& .MuiFormHelperText-root": {
+      marginTop: "12px",
+      marginBottom: "5px",
+      lineHeight: "0px",
+      fontSize: "12px",
       color: theme.palette.red,
+      "&.Mui-error": {
+        color: theme.palette.red,
+      },
     },
-  },
-  input: {
-    "&::placeholder": {
+    input: {
+      "&::placeholder": {
+        color: isBlack ? theme.palette.black : theme.palette.white,
+        fontWeight: 600,
+        opacity: isBlack ? 1 : 0.7,
+        fontSize: "16px",
+        lineHeight: "24.8px",
+      },
+    },
+    "& .MuiInputBase-root": {
       color: isBlack ? theme.palette.black : theme.palette.white,
-      fontWeight: 600,
-      opacity: 0.7,
+      fontWeight: weight,
       fontSize: "16px",
-      lineHeight: "24.8px",
-    },
-  },
-  "& .MuiInputBase-root": {
-    color: isBlack ? theme.palette.black : theme.palette.white,
-    fontSize: "16px",
-    opacity: 0.7,
-    borderColor: isBlack ? theme.palette.black : theme.palette.white,
-    "&:hover": {
-      "&:not(.Mui-disabled)": {
-        "&:before": {
-          borderColor: theme.palette.green.lighter,
+      borderColor: isBlack ? theme.palette.black : theme.palette.white,
+      "&:hover": {
+        "&:not(.Mui-disabled)": {
+          "&:before": {
+            borderColor: theme.palette.green.lighter,
+          },
+        },
+      },
+      "&:before": {
+        borderColor: isBlack ? theme.palette.black : theme.palette.white,
+      },
+
+      "&:after": {
+        borderColor: isBlack ? theme.palette.black : theme.palette.white,
+      },
+
+      "&.Mui-focused": {
+        "&:after": {
+          borderColor: theme.palette.green.main,
+        },
+      },
+      "& .MuiFormLabel-root": {
+        color: isBlack ? theme.palette.black : theme.palette.white,
+        fontWeight: 400,
+        fontSize: "14px",
+        lineHeight: "24.8px",
+      },
+      "&.Mui-error": {
+        color: theme.palette.red,
+        "&:after": {
+          borderColor: theme.palette.red,
         },
       },
     },
-    "&:before": {
-      borderColor: isBlack ? theme.palette.black : theme.palette.white,
-    },
-
-    "&:after": {
-      borderColor: isBlack ? theme.palette.black : theme.palette.white,
-    },
-
-    "&.Mui-focused": {
-      "&:after": {
-        borderColor: theme.palette.green.main,
-      },
-    },
-    "& .MuiFormLabel-root": {
-      color: isBlack ? theme.palette.black : theme.palette.white,
-      fontWeight: 400,
-      fontSize: "14px",
-      lineHeight: "24.8px",
-    },
-    "&.Mui-error": {
-      color: theme.palette.red,
-      "&:after": {
-        borderColor: theme.palette.red,
-      },
-    },
-  },
-}));
+  }),
+);
 
 export const StyledList = styled(List)(() => ({
   margin: "0 auto",

@@ -16,6 +16,7 @@ type IInput = TextFieldProps & {
   control?: any;
   isBlack?: boolean;
   formName?: string;
+  weight?: number;
 };
 
 const Input: FC<IInput> = ({
@@ -23,6 +24,7 @@ const Input: FC<IInput> = ({
   isResetPassword = false,
   formName,
   control,
+  weight,
   isBlack = false,
   ...props
 }) => {
@@ -41,6 +43,7 @@ const Input: FC<IInput> = ({
     <StyledInput
       {...isRegister}
       {...props}
+      weight={weight}
       isBlack={isBlack}
       InputLabelProps={{ shrink: true }}
       onCopy={handleChange}

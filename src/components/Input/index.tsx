@@ -68,6 +68,7 @@ const Input: FC<IInput> = ({
                 <InputAdornment position="end">
                   {isPassword && (
                     <IconButton
+                      disableRipple
                       sx={{
                         color: isBlack
                           ? theme.palette.black
@@ -83,7 +84,9 @@ const Input: FC<IInput> = ({
                     </IconButton>
                   )}
                   {isNumber && (
-                    <IconButton>{isNumber && <AttachMoneyIcon />}</IconButton>
+                    <IconButton disableRipple>
+                      {isNumber && <AttachMoneyIcon />}
+                    </IconButton>
                   )}
                 </InputAdornment>
               ),

@@ -13,7 +13,7 @@ export const SearchInput: FC<ISearchInput> = () => {
         variant="standard"
         InputProps={{
           startAdornment: (
-            <IconButton>
+            <IconButton disableRipple>
               <SearchIcon sx={{ color: "#1D283A" }} />
             </IconButton>
           ),

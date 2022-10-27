@@ -504,7 +504,7 @@ export const NewCategoryWrapper = styled(Box)(() => ({
   padding: "24px",
   borderRadius: "4px",
   backgroundColor: theme.palette.purple.lighter,
-  width: "calc(100% - 426px)",
+  width: "310px",
 }));
 
 export const AddImageBtn = styled("label")(() => ({
@@ -640,8 +640,13 @@ export const StyledCategoryCell = styled(TableCell)(() => ({
 
 export const IconWrapper = styled(Box)(() => ({
   color: theme.palette.black,
+  cursor: "pointer",
   "& .MuiSvgIcon-root": {
+    color: theme.palette.disabled,
     width: "16px",
     height: "16px",
+    "&:hover": {
+      color: theme.palette.black,
+    },
   },
 }));

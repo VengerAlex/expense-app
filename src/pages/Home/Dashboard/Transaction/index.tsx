@@ -8,9 +8,10 @@ import {
   getRandomColor,
 } from "../../../../utils/helpers";
 import { Stack, Typography, useTheme } from "@mui/material";
-import { CircledBox, StyledCategoryCell } from "../../../../styles";
+import { ActionIcon, CircledBox, StyledCategoryCell } from "../../../../styles";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { categorySelector } from "../../../../store/slices/category/categorySlice";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 type ITransactionProps = ITransaction & {
   idx: number;
@@ -33,7 +34,9 @@ export const Transaction: FC<ITransactionProps> = ({
   )?.label;
 
   return (
-    <TableRow sx={{ backgroundColor: getBackgroundColor(idx) }}>
+    <TableRow
+      sx={{ backgroundColor: getBackgroundColor(idx), position: "relative" }}
+    >
       <StyledCategoryCell align="center">{idx + 1}</StyledCategoryCell>
       <StyledCategoryCell>
         <Stack direction="row" alignItems="center">

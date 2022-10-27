@@ -19,6 +19,7 @@ declare module "@mui/material/styles" {
       main: string;
       lighter: string;
       border: string;
+      datePicker: string;
     };
     white: string;
     bgr: string;
@@ -43,6 +44,7 @@ declare module "@mui/material/styles" {
       main: string;
       lighter: string;
       border: string;
+      datePicker: string;
     };
     white: string;
     bgr: string;
@@ -72,6 +74,7 @@ export const theme = createTheme({
       main: "#539713",
       lighter: "#b2d0ad",
       border: "#58F83B",
+      datePicker: "#81b34f",
     },
     white: "#ffffff",
     bgr: "#f5f5f5",

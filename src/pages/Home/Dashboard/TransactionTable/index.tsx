@@ -8,6 +8,7 @@ import {
   TableRow,
   Table,
   Stack,
+  Typography,
 } from "@mui/material";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { transactionSelector } from "../../../../store/slices/transaction/transactionSlice";
@@ -15,6 +16,7 @@ import { Transaction } from "../Transaction";
 import { IconWrapper, StyledTableCell } from "../../../../styles";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import { LOADING_STATUS } from "../../../../utils/types";
 
 interface ITransactionTable {}
 export const TransactionTable: FC<ITransactionTable> = () => {
@@ -28,7 +30,7 @@ export const TransactionTable: FC<ITransactionTable> = () => {
             <StyledTableCell>
               <Stack
                 justifyContent="center"
-                alignItems="center"
+                alignItems="flex-start"
                 direction="row"
               >
                 #
@@ -61,18 +63,22 @@ export const TransactionTable: FC<ITransactionTable> = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {transactions?.map((transaction, index) => (
-            <Transaction
-              key={transaction.id}
-              idx={index}
-              id={transaction.id}
-              label={transaction.label}
-              categoryId={transaction.categoryId}
-              userId={transaction.userId}
-              amount={transaction.amount}
-              date={transaction.date}
-            />
-          ))}
+          {loading === LOADING_STATUS.PENDING ? (
+            <Typography>Loading...</Typography>
+          ) : (
+            transactions?.map((transaction, index) => (
+              <Transaction
+                key={transaction.id}
+                idx={index}
+                id={transaction.id}
+                label={transaction.label}
+                categoryId={transaction.categoryId}
+                userId={transaction.userId}
+                amount={transaction.amount}
+                date={transaction.date}
+              />
+            ))
+          )}
         </TableBody>
       </Table>
     </TableContainer>

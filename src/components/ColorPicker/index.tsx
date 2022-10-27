@@ -9,8 +9,6 @@ export const ColorPicker: FC<IColorPicker> = () => {
   const theme = useTheme();
   const [color, setColor] = useState("#fff");
 
-  console.log(color);
-
   return (
     <ColorPickerWrapper>
       <Typography mb="4px" color={theme.palette.black} variant="subtitle1">

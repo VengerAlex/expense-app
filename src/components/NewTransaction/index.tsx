@@ -6,19 +6,27 @@ import { MySelect } from "../Select";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { categorySelector } from "../../store/slices/category/categorySlice";
 import { DataPicker } from "../DataPicker";
-import dayjs, { Dayjs } from "dayjs";
+import { userSelector } from "../../store/slices/user/userSlice";
 
 interface INewTransaction {}
 
 export const NewTransaction: FC<INewTransaction> = () => {
   const { categories } = useAppSelector(categorySelector);
+  const { user } = useAppSelector(userSelector);
   const categoriesTitle = categories?.map((category) => category.label) || [];
   const [category, setCategory] = useState(categoriesTitle[1]);
   const [date, setDate] = useState(new Date());
+  const [amount, setAmount] = useState(0);
+  const [label, setLabel] = useState("");
   const theme = useTheme();
 
   const addHandler = () => {
     console.log(date, "data");
+    const transaction = {
+      label,
+      amount,
+      userId: user?.id,
+    };
   };
 
   return (
@@ -27,6 +35,8 @@ export const NewTransaction: FC<INewTransaction> = () => {
         Add Transaction
       </Typography>
       <Input
+        value={label}
+        onChange={(e) => setLabel(e.target.value)}
         weight={600}
         sx={{ mb: 2 }}
         fullWidth
@@ -44,6 +54,8 @@ export const NewTransaction: FC<INewTransaction> = () => {
         <Input
           sx={{ mb: 2, width: "225px" }}
           isNumber
+          value={amount}
+          onChange={(e) => setAmount(Number(e.target.value))}
           weight={600}
           label="Input Chevron Name"
           placeholder="-000,000.00"

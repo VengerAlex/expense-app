@@ -23,8 +23,6 @@ export const CategoryItem: FC<ICategory> = ({ label, id }) => {
   useOnClickOutside(clickRef, () => setIsShownBtnActions(false));
 
   const editHandler = () => {
-    console.log("editHandler");
-
     setIsShownBtnActions(false);
   };
 

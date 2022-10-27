@@ -22,6 +22,7 @@ export const URL_TEMPLATES = {
   UPDATE_CATEGORY: (id: number) => `${CategoryUrlRoute}/${id}`,
 
   GET_TRANSACTIONS: TransactionUrlRoute,
+  CREATE_TRANSACTIONS: TransactionUrlRoute,
 };
 
 const instance = axios.create({

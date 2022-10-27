@@ -3,9 +3,9 @@ import {
   ITransactionInitialState,
 } from "./transaction.interface";
 import { LOADING_STATUS } from "../../../utils/types";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../index";
-import { getTransactions } from "./transaction.actions";
+import { createTransaction, getTransactions } from "./transaction.actions";
 
 const initialState: ITransactionInitialState = {
   loading: LOADING_STATUS.IDLE,
@@ -20,7 +20,7 @@ const transactionSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // getCategories
+      // getTransactions
       .addCase(getTransactions.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
@@ -38,6 +38,22 @@ const transactionSlice = createSlice({
         });
       })
       .addCase(getTransactions.rejected, (state) => {
+        state.loading = LOADING_STATUS.REJECTED;
+      })
+
+      // createTransactions
+      .addCase(createTransaction.pending, (state) => {
+        state.loading = LOADING_STATUS.PENDING;
+      })
+      .addCase(
+        createTransaction.fulfilled,
+        (state, action: PayloadAction<ITransaction>) => {
+          state.loading = LOADING_STATUS.FULFILLED;
+
+          console.log(action.payload, "action.payload");
+        },
+      )
+      .addCase(createTransaction.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
       });
   },

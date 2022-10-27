@@ -11,14 +11,20 @@ import { NewCategory } from "../../../components/NewCategory";
 import { NewTransaction } from "../../../components/NewTransaction";
 import { useActions } from "../../../hooks/useActions";
 import { AllTransaction } from "./AllTransaction";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { transactionSelector } from "../../../store/slices/transaction/transactionSlice";
+import { LOADING_STATUS } from "../../../utils/types";
 
 interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
+  const { loading } = useAppSelector(transactionSelector);
   const { getTransactions } = useActions();
 
   useEffect(() => {
-    getTransactions();
-  }, []);
+    if (loading === LOADING_STATUS.IDLE) {
+      getTransactions();
+    }
+  }, [loading]);
 
   return (
     <MainLayout>

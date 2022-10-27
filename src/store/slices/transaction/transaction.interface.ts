@@ -10,7 +10,7 @@ export interface ITransactionInitialState {
 export interface ITransaction {
   id: number;
   label: string;
-  date: string;
+  date: Date;
   amount: number;
   categoryId: number;
   userId: number;

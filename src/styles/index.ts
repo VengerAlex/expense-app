@@ -12,6 +12,7 @@ import {
   styled,
   TextField,
   FormControl,
+  TableCell,
   Typography,
   Stack,
 } from "@mui/material";
@@ -602,5 +603,45 @@ export const SelectWrapper = styled(FormControl)(() => ({
         borderBottom: `1px solid ${theme.palette.black} !important`,
       },
     },
+  },
+}));
+
+export const StyledTableCell = styled(TableCell)(() => ({
+  color: theme.palette.black,
+  opacity: 0.7,
+  fontSize: "12px",
+  fontWeight: 400,
+  lineHeight: "18.6px",
+  padding: "0px",
+  border: "none",
+}));
+
+export const CircledBox = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "bgColor",
+})<{ bgColor: string }>(({ bgColor }) => ({
+  width: "16px",
+  height: "16px",
+  backgroundColor: bgColor,
+  borderRadius: "100%",
+  marginRight: "4px",
+}));
+
+export const StyledCategoryCell = styled(TableCell)(() => ({
+  color: theme.palette.black,
+  fontSize: "14px",
+  lineHeight: "21.7px",
+  paddingLeft: 0,
+  backgroundColor: "rgba(212, 204, 241, 0.3)}",
+  "& .MuiTableCell-root": {
+    border: "none",
+    padding: "10px",
+  },
+}));
+
+export const IconWrapper = styled(Box)(() => ({
+  color: theme.palette.black,
+  "& .MuiSvgIcon-root": {
+    width: "16px",
+    height: "16px",
   },
 }));

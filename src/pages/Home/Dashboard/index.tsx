@@ -10,6 +10,7 @@ import { DashboardHeader } from "./DashboardHeader";
 import { NewCategory } from "../../../components/NewCategory";
 import { NewTransaction } from "../../../components/NewTransaction";
 import { useActions } from "../../../hooks/useActions";
+import { AllTransaction } from "./AllTransaction";
 
 interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
@@ -28,6 +29,7 @@ export const Dashboard: FC<IDashboard> = () => {
             <NewTransaction />
             <NewCategory />
           </Stack>
+          <AllTransaction />
         </DashboardLeftSide>
         <DashboardRightSide>
           <Typography>RIGHT SIDE</Typography>

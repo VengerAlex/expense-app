@@ -1,11 +1,15 @@
 import { FC, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { Box, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { authSelector } from "../../../../store/slices/auth/authSlice";
-import { StyledFormControl, StyledPrimaryButton } from "../../../../styles";
+import {
+  StyledFormControl,
+  StyledPrimaryButton,
+  StyledLabel,
+} from "../../../../styles";
 import {
   ISignUpFormValue,
   LOADING_STATUS,
@@ -112,7 +116,14 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             <Checkbox
               defaultChecked
               disableRipple
-              labelText="By creating an account you agree to the terms of use and our privacy policy."
+              label={
+                <StyledLabel variant="subtitle2">
+                  By creating an account you agree to the
+                  <Link href="#"> terms of use </Link>
+                  and our
+                  <Link href="#"> privacy policy.</Link>
+                </StyledLabel>
+              }
               control={control}
             />
           </Box>

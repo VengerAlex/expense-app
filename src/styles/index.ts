@@ -129,6 +129,12 @@ export const AvatarWrapper = styled(Box)(() => ({
 export const StyledLabel = styled(Typography)(() => ({
   color: theme.palette.bgr,
   opacity: 0.8,
+  "& .MuiLink-root": {
+    fontSize: "12px",
+    fontWeight: 400,
+    lineHeight: "19px",
+    textDecoration: "none",
+  },
 }));
 
 export const StyledFormControl = styled(FormControl)(() => ({

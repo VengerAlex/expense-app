@@ -55,8 +55,6 @@ const transactionSlice = createSlice({
           } else {
             state.totalExpense += action.payload.amount;
           }
-
-          console.log(action.payload, "action.payload");
         },
       )
       .addCase(createTransaction.rejected, (state) => {

@@ -17,7 +17,6 @@ export const DataPicker: FC<IDataPicker> = ({ date, setDate }) => {
   const theme = useTheme();
 
   const handleChange = (newValue: any) => {
-    console.log(newValue["_d"]);
     setDate(newValue["_d"]);
   };
 

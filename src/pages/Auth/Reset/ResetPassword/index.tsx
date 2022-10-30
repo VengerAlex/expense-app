@@ -5,7 +5,10 @@ import Input from "../../../../components/Input";
 import { IResetForm, RESET_PAGE, ROUTES } from "../../../../utils/types";
 import { StyledPrimaryButton, StyledFormControl } from "../../../../styles";
 import { resetPasswordSchema } from "../../../../utils/schema";
-import { showErrorText } from "../../../../utils/helpers";
+import {
+  showErrorOnConfirmPassword,
+  showErrorText,
+} from "../../../../utils/helpers";
 import { MyLink } from "../../../../components/MyLink";
 
 interface IResetPassword {
@@ -15,13 +18,17 @@ interface IResetPassword {
 export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
   const {
     control,
+    watch,
     getValues,
     formState: { errors, isValid },
   } = useForm<IResetForm>({
     mode: "onChange",
     resolver: yupResolver(resetPasswordSchema),
   });
+  watch();
+
   const { password, confirmedPassword } = getValues();
+  const passwordIsEqual = password === confirmedPassword;
 
   return (
     <>
@@ -42,12 +49,12 @@ export const ResetPassword = ({ setCurrentComponent }: IResetPassword) => {
             isPassword
           />
           <Input
-            helperText={showErrorText(
-              errors,
-              "confirmedPassword",
+            helperText={showErrorOnConfirmPassword(
+              password,
               confirmedPassword,
+              passwordIsEqual,
             )}
-            error={!!errors.confirmedPassword && !!confirmedPassword}
+            error={!passwordIsEqual && !!confirmedPassword}
             placeholder="***************"
             control={control}
             formName="confirmedPassword"

@@ -11,7 +11,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { profileSettingsSchema } from "../../../../utils/schema";
 import { ProfileAvatar } from "../../../../components/ProfileAvatar";
-import { showErrorText } from "../../../../utils/helpers";
+import {
+  showErrorOnConfirmPassword,
+  showErrorText,
+} from "../../../../utils/helpers";
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { authSelector } from "../../../../store/slices/auth/authSlice";
@@ -51,6 +54,8 @@ export const ProfileSettings: FC<IProfileSettings> = ({
     reset();
   };
 
+  const passwordIsEqual = password === confirmedPassword;
+
   return (
     <>
       <ProfileAvatar isBig myVariant="h4" color={theme.palette.black} />
@@ -85,12 +90,12 @@ export const ProfileSettings: FC<IProfileSettings> = ({
             isPassword
           />
           <Input
-            helperText={showErrorText(
-              errors,
-              "confirmedPassword",
+            helperText={showErrorOnConfirmPassword(
+              password,
               confirmedPassword,
+              passwordIsEqual,
             )}
-            error={!!errors.confirmedPassword && !!confirmedPassword}
+            error={!passwordIsEqual && !!confirmedPassword}
             control={control}
             isBlack
             placeholder="***************"

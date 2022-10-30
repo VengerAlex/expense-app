@@ -17,7 +17,10 @@ import Input from "../../../../components/Input";
 import { Checkbox } from "../../../../components/Checkbox";
 import { MyLink } from "../../../../components/MyLink";
 import { signUpSchema } from "../../../../utils/schema";
-import { showErrorText } from "../../../../utils/helpers";
+import {
+  showErrorOnConfirmPassword,
+  showErrorText,
+} from "../../../../utils/helpers";
 
 interface ISignUpForm {
   setCurrentComponent: (component: SIGN_UP) => void;
@@ -27,6 +30,7 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
   const { register } = useActions();
   const { loading, statusCode } = useAppSelector(authSelector);
   const {
+    watch,
     control,
     getValues,
     handleSubmit,
@@ -36,7 +40,9 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
     mode: "onChange",
     resolver: yupResolver(signUpSchema),
   });
+  watch();
   const { username, fullName, password, confirmedPassword } = getValues();
+  const passwordIsEqual = password === confirmedPassword;
 
   const onSubmit = (data: ISignUpFormValue) => {
     const { username, password, fullName: displayName } = data;
@@ -89,12 +95,12 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             isPassword
           />
           <Input
-            helperText={showErrorText(
-              errors,
-              "confirmedPassword",
+            helperText={showErrorOnConfirmPassword(
+              password,
               confirmedPassword,
+              passwordIsEqual,
             )}
-            error={!!errors.confirmedPassword && !!confirmedPassword}
+            error={!passwordIsEqual && !!confirmedPassword}
             placeholder="***************"
             control={control}
             formName="confirmedPassword"

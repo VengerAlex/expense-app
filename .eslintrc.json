@@ -25,6 +25,7 @@
         "prettier"
     ],
     "rules": {
+        "no-unneeded-ternary": 0,
         "object-shorthand": 0,
         "@typescript-eslint/dot-notation": 0,
         "import/no-named-as-default": 0,

@@ -62,6 +62,18 @@ export const showErrorText = (
   return errors[value]?.message && !!fieldValue ? errors[value]?.message : " ";
 };
 
+export const showErrorOnConfirmPassword = (
+  password: string,
+  confirmedPassword: string,
+  passwordIsEqual: boolean,
+) => {
+  return !confirmedPassword
+    ? " "
+    : passwordIsEqual
+    ? " "
+    : "Passwords must match";
+};
+
 export const errorCatch = (error: any): string =>
   error.response && error.response.data
     ? typeof error.response.data.message === "object"

@@ -6,10 +6,10 @@ import { SelectWrapper } from "../../styles";
 import { useTheme } from "@mui/material";
 
 interface ISelect {
-  label: string;
-  menuItems: string[];
-  value: string;
-  setCategory: (value: string) => void;
+  label: any;
+  menuItems: any;
+  value: any;
+  setCategory: (value: any) => void;
 }
 
 export const MySelect: FC<ISelect> = ({
@@ -21,7 +21,14 @@ export const MySelect: FC<ISelect> = ({
   const theme = useTheme();
 
   const handleChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value);
+    const category = menuItems?.find(
+      (el: any) => el.id === Number(event.target.value),
+    );
+
+    if (category) {
+      console.log(category, "!!category");
+      setCategory(category);
+    }
   };
 
   return (
@@ -50,16 +57,18 @@ export const MySelect: FC<ISelect> = ({
             },
           },
         }}
+        defaultValue=""
         labelId="category"
-        value={value || ""}
         onChange={handleChange}
+        value={value?.label}
         label="Category"
       >
-        {menuItems.map((categoryItem) => (
-          <MenuItem key={categoryItem} value={categoryItem}>
-            {categoryItem}
-          </MenuItem>
-        ))}
+        {menuItems &&
+          menuItems.map((categoryItem: any) => (
+            <MenuItem key={categoryItem.id} value={categoryItem.id}>
+              {categoryItem.label}
+            </MenuItem>
+          ))}
       </Select>
     </SelectWrapper>
   );

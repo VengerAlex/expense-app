@@ -57,7 +57,7 @@ const colors = [
 export const showErrorText = (
   errors: any,
   value: string,
-  fieldValue?: string,
+  fieldValue?: string | number,
 ) => {
   return errors[value]?.message && !!fieldValue ? errors[value]?.message : " ";
 };

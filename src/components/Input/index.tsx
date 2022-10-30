@@ -84,7 +84,10 @@ const Input: FC<IInput> = ({
                     </IconButton>
                   )}
                   {isNumber && (
-                    <IconButton disableRipple>
+                    <IconButton
+                      sx={{ color: theme.palette.black }}
+                      disableRipple
+                    >
                       {isNumber && <AttachMoneyIcon />}
                     </IconButton>
                   )}

@@ -10,7 +10,6 @@ export const getTransactions = createAsyncThunk<any>(
     try {
       const response = await TransactionService.getAll();
 
-      console.log(response, "RESPONSE");
       return response.data;
     } catch (error: any) {
       if (error.response) {
@@ -24,10 +23,11 @@ export const createTransaction = createAsyncThunk<any, ITransactionDto>(
   "transactions/create",
   async (dto, thunkAPI) => {
     try {
-      const response = await TransactionService.getAll();
+      const response = await TransactionService.create(dto);
 
       toastr.success("Created", "Transaction successfully");
-      return response.data;
+
+      return response;
     } catch (error: any) {
       toastError(error);
       return thunkAPI.rejectWithValue(error.response.data.message);

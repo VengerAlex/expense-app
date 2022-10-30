@@ -49,6 +49,12 @@ const transactionSlice = createSlice({
         createTransaction.fulfilled,
         (state, action: PayloadAction<ITransaction>) => {
           state.loading = LOADING_STATUS.FULFILLED;
+          state.transactions?.push(action.payload);
+          if (action.payload.amount > 0) {
+            state.totalReceipt += action.payload.amount;
+          } else {
+            state.totalExpense += action.payload.amount;
+          }
 
           console.log(action.payload, "action.payload");
         },

@@ -7,26 +7,50 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { categorySelector } from "../../store/slices/category/categorySlice";
 import { DataPicker } from "../DataPicker";
 import { userSelector } from "../../store/slices/user/userSlice";
+import { useForm } from "react-hook-form";
+import { ICreateTransactionForm } from "../../utils/types";
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import { createTransactionSchema } from "../../utils/schema";
+import { showErrorText } from "../../utils/helpers";
+import { useActions } from "../../hooks/useActions";
 
 interface INewTransaction {}
 
 export const NewTransaction: FC<INewTransaction> = () => {
+  const {
+    control,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ICreateTransactionForm>({
+    mode: "onSubmit",
+    resolver: yupResolver(createTransactionSchema),
+  });
+  const { label, amount } = getValues();
+
+  const theme = useTheme();
+  const { createTransaction } = useActions();
+  const [date, setDate] = useState(new Date());
   const { categories } = useAppSelector(categorySelector);
   const { user } = useAppSelector(userSelector);
-  const categoriesTitle = categories?.map((category) => category.label) || [];
-  const [category, setCategory] = useState(categoriesTitle[1]);
-  const [date, setDate] = useState(new Date());
-  const [amount, setAmount] = useState(0);
-  const [label, setLabel] = useState("");
-  const theme = useTheme();
 
-  const addHandler = () => {
-    console.log(date, "data");
-    const transaction = {
-      label,
-      amount,
-      userId: user?.id,
-    };
+  const [category, setCategory] = useState(categories?.[0]);
+
+  const createTransactionHandler = () => {
+    if (category && user) {
+      const newTransaction = {
+        label: label,
+        amount: Number(amount),
+        date,
+        userId: user && user.id,
+        categoryId: category && category.id,
+      };
+
+      createTransaction(newTransaction);
+    }
+
+    reset();
   };
 
   return (
@@ -34,55 +58,56 @@ export const NewTransaction: FC<INewTransaction> = () => {
       <Typography variant="h4" mb={2} color={theme.palette.darkBlack}>
         Add Transaction
       </Typography>
-      <Input
-        value={label}
-        onChange={(e) => setLabel(e.target.value)}
-        weight={600}
-        sx={{ mb: 2 }}
-        fullWidth
-        label="Transaction Name"
-        placeholder="For my car tuning wheels by BBS"
-        isBlack
-      />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: 2,
-        }}
-      >
+      <form onSubmit={handleSubmit(createTransactionHandler)}>
         <Input
-          sx={{ mb: 2, width: "225px" }}
-          isNumber
-          value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))}
+          control={control}
+          formName="label"
+          helperText={showErrorText(errors, "label", label)}
+          error={!!errors.label && !!label}
           weight={600}
-          label="Input Chevron Name"
-          placeholder="-000,000.00"
-          isBlack
+          sx={{ mb: 1 }}
           fullWidth
+          label="Transaction Name"
+          placeholder="For my car tuning wheels by BBS"
+          isBlack
         />
-        <DataPicker date={date} setDate={setDate} />
-      </Box>
-      <Stack
-        alignItems="flex-end"
-        direction="row"
-        justifyContent="space-between"
-      >
-        <MySelect
-          value={category}
-          setCategory={setCategory}
-          menuItems={categoriesTitle}
-          label="Select Category"
-        />
-        <StyledSecondaryButton
-          onClick={addHandler}
-          type="submit"
-          sx={{ p: "4px 45px" }}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
         >
-          ADD
-        </StyledSecondaryButton>
-      </Stack>
+          <Input
+            control={control}
+            formName="amount"
+            helperText={showErrorText(errors, "amount", amount)}
+            error={!!errors.amount && !!amount}
+            sx={{ width: "225px" }}
+            isNumber
+            weight={600}
+            label="Input Chevron Name"
+            placeholder="-000,000.00"
+            isBlack
+            fullWidth
+          />
+          <DataPicker date={date} setDate={setDate} />
+        </Box>
+        <Stack
+          alignItems="flex-end"
+          direction="row"
+          justifyContent="space-between"
+        >
+          <MySelect
+            label="Select Category"
+            menuItems={categories}
+            value={category}
+            setCategory={setCategory}
+          />
+          <StyledSecondaryButton type="submit" sx={{ p: "4px 45px" }}>
+            ADD
+          </StyledSecondaryButton>
+        </Stack>
+      </form>
     </NewTransactionWrapper>
   );
 };

@@ -77,3 +77,8 @@ export interface IResetProfileForm {
 export interface ICreateCategoryForm {
   label: string;
 }
+
+export interface ICreateTransactionForm {
+  label: string;
+  amount: number;
+}

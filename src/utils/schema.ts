@@ -82,3 +82,16 @@ export const createCategorySchema = yup.object().shape({
     .min(2)
     .max(30),
 });
+
+export const createTransactionSchema = yup.object().shape({
+  label: yup
+    .string()
+    .matches(SPACE_REGEXP, SPACE_WARNING)
+    .required()
+    .min(2)
+    .max(30),
+  amount: yup
+    .number()
+    .notOneOf([0], "0 can't be as a value")
+    .typeError("0 can't be as a value"),
+});

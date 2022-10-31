@@ -5,7 +5,11 @@ import {
 import { LOADING_STATUS, SORT } from "../../../utils/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../index";
-import { createTransaction, getTransactions } from "./transaction.actions";
+import {
+  createTransaction,
+  deleteTransaction,
+  getTransactions,
+} from "./transaction.actions";
 
 const initialState: ITransactionInitialState = {
   loading: LOADING_STATUS.IDLE,
@@ -72,6 +76,31 @@ const transactionSlice = createSlice({
         },
       )
       .addCase(createTransaction.rejected, (state) => {
+        state.loading = LOADING_STATUS.REJECTED;
+      })
+
+      // deleteTransactions
+      .addCase(deleteTransaction.pending, (state) => {
+        state.loading = LOADING_STATUS.PENDING;
+      })
+      .addCase(
+        deleteTransaction.fulfilled,
+        (state, action: PayloadAction<ITransaction>) => {
+          state.loading = LOADING_STATUS.FULFILLED;
+
+          state.transactions =
+            state.transactions?.filter(
+              (transactionElem) => transactionElem.id !== action.payload.id,
+            ) || [];
+
+          if (action.payload.amount > 0) {
+            state.totalReceipt -= action.payload.amount;
+          } else {
+            state.totalExpense -= action.payload.amount;
+          }
+        },
+      )
+      .addCase(deleteTransaction.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
       });
   },

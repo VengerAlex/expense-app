@@ -24,7 +24,7 @@ export const Dashboard: FC<IDashboard> = () => {
     if (loading === LOADING_STATUS.IDLE) {
       getTransactions({ dateOrder: SORT.ASC, idOrder: SORT.ASC });
     }
-  }, [loading]);
+  }, [loading, getTransactions]);
 
   return (
     <MainLayout>

@@ -28,6 +28,14 @@ class TransactionService {
 
     return data;
   }
+
+  async delete(id: number) {
+    const { data } = await axios.delete<number, { data: ITransaction }>(
+      URL_TEMPLATES.DELETE_TRANSACTIONS(id),
+    );
+
+    return data;
+  }
 }
 
 export default new TransactionService();

@@ -101,7 +101,6 @@ export const TransactionTable: FC<ITransactionTable> = () => {
         <TableBody>
           {transactions?.map((transaction, index) => (
             <Transaction
-              array={transactions}
               key={transaction.id}
               idx={index}
               id={transaction.id}

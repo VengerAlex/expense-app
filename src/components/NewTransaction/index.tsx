@@ -38,8 +38,6 @@ export const NewTransaction: FC<INewTransaction> = () => {
 
   const [category, setCategory] = useState(categories?.[0]);
 
-  console.log(label, "LABEL");
-
   const createTransactionHandler = () => {
     if (category && user && category?.id) {
       const newTransaction = {
@@ -53,8 +51,6 @@ export const NewTransaction: FC<INewTransaction> = () => {
       createTransaction(newTransaction);
     }
   };
-
-  console.log(category);
 
   return (
     <NewTransactionWrapper>

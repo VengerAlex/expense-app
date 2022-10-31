@@ -1,6 +1,13 @@
 import { FC, useState, MouseEvent } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { Menu, Box, MenuItem, IconButton, Stack } from "@mui/material";
+import {
+  Menu,
+  Box,
+  MenuItem,
+  IconButton,
+  Stack,
+  useTheme,
+} from "@mui/material";
 import { StyledSecondaryButton } from "../../styles";
 
 interface IActionButtons {
@@ -21,6 +28,7 @@ export const ActionButtons: FC<IActionButtons> = ({
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const theme = useTheme();
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -33,6 +41,8 @@ export const ActionButtons: FC<IActionButtons> = ({
   return (
     <Box sx={{ position: "absolute", ...coordinates }}>
       <IconButton
+        sx={{ color: theme.palette.black }}
+        disableRipple
         aria-label="more"
         aria-controls={open ? "long-menu" : undefined}
         aria-expanded={open ? "true" : undefined}

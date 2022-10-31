@@ -23,6 +23,7 @@ export const URL_TEMPLATES = {
 
   GET_TRANSACTIONS: TransactionUrlRoute,
   CREATE_TRANSACTIONS: TransactionUrlRoute,
+  DELETE_TRANSACTIONS: (id: number) => `${TransactionUrlRoute}/${id}`,
 };
 
 const instance = axios.create({

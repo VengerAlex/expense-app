@@ -11,10 +11,11 @@ import { Stack, Typography, useTheme } from "@mui/material";
 import { CircledBox, StyledCategoryCell } from "../../../../styles";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { categorySelector } from "../../../../store/slices/category/categorySlice";
+import { ActionButtons } from "../../../../components/ActionButtons";
+import { useActions } from "../../../../hooks/useActions";
 
 type ITransactionProps = ITransaction & {
   idx: number;
-  array: any;
 };
 
 export const Transaction: FC<ITransactionProps> = ({
@@ -22,17 +23,25 @@ export const Transaction: FC<ITransactionProps> = ({
   label,
   date,
   amount,
-  array,
   id,
   categoryId,
   userId,
 }) => {
   const { categories } = useAppSelector(categorySelector);
+  const { deleteTransaction } = useActions();
   const theme = useTheme();
 
   const categoryTitle = categories?.find(
     (category) => category.id === categoryId,
   )?.label;
+
+  const onEdit = () => {
+    console.log("EDIT");
+  };
+  const onDelete = () => {
+    deleteTransaction(id);
+    console.log("DELETE");
+  };
 
   return (
     <TableRow
@@ -47,10 +56,15 @@ export const Transaction: FC<ITransactionProps> = ({
       </StyledCategoryCell>
       <StyledCategoryCell>{label}</StyledCategoryCell>
       <StyledCategoryCell>{formatDate(date)}</StyledCategoryCell>
-      <StyledCategoryCell>
+      <StyledCategoryCell sx={{ position: "relative" }}>
         <Typography color={theme.palette.orange} variant="h5">
           {formatNumber(amount)}
         </Typography>
+        <ActionButtons
+          onDelete={onDelete}
+          onEdit={onEdit}
+          coordinates={{ top: "2px", right: "20px" }}
+        />
       </StyledCategoryCell>
     </TableRow>
   );

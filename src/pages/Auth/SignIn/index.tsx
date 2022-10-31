@@ -47,7 +47,7 @@ const SignIn: FC = () => {
     if (loading === LOADING_STATUS.FULFILLED && token) {
       navigate(from, { replace: true });
     }
-  }, [loading]);
+  }, [loading, token]);
 
   return (
     <AuthPageWrapper bgImage={signInCover}>

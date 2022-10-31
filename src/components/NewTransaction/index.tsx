@@ -19,6 +19,7 @@ interface INewTransaction {}
 export const NewTransaction: FC<INewTransaction> = () => {
   const {
     control,
+    watch,
     getValues,
     handleSubmit,
     formState: { errors },
@@ -37,8 +38,10 @@ export const NewTransaction: FC<INewTransaction> = () => {
 
   const [category, setCategory] = useState(categories?.[0]);
 
+  console.log(label, "LABEL");
+
   const createTransactionHandler = () => {
-    if (category && user) {
+    if (category && user && category?.id) {
       const newTransaction = {
         label: label,
         amount: Number(amount),
@@ -49,9 +52,9 @@ export const NewTransaction: FC<INewTransaction> = () => {
 
       createTransaction(newTransaction);
     }
-
-    reset();
   };
+
+  console.log(category);
 
   return (
     <NewTransactionWrapper>
@@ -75,6 +78,7 @@ export const NewTransaction: FC<INewTransaction> = () => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            marginBottom: 2,
           }}
         >
           <Input
@@ -98,7 +102,6 @@ export const NewTransaction: FC<INewTransaction> = () => {
           justifyContent="space-between"
         >
           <MySelect
-            label="Select Category"
             menuItems={categories}
             value={category}
             setCategory={setCategory}

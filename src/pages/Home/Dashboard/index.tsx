@@ -13,7 +13,7 @@ import { useActions } from "../../../hooks/useActions";
 import { AllTransaction } from "./AllTransaction";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { transactionSelector } from "../../../store/slices/transaction/transactionSlice";
-import { LOADING_STATUS } from "../../../utils/types";
+import { LOADING_STATUS, SORT } from "../../../utils/types";
 
 interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
@@ -22,7 +22,7 @@ export const Dashboard: FC<IDashboard> = () => {
 
   useEffect(() => {
     if (loading === LOADING_STATUS.IDLE) {
-      getTransactions();
+      getTransactions({ dateOrder: SORT.ASC, idOrder: SORT.ASC });
     }
   }, [loading]);
 

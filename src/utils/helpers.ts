@@ -1,5 +1,6 @@
 import { toastr } from "react-redux-toastr";
 import { theme } from "../providers/ThemeProvider";
+import dayjs, { Dayjs } from "dayjs";
 
 const colors = [
   "#FF6633",
@@ -98,12 +99,8 @@ export const formatNumber = (number: number) => {
     .replace(/^(\D+)/, "$1 ");
 };
 
-export const formatDate = (date: any) => {
-  return new Intl.DateTimeFormat("en-UK", {
-    day: "numeric",
-    month: "numeric",
-    year: "2-digit",
-  }).format(date);
+export const formatDate = (date: Dayjs | Date) => {
+  return dayjs(date).format("DD/MM/YY");
 };
 
 export const getRandomColor = () => {

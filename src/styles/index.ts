@@ -15,6 +15,7 @@ import {
   TableCell,
   Typography,
   Stack,
+  IconButton,
 } from "@mui/material";
 import { theme } from "../providers/ThemeProvider";
 
@@ -644,11 +645,14 @@ export const StyledCategoryCell = styled(TableCell)(() => ({
   },
 }));
 
-export const IconWrapper = styled(Box)(() => ({
+export const IconWrapper = styled(IconButton, {
+  shouldForwardProp: (prop) => prop !== "isActive",
+})<{ isActive?: boolean }>(({ isActive }) => ({
   color: theme.palette.black,
+  padding: "0px",
   cursor: "pointer",
   "& .MuiSvgIcon-root": {
-    color: theme.palette.disabled,
+    color: isActive ? theme.palette.black : theme.palette.disabled,
     width: "16px",
     height: "16px",
     "&:hover": {

@@ -2,7 +2,7 @@ import {
   ITransaction,
   ITransactionInitialState,
 } from "./transaction.interface";
-import { LOADING_STATUS } from "../../../utils/types";
+import { LOADING_STATUS, SORT } from "../../../utils/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../index";
 import { createTransaction, getTransactions } from "./transaction.actions";
@@ -12,12 +12,24 @@ const initialState: ITransactionInitialState = {
   transactions: null,
   totalReceipt: 0,
   totalExpense: 0,
+  sort: [{ date: SORT.ASC }, { id: SORT.ASC }],
 };
 
 const transactionSlice = createSlice({
   name: "transaction",
   initialState,
-  reducers: {},
+  reducers: {
+    sortHandler: (state, action: PayloadAction<"date" | "id">) => {
+      state.sort.map((elem: any) => {
+        if (elem[action.payload]) {
+          elem[action.payload] =
+            elem[action.payload] === SORT.ASC ? SORT.DESC : SORT.ASC;
+        }
+
+        return elem;
+      });
+    },
+  },
   extraReducers: (builder) => {
     builder
       // getTransactions
@@ -28,6 +40,8 @@ const transactionSlice = createSlice({
         const allTransactions = action.payload.content;
         state.loading = LOADING_STATUS.FULFILLED;
         state.transactions = allTransactions;
+        state.totalExpense = 0;
+        state.totalReceipt = 0;
 
         allTransactions.forEach((transaction: ITransaction) => {
           if (transaction.amount < 0) {
@@ -65,4 +79,5 @@ const transactionSlice = createSlice({
 
 export const transactionSelector = (state: RootState) => state.transaction;
 
+export const { sortHandler } = transactionSlice.actions;
 export default transactionSlice.reducer;

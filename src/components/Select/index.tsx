@@ -6,18 +6,12 @@ import { SelectWrapper } from "../../styles";
 import { useTheme } from "@mui/material";
 
 interface ISelect {
-  label: any;
   menuItems: any;
   value: any;
   setCategory: (value: any) => void;
 }
 
-export const MySelect: FC<ISelect> = ({
-  label,
-  menuItems,
-  value,
-  setCategory,
-}) => {
+export const MySelect: FC<ISelect> = ({ menuItems, value, setCategory }) => {
   const theme = useTheme();
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -33,7 +27,6 @@ export const MySelect: FC<ISelect> = ({
 
   return (
     <SelectWrapper variant="standard" sx={{ minWidth: "225px" }}>
-      <InputLabel id="category">{label}</InputLabel>
       <Select
         MenuProps={{
           PaperProps: {

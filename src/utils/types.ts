@@ -82,3 +82,8 @@ export interface ICreateTransactionForm {
   label: string;
   amount: number;
 }
+
+export enum SORT {
+  ASC = "asc",
+  DESC = "desc",
+}

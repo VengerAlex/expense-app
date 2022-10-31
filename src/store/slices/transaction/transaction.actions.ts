@@ -1,14 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import TransactionService from "../../../services/transaction.service";
-import { ITransactionDto } from "./transaction.interface";
+import { ITransactionDto, ITransactionParams } from "./transaction.interface";
 import { toastError } from "../../../utils/helpers";
 import { toastr } from "react-redux-toastr";
 
-export const getTransactions = createAsyncThunk<any>(
+export const getTransactions = createAsyncThunk<any, ITransactionParams>(
   "transactions",
-  async (_, thunkAPI) => {
+  async (transactionParams, thunkAPI) => {
     try {
-      const response = await TransactionService.getAll();
+      const { dateOrder, idOrder } = transactionParams;
+      const response = await TransactionService.getAll(dateOrder, idOrder);
 
       return response.data;
     } catch (error: any) {

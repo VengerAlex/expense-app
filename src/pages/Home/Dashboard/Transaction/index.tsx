@@ -8,13 +8,13 @@ import {
   getRandomColor,
 } from "../../../../utils/helpers";
 import { Stack, Typography, useTheme } from "@mui/material";
-import { ActionIcon, CircledBox, StyledCategoryCell } from "../../../../styles";
+import { CircledBox, StyledCategoryCell } from "../../../../styles";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { categorySelector } from "../../../../store/slices/category/categorySlice";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 type ITransactionProps = ITransaction & {
   idx: number;
+  array: any;
 };
 
 export const Transaction: FC<ITransactionProps> = ({
@@ -22,6 +22,7 @@ export const Transaction: FC<ITransactionProps> = ({
   label,
   date,
   amount,
+  array,
   id,
   categoryId,
   userId,
@@ -45,7 +46,7 @@ export const Transaction: FC<ITransactionProps> = ({
         </Stack>
       </StyledCategoryCell>
       <StyledCategoryCell>{label}</StyledCategoryCell>
-      <StyledCategoryCell>{formatDate(new Date())}</StyledCategoryCell>
+      <StyledCategoryCell>{formatDate(date)}</StyledCategoryCell>
       <StyledCategoryCell>
         <Typography color={theme.palette.orange} variant="h5">
           {formatNumber(amount)}

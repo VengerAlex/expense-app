@@ -16,7 +16,7 @@ export const PrivateRoute = () => {
   useEffect(() => {
     if (!user && token) {
       getMe();
-      getCategories();
+      getCategories("");
     }
   }, [user, token]);
 

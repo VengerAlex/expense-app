@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { LOADING_STATUS } from "../../../utils/types";
 import { RootState } from "../../index";
-import { ICategoryInitialState } from "./category.interface";
+import { ICategory, ICategoryInitialState } from "./category.interface";
 import {
   deleteCategory,
   getCategories,
@@ -25,7 +25,9 @@ const categorySlice = createSlice({
       })
       .addCase(getCategories.fulfilled, (state, action) => {
         state.loading = LOADING_STATUS.FULFILLED;
-        state.categories = action.payload.content;
+        state.categories = action.payload.content.filter(
+          (category: ICategory) => category.id !== -1,
+        );
       })
       .addCase(getCategories.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;

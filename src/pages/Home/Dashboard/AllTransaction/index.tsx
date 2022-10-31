@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Box, Typography, useTheme, Stack } from "@mui/material";
-import { SearchInput } from "../../../../components/SearchInput";
 import { TransactionTable } from "../TransactionTable";
 
 interface IAllTransaction {}
@@ -18,7 +17,6 @@ export const AllTransaction: FC<IAllTransaction> = () => {
         <Typography variant="h4" color={theme.palette.darkBlack}>
           All Transaction
         </Typography>
-        <SearchInput />
       </Stack>
       <TransactionTable />
     </Box>

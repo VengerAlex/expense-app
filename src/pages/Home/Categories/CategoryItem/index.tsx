@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Typography } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import {
   CategoryWrapper,
   SliderWrapper,
@@ -13,6 +13,7 @@ import { useActions } from "../../../../hooks/useActions";
 import { ActionButtons } from "../../../../components/ActionButtons";
 
 export const CategoryItem: FC<ICategory> = ({ label, id }) => {
+  const theme = useTheme();
   const { deleteCategory } = useActions();
 
   const editHandler = () => {
@@ -24,26 +25,26 @@ export const CategoryItem: FC<ICategory> = ({ label, id }) => {
       <CategoryWrapper>
         <ActionButtons
           coordinates={{ top: "2px", right: "9px" }}
-          onDelete={() => console.log(id)}
+          onDelete={() => deleteCategory({ id })}
           onEdit={editHandler}
         />
         <CategoryAvatar />
         <CategoryTitle variant="h5">{label}</CategoryTitle>
-        <Typography variant="subtitle2" sx={{ color: "#1D283A" }}>
+        <Typography variant="subtitle2" color={theme.palette.black}>
           Total Transactions
         </Typography>
-        <Typography variant="h5" sx={{ color: "#1D283A", mb: "8px" }}>
+        <Typography variant="h5" color={theme.palette.black} mb={1}>
           132
         </Typography>
-        <Typography variant="subtitle2" sx={{ color: "#1D283A", mb: "8px" }}>
+        <Typography variant="subtitle2" color={theme.palette.black} mb={1}>
           Total of Money
         </Typography>
         <SliderWrapper />
         <CategoryPriceWrapper>
-          <Typography variant="h5" sx={{ color: "#1D283A" }}>
+          <Typography variant="h5" color={theme.palette.black}>
             +$ 1,123,874
           </Typography>
-          <Typography variant="h5" sx={{ color: "#1D283A" }}>
+          <Typography variant="h5" color={theme.palette.black}>
             -$ 0
           </Typography>
         </CategoryPriceWrapper>

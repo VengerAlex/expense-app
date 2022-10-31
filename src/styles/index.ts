@@ -343,18 +343,11 @@ export const CategoryHeader = styled(Box)(() => ({
 
 export const SearchField = styled(TextField)(() => ({
   "&.MuiTextField-root": {
-    borderColor: "red",
     "&:hover": {
       "&:after": {
-        borderColor: "#1D283A !important",
+        borderBottom: "1px solid #1D283A !important",
       },
     },
-    "&:after": {
-      borderColor: "#1D283A !important",
-    },
-  },
-  "&.InputDecoration": {
-    borderColor: "red",
   },
   "& .MuiInputBase-root": {
     color: "black",
@@ -362,17 +355,14 @@ export const SearchField = styled(TextField)(() => ({
     fontSize: "14px",
     lineHeight: "21.7px",
     "&:before": {
-      borderColor: "#1D283A !important",
+      borderBottom: "1px solid #1D283A !important",
     },
     "&:after": {
-      borderColor: "#1D283A",
+      borderBottom: "1px solid #1D283A !important",
     },
     "&:hover": {
       "&:before": {
-        borderColor: "#1D283A !important",
-      },
-      "&:after": {
-        borderColor: "#1D283A !important",
+        borderBottom: "1px solid #1D283A !important",
       },
     },
     "&.Mui-focused": {
@@ -382,7 +372,7 @@ export const SearchField = styled(TextField)(() => ({
     },
   },
   input: {
-    padding: "4px 0 0",
+    padding: "4px 0 4px",
   },
   "& .MuiIconButton-root": {
     padding: "0px 5px 2px 0",
@@ -394,8 +384,6 @@ export const SearchField = styled(TextField)(() => ({
 
 export const CategoryWrapper = styled(Grid)(() => ({
   position: "relative",
-  // width: "312px",
-  // minHeight: "284px",
   backgroundColor: "#fff",
   borderRadius: "8px",
   padding: "24px 16px 22px",

@@ -4,11 +4,17 @@ import { ICategoryDto } from "./category.interface";
 import { toastError } from "../../../utils/helpers";
 import { toastr } from "react-redux-toastr";
 
-export const getCategories = createAsyncThunk<any>(
-  "categories",
-  async (_, thunkAPI) => {
+const CATEGORY = {
+  ALL: "category",
+  POST: "category/post",
+  DELETE: "category/delete",
+};
+
+export const getCategories = createAsyncThunk<any, string>(
+  CATEGORY.ALL,
+  async (label, thunkAPI) => {
     try {
-      const response = await CategoryService.getAll();
+      const response = await CategoryService.getAll(label);
 
       return response.data;
     } catch (error: any) {
@@ -20,7 +26,7 @@ export const getCategories = createAsyncThunk<any>(
 );
 
 export const deleteCategory = createAsyncThunk<any, { id: number }>(
-  "categories/delete",
+  CATEGORY.DELETE,
   async ({ id }, thunkAPI) => {
     try {
       const response = await CategoryService.deleteOne(id);
@@ -35,7 +41,7 @@ export const deleteCategory = createAsyncThunk<any, { id: number }>(
 );
 
 export const postCategory = createAsyncThunk<any, ICategoryDto>(
-  "categories/create",
+  CATEGORY.POST,
   async (dto, thunkAPI) => {
     try {
       const response = await CategoryService.create(dto);

@@ -5,8 +5,12 @@ import {
 } from "../store/slices/category/category.interface";
 
 class CategoryService {
-  async getAll() {
-    const response = await axios.get<ICategory[]>(URL_TEMPLATES.GET_CATEGORIES);
+  async getAll(label?: string) {
+    const searchedValue = label ? `?label[contains]=${label}` : "";
+
+    const response = await axios.get<ICategory[]>(
+      `${URL_TEMPLATES.GET_CATEGORIES}${searchedValue}`,
+    );
 
     return response;
   }

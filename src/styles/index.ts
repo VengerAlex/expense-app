@@ -1,6 +1,5 @@
 import {
   Divider,
-  Icon,
   Box,
   Paper,
   Avatar,
@@ -14,7 +13,6 @@ import {
   FormControl,
   TableCell,
   Typography,
-  Stack,
   IconButton,
 } from "@mui/material";
 import { theme } from "../providers/ThemeProvider";
@@ -444,24 +442,11 @@ export const CategoryPriceWrapper = styled(Box)(() => ({
   width: "100%",
 }));
 
-export const ActionIcon = styled(Icon)(() => ({
-  cursor: "pointer",
-  position: "absolute",
-  right: "14px",
-  top: "7px",
-  fontSize: "20px",
-}));
-
 export const StyledGridItem = styled(Grid)(() => ({
   "&.MuiGrid-item": {
     paddingLeft: "24px",
     paddingTop: "24px",
   },
-}));
-
-export const ActionButtons = styled(Stack)(() => ({
-  position: "absolute",
-  right: "14px",
 }));
 
 export const DashboardWrapper = styled(Box)(() => ({

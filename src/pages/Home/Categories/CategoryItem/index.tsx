@@ -1,60 +1,32 @@
-import { FC, useRef, useState } from "react";
-import { Typography, Box } from "@mui/material";
+import { FC } from "react";
+import { Typography } from "@mui/material";
 import {
   CategoryWrapper,
-  ActionIcon,
   SliderWrapper,
   CategoryAvatar,
   CategoryPriceWrapper,
   CategoryTitle,
   StyledGridItem,
-  StyledSecondaryButton,
-  ActionButtons,
 } from "../../../../styles";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { ICategory } from "../../../../store/slices/category/category.interface";
-import { useOnClickOutside } from "../../../../hooks/useOnClickOutside";
 import { useActions } from "../../../../hooks/useActions";
+import { ActionButtons } from "../../../../components/ActionButtons";
 
 export const CategoryItem: FC<ICategory> = ({ label, id }) => {
   const { deleteCategory } = useActions();
-  const [isShowBtnAction, setIsShownBtnActions] = useState(false);
-  const clickRef = useRef<HTMLSpanElement>(null);
-  useOnClickOutside(clickRef, () => setIsShownBtnActions(false));
 
   const editHandler = () => {
-    setIsShownBtnActions(false);
-  };
-
-  const deleteHandler = () => {
-    deleteCategory({ id });
-
-    setIsShownBtnActions(false);
+    console.log("EDIT");
   };
 
   return (
-    <StyledGridItem item xs={4}>
+    <StyledGridItem item xs={4} sx={{ position: "relative" }}>
       <CategoryWrapper>
-        <Box ref={clickRef}>
-          <ActionIcon onClick={() => setIsShownBtnActions(true)}>
-            <MoreHorizIcon />
-          </ActionIcon>
-          {isShowBtnAction && (
-            <ActionButtons>
-              <StyledSecondaryButton onClick={editHandler} isEdit>
-                Edit
-              </StyledSecondaryButton>
-              <StyledSecondaryButton
-                onClick={deleteHandler}
-                sx={{ mt: "2px", px: "37px" }}
-                isDelete
-              >
-                Delete
-              </StyledSecondaryButton>
-            </ActionButtons>
-          )}
-        </Box>
-
+        <ActionButtons
+          coordinates={{ top: "2px", right: "9px" }}
+          onDelete={() => console.log(id)}
+          onEdit={editHandler}
+        />
         <CategoryAvatar />
         <CategoryTitle variant="h5">{label}</CategoryTitle>
         <Typography variant="subtitle2" sx={{ color: "#1D283A" }}>

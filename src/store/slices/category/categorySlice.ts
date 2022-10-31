@@ -37,9 +37,13 @@ const categorySlice = createSlice({
       .addCase(postCategory.pending, (state) => {
         state.loading = LOADING_STATUS.PENDING;
       })
-      .addCase(postCategory.fulfilled, (state) => {
-        state.loading = LOADING_STATUS.FULFILLED;
-      })
+      .addCase(
+        postCategory.fulfilled,
+        (state, action: PayloadAction<ICategory>) => {
+          state.loading = LOADING_STATUS.FULFILLED;
+          state?.categories?.push(action.payload);
+        },
+      )
       .addCase(postCategory.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
       })

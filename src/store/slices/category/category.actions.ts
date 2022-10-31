@@ -25,20 +25,22 @@ export const getCategories = createAsyncThunk<any, string>(
   },
 );
 
-export const deleteCategory = createAsyncThunk<any, { id: number }>(
-  CATEGORY.DELETE,
-  async ({ id }, thunkAPI) => {
-    try {
-      const response = await CategoryService.deleteOne(id);
+export const deleteCategory = createAsyncThunk<
+  any,
+  number,
+  { rejectValue: string }
+>(CATEGORY.DELETE, async (id, thunkAPI) => {
+  try {
+    const response = await CategoryService.deleteOne(id);
 
-      return response.data.id;
-    } catch (error: any) {
-      if (error.response) {
-        return thunkAPI.rejectWithValue(error.response.data.message);
-      }
+    toastr.success("Category", "Deleted successfully");
+    return response.id;
+  } catch (error: any) {
+    if (error.response) {
+      return thunkAPI.rejectWithValue("sasas");
     }
-  },
-);
+  }
+});
 
 export const postCategory = createAsyncThunk<any, ICategoryDto>(
   CATEGORY.POST,
@@ -48,23 +50,6 @@ export const postCategory = createAsyncThunk<any, ICategoryDto>(
 
       toastr.success("Category", "Created successfully");
       return response;
-    } catch (error: any) {
-      if (error.response) {
-        toastError(error);
-        return thunkAPI.rejectWithValue(error.response.data.message);
-      }
-    }
-  },
-);
-
-export const updateCategory = createAsyncThunk<any, { id: number }>(
-  "categories/delete",
-  async ({ id }, thunkAPI) => {
-    try {
-      const response = await CategoryService.update(id);
-
-      toastr.success("Category", "Updated successfully");
-      return response.data;
     } catch (error: any) {
       if (error.response) {
         toastError(error);

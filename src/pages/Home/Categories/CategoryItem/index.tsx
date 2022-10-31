@@ -25,7 +25,7 @@ export const CategoryItem: FC<ICategory> = ({ label, id }) => {
       <CategoryWrapper>
         <ActionButtons
           coordinates={{ top: "2px", right: "9px" }}
-          onDelete={() => deleteCategory({ id })}
+          onDelete={() => deleteCategory(id)}
           onEdit={editHandler}
         />
         <CategoryAvatar />

@@ -25,15 +25,11 @@ class CategoryService {
   }
 
   async deleteOne(id: number) {
-    const response = await axios.delete(URL_TEMPLATES.DELETE_CATEGORY(id));
+    const { data } = await axios.delete<number, { data: ICategory }>(
+      URL_TEMPLATES.DELETE_CATEGORY(id),
+    );
 
-    return response;
-  }
-
-  async update(id: number) {
-    const response = await axios.patch(URL_TEMPLATES.UPDATE_CATEGORY(id));
-
-    return response;
+    return data;
   }
 }
 

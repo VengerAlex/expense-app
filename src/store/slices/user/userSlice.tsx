@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserInitialState } from "./user.interface";
 import { IUser, LOADING_STATUS } from "../../../utils/types";
 import { changeInformation, getMe, logout } from "./user.actions";
@@ -54,5 +54,19 @@ const userSlice = createSlice({
 });
 
 export const userSelector = (state: RootState) => state.user;
+
+const userDisplayName = (state: RootState) => state.user.user?.displayName;
+
+export const selectDisplayName = createSelector(
+  userDisplayName,
+  (displayName) => {
+    const INITIALS = displayName
+      ?.split(" ")
+      .map((value) => value[0])
+      .join("");
+
+    return [INITIALS, displayName];
+  },
+);
 
 export default userSlice.reducer;

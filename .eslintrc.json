@@ -25,6 +25,7 @@
         "prettier"
     ],
     "rules": {
+        "react/prop-types": 0,
         "jsx-a11y/anchor-is-valid": 0,
         "no-unneeded-ternary": 0,
         "object-shorthand": 0,

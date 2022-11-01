@@ -7,6 +7,8 @@ import { SearchInput } from "../../../components/SearchInput";
 import { CategoryList } from "./CategoryList";
 import { useActions } from "../../../hooks/useActions";
 import { useDebounce } from "../../../hooks/useDebounce";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { categorySelector } from "../../../store/slices/category/categorySlice";
 
 interface ICategories {}
 
@@ -16,9 +18,7 @@ export const Categories: FC<ICategories> = () => {
   const { getCategories } = useActions();
 
   useEffect(() => {
-    if (debouncedValue) {
-      getCategories(debouncedValue);
-    }
+    getCategories(debouncedValue);
   }, [debouncedValue]);
 
   return (

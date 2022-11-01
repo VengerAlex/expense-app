@@ -5,6 +5,7 @@ import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { categorySelector } from "../../../../store/slices/category/categorySlice";
 
 interface ICategoryList {}
+
 export const CategoryList: FC<ICategoryList> = () => {
   const { categories } = useAppSelector(categorySelector);
 

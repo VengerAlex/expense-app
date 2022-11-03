@@ -8,7 +8,6 @@ import {
   TableRow,
   Table,
   Stack,
-  Typography,
 } from "@mui/material";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import {
@@ -22,6 +21,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { LOADING_STATUS, SORT } from "../../../../utils/types";
 import { useDispatch } from "react-redux";
 import { useActions } from "../../../../hooks/useActions";
+import { Progress } from "../../../../components/Progress";
 
 interface ITransactionTable {}
 export const TransactionTable: FC<ITransactionTable> = () => {
@@ -39,7 +39,7 @@ export const TransactionTable: FC<ITransactionTable> = () => {
   }, [sort]);
 
   if (loading === LOADING_STATUS.PENDING) {
-    return <Typography>LOADING...</Typography>;
+    return <Progress />;
   }
 
   return (

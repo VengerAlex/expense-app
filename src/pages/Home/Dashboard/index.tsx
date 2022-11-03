@@ -17,6 +17,7 @@ import { LOADING_STATUS, SORT } from "../../../utils/types";
 
 interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
+  const { transactions } = useAppSelector(transactionSelector);
   const { loading } = useAppSelector(transactionSelector);
   const { getTransactions } = useActions();
 
@@ -35,7 +36,7 @@ export const Dashboard: FC<IDashboard> = () => {
             <NewTransaction />
             <NewCategory />
           </Stack>
-          <AllTransaction />
+          {transactions?.length ? <AllTransaction /> : null}
         </DashboardLeftSide>
         <DashboardRightSide>
           <Typography>RIGHT SIDE</Typography>

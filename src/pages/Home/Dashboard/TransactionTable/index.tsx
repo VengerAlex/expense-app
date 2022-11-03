@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import * as React from "react";
 import {
   Box,
@@ -18,25 +18,13 @@ import { Transaction } from "../Transaction";
 import { IconWrapper, StyledTableCell } from "../../../../styles";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import { LOADING_STATUS, SORT } from "../../../../utils/types";
+import { SORT } from "../../../../utils/types";
 import { useDispatch } from "react-redux";
-import { useActions } from "../../../../hooks/useActions";
-import { Progress } from "../../../../components/Progress";
 
 interface ITransactionTable {}
 export const TransactionTable: FC<ITransactionTable> = () => {
   const dispatch = useDispatch();
-  const { getTransactions } = useActions();
-  const { transactions, loading, sort } = useAppSelector(transactionSelector);
-
-  useEffect(() => {
-    const params = {
-      dateOrder: sort[0].date,
-      idOrder: sort[1].id,
-    };
-
-    getTransactions(params);
-  }, [sort]);
+  const { transactions, sort } = useAppSelector(transactionSelector);
 
   return (
     <TableContainer component={Box}>

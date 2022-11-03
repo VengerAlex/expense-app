@@ -13,19 +13,16 @@ import { useActions } from "../../../hooks/useActions";
 import { AllTransaction } from "./AllTransaction";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { transactionSelector } from "../../../store/slices/transaction/transactionSlice";
-import { LOADING_STATUS, SORT } from "../../../utils/types";
 
 interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
   const { transactions } = useAppSelector(transactionSelector);
-  const { loading } = useAppSelector(transactionSelector);
+  const { sort } = useAppSelector(transactionSelector);
   const { getTransactions, getCategories } = useActions();
 
   useEffect(() => {
-    if (loading === LOADING_STATUS.IDLE) {
-      getTransactions({ dateOrder: SORT.ASC, idOrder: SORT.ASC });
-    }
-  }, [loading, getTransactions]);
+    getTransactions({ dateOrder: sort[0].date, idOrder: sort[1].id });
+  }, [sort]);
 
   useEffect(() => {
     getCategories("");

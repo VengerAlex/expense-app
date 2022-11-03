@@ -32,10 +32,11 @@ export const deleteCategory = createAsyncThunk<
 >(CATEGORY.DELETE, async (id, thunkAPI) => {
   try {
     const response = await CategoryService.deleteOne(id);
-
     toastr.success("Category", "Deleted successfully");
+
     return response.id;
   } catch (error: any) {
+    toastError(error);
     if (error.response) {
       return thunkAPI.rejectWithValue("sasas");
     }

@@ -15,6 +15,7 @@ export const URL_TEMPLATES = {
 
   CHANGE_INFORMATION: `${UserUrlRoute}/self`,
   GET_ME: `${UserUrlRoute}/self`,
+  DELETE_ME: `${UserUrlRoute}/self`,
 
   GET_CATEGORIES: CategoryUrlRoute,
   CREATE_CATEGORY: `${CategoryUrlRoute}`,

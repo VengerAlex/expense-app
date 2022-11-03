@@ -1,7 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserInitialState } from "./user.interface";
 import { IUser, LOADING_STATUS } from "../../../utils/types";
-import { changeInformation, getMe, logout } from "./user.actions";
+import { changeInformation, deleteSelf, getMe, logout } from "./user.actions";
 import { RootState } from "../../index";
 
 const initialState: IUserInitialState = {
@@ -48,6 +48,17 @@ const userSlice = createSlice({
         state.user = null;
       })
       .addCase(logout.rejected, (state) => {
+        state.loading = LOADING_STATUS.REJECTED;
+      })
+
+      // delete
+      .addCase(deleteSelf.pending, (state) => {
+        state.loading = LOADING_STATUS.PENDING;
+      })
+      .addCase(deleteSelf.fulfilled, (state) => {
+        state.loading = LOADING_STATUS.FULFILLED;
+      })
+      .addCase(deleteSelf.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
       });
   },

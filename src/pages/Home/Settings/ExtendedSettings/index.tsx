@@ -28,7 +28,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
 }) => {
   const theme = useTheme();
   const { user, loading } = useAppSelector(userSelector);
-  const { logout, changeInformation } = useActions();
+  const { logout, changeInformation, deleteSelf } = useActions();
   const {
     handleSubmit,
     control,
@@ -99,8 +99,14 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
           >
             Reset Password
           </StyledSecondaryButton>
-          <StyledLogoutButton onClick={() => logout()}>
+          <StyledLogoutButton onClick={() => logout()} sx={{ mb: 2 }}>
             Log Out
+          </StyledLogoutButton>
+          <StyledLogoutButton
+            onClick={() => deleteSelf()}
+            sx={{ backgroundColor: theme.palette.red }}
+          >
+            Delete Your Account
           </StyledLogoutButton>
         </form>
       </FormControl>

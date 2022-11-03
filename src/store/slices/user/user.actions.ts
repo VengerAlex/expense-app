@@ -35,6 +35,10 @@ export const changeInformation = createAsyncThunk<any, any>(
   },
 );
 
-export const logout = createAsyncThunk("auth/logout", async () => {
+export const logout = createAsyncThunk("user/logout", async () => {
   AuthService.logout();
+});
+
+export const deleteSelf = createAsyncThunk("user/delete", async () => {
+  await UserService.deleteSelf();
 });

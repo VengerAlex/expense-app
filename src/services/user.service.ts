@@ -1,5 +1,6 @@
 import axios, { URL_TEMPLATES } from "../api/index";
 import { IUser } from "../utils/types";
+import { localstorageAuthService } from "./localstorage.service";
 
 class UserService {
   async getMe() {
@@ -18,6 +19,13 @@ class UserService {
     );
 
     return response;
+  }
+
+  async deleteSelf() {
+    const { data } = await axios.delete(URL_TEMPLATES.DELETE_ME);
+    localstorageAuthService.clearStorage();
+
+    return data;
   }
 }
 

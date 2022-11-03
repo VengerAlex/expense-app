@@ -4,7 +4,10 @@ import { NewTransactionWrapper, StyledSecondaryButton } from "../../styles";
 import Input from "../Input";
 import { MySelect } from "../Select";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { categorySelector } from "../../store/slices/category/categorySlice";
+import {
+  categorySelector,
+  selectFirstCategory,
+} from "../../store/slices/category/categorySlice";
 import { DataPicker } from "../DataPicker";
 import { userSelector } from "../../store/slices/user/userSlice";
 import { useForm } from "react-hook-form";
@@ -13,6 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { createTransactionSchema } from "../../utils/schema";
 import { showErrorText } from "../../utils/helpers";
 import { useActions } from "../../hooks/useActions";
+import { ICategory } from "../../store/slices/category/category.interface";
 
 interface INewTransaction {}
 
@@ -28,6 +32,7 @@ export const NewTransaction: FC<INewTransaction> = () => {
     mode: "onSubmit",
     resolver: yupResolver(createTransactionSchema),
   });
+  watch();
   const { label, amount } = getValues();
 
   const theme = useTheme();
@@ -35,20 +40,39 @@ export const NewTransaction: FC<INewTransaction> = () => {
   const [date, setDate] = useState(new Date());
   const { categories } = useAppSelector(categorySelector);
   const { user } = useAppSelector(userSelector);
+  const firstCategory = useAppSelector(selectFirstCategory);
 
-  const [category, setCategory] = useState(categories?.[0]);
+  const [category, setCategory] = useState<ICategory | undefined>(
+    firstCategory || {
+      id: -1,
+      label: "Інше",
+      userId: 1590,
+    },
+  );
+
+  console.log(firstCategory, "firstCategory");
 
   const createTransactionHandler = () => {
     if (category && user && category?.id) {
       const newTransaction = {
-        label: label,
+        label,
         amount: Number(amount),
         date,
         userId: user && user.id,
         categoryId: category && category.id,
       };
-
+      console.log(newTransaction, "newTransaction");
       createTransaction(newTransaction);
+    }
+
+    reset();
+  };
+
+  const setCategoryHandler = (value: string) => {
+    const category = categories?.find((el: ICategory) => el.label === value);
+
+    if (category) {
+      setCategory(category);
     }
   };
 
@@ -98,9 +122,9 @@ export const NewTransaction: FC<INewTransaction> = () => {
           justifyContent="space-between"
         >
           <MySelect
+            changeHandler={setCategoryHandler}
             menuItems={categories}
             value={category}
-            setCategory={setCategory}
           />
           <StyledSecondaryButton type="submit" sx={{ p: "4px 45px" }}>
             ADD

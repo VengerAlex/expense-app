@@ -38,10 +38,6 @@ export const TransactionTable: FC<ITransactionTable> = () => {
     getTransactions(params);
   }, [sort]);
 
-  if (loading === LOADING_STATUS.PENDING) {
-    return <Progress />;
-  }
-
   return (
     <TableContainer component={Box}>
       <Table sx={{ minWidth: 710 }} aria-label="simple table">

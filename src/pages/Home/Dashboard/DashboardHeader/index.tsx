@@ -13,8 +13,6 @@ export const DashboardHeader = () => {
   const { totalReceipt, totalExpense, transactions } =
     useAppSelector(transactionSelector);
 
-  console.log("HEADER RENDER");
-
   const INFO_CARDS = [
     {
       isBig: true,

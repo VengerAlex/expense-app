@@ -19,13 +19,17 @@ interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
   const { transactions } = useAppSelector(transactionSelector);
   const { loading } = useAppSelector(transactionSelector);
-  const { getTransactions } = useActions();
+  const { getTransactions, getCategories } = useActions();
 
   useEffect(() => {
     if (loading === LOADING_STATUS.IDLE) {
       getTransactions({ dateOrder: SORT.ASC, idOrder: SORT.ASC });
     }
   }, [loading, getTransactions]);
+
+  useEffect(() => {
+    getCategories("");
+  }, []);
 
   return (
     <MainLayout>

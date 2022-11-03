@@ -9,7 +9,7 @@ import {
 } from "./category.actions";
 
 const initialState: ICategoryInitialState = {
-  categories: null,
+  categories: [],
   loading: LOADING_STATUS.IDLE,
 };
 
@@ -25,9 +25,7 @@ const categorySlice = createSlice({
       })
       .addCase(getCategories.fulfilled, (state, action) => {
         state.loading = LOADING_STATUS.FULFILLED;
-        state.categories = action.payload.content.filter(
-          (category: ICategory) => category.id !== -1,
-        );
+        state.categories = action.payload.content;
       })
       .addCase(getCategories.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
@@ -41,7 +39,7 @@ const categorySlice = createSlice({
         postCategory.fulfilled,
         (state, action: PayloadAction<ICategory>) => {
           state.loading = LOADING_STATUS.FULFILLED;
-          state?.categories?.push(action.payload);
+          state.categories?.push(action.payload);
         },
       )
       .addCase(postCategory.rejected, (state) => {
@@ -71,5 +69,7 @@ const categorySlice = createSlice({
 });
 
 export const categorySelector = (state: RootState) => state.category;
+export const selectFirstCategory = (state: RootState) =>
+  state.category.categories?.[0];
 
 export default categorySlice.reducer;

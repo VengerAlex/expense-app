@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Stack, Typography } from "@mui/material";
 import { MainLayout } from "../../../components/MainLayout";
 import {
@@ -13,16 +13,22 @@ import { useActions } from "../../../hooks/useActions";
 import { AllTransaction } from "./AllTransaction";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { transactionSelector } from "../../../store/slices/transaction/transactionSlice";
+import { useDebounce } from "../../../hooks/useDebounce";
 
 interface IDashboard {}
 export const Dashboard: FC<IDashboard> = () => {
-  const { transactions } = useAppSelector(transactionSelector);
+  const [searchValue, setSearchValue] = useState("");
+  const debouncedValue = useDebounce(searchValue, 500);
   const { sort } = useAppSelector(transactionSelector);
   const { getTransactions, getCategories } = useActions();
 
   useEffect(() => {
-    getTransactions({ dateOrder: sort[0].date, idOrder: sort[1].id });
-  }, [sort]);
+    getTransactions({
+      dateOrder: sort[0].date,
+      idOrder: sort[1].id,
+      searchValue: debouncedValue,
+    });
+  }, [sort, debouncedValue]);
 
   useEffect(() => {
     getCategories("");
@@ -37,7 +43,10 @@ export const Dashboard: FC<IDashboard> = () => {
             <NewTransaction />
             <NewCategory />
           </Stack>
-          {transactions?.length ? <AllTransaction /> : null}
+          <AllTransaction
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+          />
         </DashboardLeftSide>
         <DashboardRightSide>
           <Typography>RIGHT SIDE</Typography>

@@ -6,14 +6,18 @@ import {
 import { SORT } from "../utils/types";
 
 class TransactionService {
-  async getAll(dateOrder: SORT, idOrder: SORT) {
+  async getAll(dateOrder: SORT, idOrder: SORT, searchValue: string) {
     const params = new URLSearchParams();
     params.append("_sort", "date");
     params.append("_order", dateOrder);
     params.append("_sort", "id");
     params.append("_order", idOrder);
 
-    const response = await axios.get(URL_TEMPLATES.GET_TRANSACTIONS, {
+    if (searchValue) {
+      params.append("label[contains]", searchValue);
+    }
+
+    const response = await axios.get(`${URL_TEMPLATES.GET_TRANSACTIONS}`, {
       params,
     });
 

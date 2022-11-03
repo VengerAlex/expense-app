@@ -50,8 +50,6 @@ export const NewTransaction: FC<INewTransaction> = () => {
     },
   );
 
-  console.log(firstCategory, "firstCategory");
-
   const createTransactionHandler = () => {
     if (category && user && category?.id) {
       const newTransaction = {

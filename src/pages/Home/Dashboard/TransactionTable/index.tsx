@@ -26,6 +26,8 @@ export const TransactionTable: FC<ITransactionTable> = () => {
   const dispatch = useDispatch();
   const { transactions, sort } = useAppSelector(transactionSelector);
 
+  console.log("RENDER TABLE");
+
   return (
     <TableContainer component={Box}>
       <Table sx={{ minWidth: 710 }} aria-label="simple table">

@@ -14,11 +14,12 @@ export const getTransactions = createAsyncThunk<any, ITransactionParams>(
   TRANSACTION.ALL,
   async (transactionParams, thunkAPI) => {
     try {
-      const { dateOrder, idOrder, searchValue } = transactionParams;
+      const { dateOrder, idOrder, searchValue, categoryId } = transactionParams;
       const response = await TransactionService.getAll(
         dateOrder,
         idOrder,
         searchValue,
+        categoryId,
       );
 
       return response.data;

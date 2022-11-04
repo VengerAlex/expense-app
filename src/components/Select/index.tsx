@@ -6,15 +6,24 @@ import {
   useTheme,
   Select,
   SelectChangeEvent,
+  InputLabel,
 } from "@mui/material";
 
 interface ISelect {
   menuItems: any;
   value: any;
   changeHandler: (value: any) => void;
+  label?: string;
+  width?: string;
 }
 
-export const MySelect: FC<ISelect> = ({ value, menuItems, changeHandler }) => {
+export const MySelect: FC<ISelect> = ({
+  value,
+  menuItems,
+  changeHandler,
+  label,
+  width = "225px",
+}) => {
   const theme = useTheme();
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -22,8 +31,11 @@ export const MySelect: FC<ISelect> = ({ value, menuItems, changeHandler }) => {
   };
 
   return (
-    <SelectWrapper variant="standard" sx={{ minWidth: "225px" }}>
+    <SelectWrapper variant="standard" sx={{ minWidth: width }}>
       <FormControl variant="standard">
+        {label && (
+          <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+        )}
         <Select
           MenuProps={{
             PaperProps: {
@@ -47,6 +59,7 @@ export const MySelect: FC<ISelect> = ({ value, menuItems, changeHandler }) => {
               },
             },
           }}
+          defaultValue=""
           id="demo-simple-select"
           value={value.label}
           onChange={handleChange}

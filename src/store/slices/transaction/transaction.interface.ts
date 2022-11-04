@@ -23,5 +23,6 @@ export type ITransactionDto = Omit<ITransaction, "id">;
 export type ITransactionParams = {
   dateOrder: SORT;
   idOrder: SORT;
-  searchValue: string;
+  searchValue: string | null;
+  categoryId: string | null;
 };

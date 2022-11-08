@@ -12,11 +12,11 @@ type IProfileAvatar = AvatarProps & {
 
 export const ProfileAvatar: FC<IProfileAvatar> = memo(
   ({ myVariant, isBig, color }) => {
-    const [INITIALS, displayName] = useAppSelector(selectDisplayName);
+    const [initials, displayName] = useAppSelector(selectDisplayName);
 
     return (
       <AvatarWrapper>
-        <StyledAvatar isBig={isBig}>{INITIALS}</StyledAvatar>
+        <StyledAvatar isBig={isBig}>{initials}</StyledAvatar>
         <Typography color={color} variant={myVariant}>
           {displayName}
         </Typography>

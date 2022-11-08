@@ -71,12 +71,12 @@ const userDisplayName = (state: RootState) => state.user.user?.displayName;
 export const selectDisplayName = createSelector(
   userDisplayName,
   (displayName) => {
-    const INITIALS = displayName
+    const initials = displayName
       ?.split(" ")
       .map((value) => value[0])
       .join("");
 
-    return [INITIALS, displayName];
+    return [initials, displayName];
   },
 );
 

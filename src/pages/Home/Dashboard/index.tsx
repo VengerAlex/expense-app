@@ -50,8 +50,8 @@ export const Dashboard: FC<IDashboard> = () => {
 
   useEffect(() => {
     getTransactions({
-      dateOrder: sort[0].date,
-      idOrder: sort[1].id,
+      dateOrder: sort.date,
+      idOrder: sort.id,
       searchValue: searchBy.label === "Title" ? debouncedValue : null,
       categoryId: searchBy.label === "Category" ? String(category?.id) : null,
     });
@@ -77,8 +77,6 @@ export const Dashboard: FC<IDashboard> = () => {
       setSearchBy(searchElem);
     }
   };
-
-  console.log(category, "!!!!!!!category");
 
   return (
     <MainLayout>

@@ -6,8 +6,10 @@ export interface ITransactionInitialState {
   loading: LOADING_STATUS;
   totalReceipt: number;
   totalExpense: number;
-  sort: [{ date: SORT }, { id: SORT }];
+  sort: Record<sortKeys, SORT>;
 }
+
+export type sortKeys = "date" | "id";
 
 export interface ITransaction {
   id: number;

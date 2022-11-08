@@ -1,6 +1,7 @@
 import {
   ITransaction,
   ITransactionInitialState,
+  sortKeys,
 } from "./transaction.interface";
 import { LOADING_STATUS, SORT } from "../../../utils/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -16,22 +17,19 @@ const initialState: ITransactionInitialState = {
   transactions: null,
   totalReceipt: 0,
   totalExpense: 0,
-  sort: [{ date: SORT.ASC }, { id: SORT.ASC }],
+  sort: {
+    date: SORT.ASC,
+    id: SORT.ASC,
+  },
 };
 
 const transactionSlice = createSlice({
   name: "transaction",
   initialState,
   reducers: {
-    sortHandler: (state, action: PayloadAction<"date" | "id">) => {
-      state.sort.map((elem: any) => {
-        if (elem[action.payload]) {
-          elem[action.payload] =
-            elem[action.payload] === SORT.ASC ? SORT.DESC : SORT.ASC;
-        }
-
-        return elem;
-      });
+    sortHandler: (state, action: PayloadAction<sortKeys>) => {
+      state.sort[action.payload] =
+        state.sort[action.payload] === SORT.ASC ? SORT.DESC : SORT.ASC;
     },
   },
   extraReducers: (builder) => {

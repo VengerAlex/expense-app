@@ -26,8 +26,6 @@ export const TransactionTable: FC<ITransactionTable> = () => {
   const dispatch = useDispatch();
   const { transactions, sort } = useAppSelector(transactionSelector);
 
-  console.log("RENDER TABLE");
-
   return (
     <TableContainer component={Box}>
       <Table sx={{ minWidth: 710 }} aria-label="simple table">
@@ -42,15 +40,15 @@ export const TransactionTable: FC<ITransactionTable> = () => {
                 #
                 <IconWrapper
                   onClick={() => dispatch(sortHandler("id"))}
-                  disabled={sort[1].id === SORT.DESC}
-                  isActive={sort[1].id === SORT.DESC}
+                  disabled={sort.id === SORT.DESC}
+                  isActive={sort.id === SORT.DESC}
                 >
                   <ArrowDropDownIcon />
                 </IconWrapper>
                 <IconWrapper
                   onClick={() => dispatch(sortHandler("id"))}
-                  isActive={sort[1].id === SORT.ASC}
-                  disabled={sort[1].id === SORT.ASC}
+                  isActive={sort.id === SORT.ASC}
+                  disabled={sort.id === SORT.ASC}
                 >
                   <ArrowDropUpIcon />
                 </IconWrapper>
@@ -67,15 +65,15 @@ export const TransactionTable: FC<ITransactionTable> = () => {
                 Date
                 <IconWrapper
                   onClick={() => dispatch(sortHandler("date"))}
-                  disabled={sort[0].date === SORT.DESC}
-                  isActive={sort[0].date === SORT.DESC}
+                  disabled={sort.date === SORT.DESC}
+                  isActive={sort.date === SORT.DESC}
                 >
                   <ArrowDropDownIcon />
                 </IconWrapper>
                 <IconWrapper
                   onClick={() => dispatch(sortHandler("date"))}
-                  disabled={sort[0].date === SORT.ASC}
-                  isActive={sort[0].date === SORT.ASC}
+                  disabled={sort.date === SORT.ASC}
+                  isActive={sort.date === SORT.ASC}
                 >
                   <ArrowDropUpIcon />
                 </IconWrapper>

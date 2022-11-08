@@ -1,8 +1,10 @@
 import { FC, memo } from "react";
+
 import { AvatarProps, Typography } from "@mui/material";
-import { StyledAvatar, AvatarWrapper } from "../../styles";
+
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { selectDisplayName } from "../../store/slices/user/userSlice";
+import { AvatarWrapper, StyledAvatar } from "../../styles";
 
 type IProfileAvatar = AvatarProps & {
   color: string;

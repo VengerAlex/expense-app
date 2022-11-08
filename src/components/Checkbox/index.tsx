@@ -1,7 +1,9 @@
 import { FC, ReactElement } from "react";
+
 import { CheckboxProps } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { StyledCheckbox, StyledLabel } from "../../styles";
+
+import { StyledCheckbox } from "../../styles";
 
 type ICheckbox = CheckboxProps & {
   control: any;

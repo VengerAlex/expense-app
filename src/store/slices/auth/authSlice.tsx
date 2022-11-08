@@ -1,8 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+import { LOADING_STATUS, STATUS_CODE } from "../../../utils/types";
+import { RootState } from "../../index";
 import { changePassword, login, register } from "./auth.actions";
 import { IAuthInitialState, IRegisterResponse } from "./auth.interface";
-import { RootState } from "../../index";
-import { LOADING_STATUS, STATUS_CODE } from "../../../utils/types";
 
 const initialState: IAuthInitialState = {
   loading: LOADING_STATUS.IDLE,

@@ -1,8 +1,9 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUserInitialState } from "./user.interface";
+import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
+
 import { IUser, LOADING_STATUS } from "../../../utils/types";
-import { changeInformation, deleteSelf, getMe, logout } from "./user.actions";
 import { RootState } from "../../index";
+import { changeInformation, deleteSelf, getMe, logout } from "./user.actions";
+import { IUserInitialState } from "./user.interface";
 
 const initialState: IUserInitialState = {
   user: null,

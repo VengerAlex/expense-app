@@ -50,7 +50,6 @@
         "react/jsx-boolean-value": 0,
         "react/jsx-curly-brace-presence": 0,
         "react/require-default-props": 0,
-        "prettier/prettier": ["error", {"endOfLine": "auto"}],
         "@typescript-eslint/no-unused-vars": 0,
         "@typescript-eslint/naming-convention": 0,
         "import/no-extraneous-dependencies": 0,
@@ -79,6 +78,12 @@
         ],
         "react/jsx-uses-react": ["off"],
         "react/react-in-jsx-scope": ["off"],
-        "react/jsx-props-no-spreading": ["off"]
+        "react/jsx-props-no-spreading": ["off"],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ]
     }
 }

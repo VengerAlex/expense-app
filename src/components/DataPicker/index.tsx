@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+
 import { SxProps, useTheme } from "@mui/material";
-import { StyledInput } from "../../styles";
-import { Dayjs } from "dayjs";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
+import { StyledInput } from "../../styles";
 
 interface IDataPicker {
   date: Date;

@@ -1,17 +1,19 @@
 import { FC } from "react";
+
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { Stack, Typography, useTheme } from "@mui/material";
-import { NewCategoryWrapper, StyledSecondaryButton } from "../../styles";
-import Input from "../Input";
-import { ImageButton } from "../ImageButton";
-import { ColorPicker } from "../ColorPicker";
+import { useForm } from "react-hook-form";
+
 import { useActions } from "../../hooks/useActions";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { userSelector } from "../../store/slices/user/userSlice";
-import { useForm } from "react-hook-form";
-import { ICreateCategoryForm } from "../../utils/types";
-import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { createCategorySchema } from "../../utils/schema";
+import { NewCategoryWrapper, StyledSecondaryButton } from "../../styles";
 import { showErrorText } from "../../utils/helpers";
+import { createCategorySchema } from "../../utils/schema";
+import { ICreateCategoryForm } from "../../utils/types";
+import { ColorPicker } from "../ColorPicker";
+import { ImageButton } from "../ImageButton";
+import Input from "../Input";
 
 interface INewCategory {}
 export const NewCategory: FC<INewCategory> = () => {

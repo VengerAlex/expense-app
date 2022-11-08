@@ -1,6 +1,8 @@
 import { ChangeEvent, FC } from "react";
-import { Box, IconButton, TextFieldProps } from "@mui/material";
+
 import SearchIcon from "@mui/icons-material/Search";
+import { Box, IconButton, TextFieldProps } from "@mui/material";
+
 import { SearchField } from "../../styles/index";
 
 type ISearchInput = TextFieldProps & {

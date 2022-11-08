@@ -1,20 +1,21 @@
 import {
-  Divider,
-  Box,
-  Paper,
   Avatar,
+  Box,
   Button,
   Checkbox,
+  Divider,
+  FormControl,
   Grid,
+  IconButton,
   List,
   ListItem,
-  styled,
-  TextField,
-  FormControl,
+  Paper,
   TableCell,
+  TextField,
   Typography,
-  IconButton,
+  styled,
 } from "@mui/material";
+
 import { theme } from "../providers/ThemeProvider";
 import { INFO_CARD_SIZE } from "../utils/types";
 

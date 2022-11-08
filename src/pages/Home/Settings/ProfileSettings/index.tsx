@@ -1,23 +1,26 @@
 import { FC } from "react";
+
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { FormControl, Typography, useTheme } from "@mui/material";
+import { useForm } from "react-hook-form";
+
 import Input from "../../../../components/Input";
+import { ProfileAvatar } from "../../../../components/ProfileAvatar";
+
+import { useActions } from "../../../../hooks/useActions";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
+import { authSelector } from "../../../../store/slices/auth/authSlice";
+import { StyledPrimaryButton } from "../../../../styles";
+import {
+  showErrorOnConfirmPassword,
+  showErrorText,
+} from "../../../../utils/helpers";
+import { profileSettingsSchema } from "../../../../utils/schema";
 import {
   IResetProfileForm,
   LOADING_STATUS,
   SETTINGS,
 } from "../../../../utils/types";
-import { StyledPrimaryButton } from "../../../../styles";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { profileSettingsSchema } from "../../../../utils/schema";
-import { ProfileAvatar } from "../../../../components/ProfileAvatar";
-import {
-  showErrorOnConfirmPassword,
-  showErrorText,
-} from "../../../../utils/helpers";
-import { useActions } from "../../../../hooks/useActions";
-import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { authSelector } from "../../../../store/slices/auth/authSlice";
 
 interface IProfileSettings {
   setCurrentComponent: (component: SETTINGS) => void;

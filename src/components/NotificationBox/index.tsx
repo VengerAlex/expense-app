@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { Box, BoxProps, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 import illustrationImage from "../../assets/images/ilustration.png";
 import { StyledNotificationBox, StyledPrimaryButton } from "../../styles";
 

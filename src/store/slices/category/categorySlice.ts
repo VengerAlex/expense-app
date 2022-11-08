@@ -1,12 +1,13 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
 import { LOADING_STATUS } from "../../../utils/types";
 import { RootState } from "../../index";
-import { ICategory, ICategoryInitialState } from "./category.interface";
 import {
   deleteCategory,
   getCategories,
   postCategory,
 } from "./category.actions";
+import { ICategory, ICategoryInitialState } from "./category.interface";
 
 const initialState: ICategoryInitialState = {
   categories: [],

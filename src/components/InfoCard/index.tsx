@@ -1,5 +1,7 @@
 import { FC } from "react";
-import { Stack, Typography, useTheme, Box } from "@mui/material";
+
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+
 import { CircledInfoCard, InfoCardWrapper, ResultNumber } from "../../styles";
 import { INFO_CARD_SIZE } from "../../utils/types";
 

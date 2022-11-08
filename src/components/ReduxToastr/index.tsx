@@ -1,5 +1,6 @@
-import ReduxToastrLib from "react-redux-toastr";
 import { FC } from "react";
+
+import ReduxToastrLib from "react-redux-toastr";
 
 export const ReduxToastr: FC = () => {
   return (

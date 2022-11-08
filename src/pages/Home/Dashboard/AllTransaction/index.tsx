@@ -1,11 +1,14 @@
-import { FC, useState } from "react";
-import { Box, Typography, useTheme, Stack, Select } from "@mui/material";
-import { TransactionTable } from "../TransactionTable";
+import { FC } from "react";
+
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+
 import { SearchInput } from "../../../../components/SearchInput";
 import { MySelect } from "../../../../components/Select";
+
 import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { categorySelector } from "../../../../store/slices/category/categorySlice";
 import { ICategory } from "../../../../store/slices/category/category.interface";
+import { categorySelector } from "../../../../store/slices/category/categorySlice";
+import { TransactionTable } from "../TransactionTable";
 import { SearchBy } from "../index";
 
 interface IAllTransaction {

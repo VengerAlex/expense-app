@@ -1,14 +1,15 @@
 import { FC, useEffect, useState } from "react";
+
 import { Box, Typography } from "@mui/material";
+
 import { MainLayout } from "../../../components/MainLayout";
-import { theme } from "../../../providers/ThemeProvider";
-import { CategoryHeader } from "../../../styles";
 import { SearchInput } from "../../../components/SearchInput";
-import { CategoryList } from "./CategoryList";
+
 import { useActions } from "../../../hooks/useActions";
 import { useDebounce } from "../../../hooks/useDebounce";
-import { useAppSelector } from "../../../hooks/useAppSelector";
-import { categorySelector } from "../../../store/slices/category/categorySlice";
+import { theme } from "../../../providers/ThemeProvider";
+import { CategoryHeader } from "../../../styles";
+import { CategoryList } from "./CategoryList";
 
 interface ICategories {}
 

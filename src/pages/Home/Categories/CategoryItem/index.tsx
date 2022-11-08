@@ -1,16 +1,19 @@
 import { FC } from "react";
+
 import { Typography, useTheme } from "@mui/material";
+
+import { ActionButtons } from "../../../../components/ActionButtons";
+
+import { useActions } from "../../../../hooks/useActions";
+import { ICategory } from "../../../../store/slices/category/category.interface";
 import {
-  CategoryWrapper,
-  SliderWrapper,
   CategoryAvatar,
   CategoryPriceWrapper,
   CategoryTitle,
+  CategoryWrapper,
+  SliderWrapper,
   StyledGridItem,
 } from "../../../../styles";
-import { ICategory } from "../../../../store/slices/category/category.interface";
-import { useActions } from "../../../../hooks/useActions";
-import { ActionButtons } from "../../../../components/ActionButtons";
 
 export const CategoryItem: FC<ICategory> = ({ label, id }) => {
   const theme = useTheme();

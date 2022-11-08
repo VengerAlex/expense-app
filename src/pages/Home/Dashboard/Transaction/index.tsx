@@ -1,18 +1,21 @@
 import { FC } from "react";
-import { ITransaction } from "../../../../store/slices/transaction/transaction.interface";
+
+import { Stack, Typography, useTheme } from "@mui/material";
 import TableRow from "@mui/material/TableRow";
+
+import { ActionButtons } from "../../../../components/ActionButtons";
+
+import { useActions } from "../../../../hooks/useActions";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
+import { categorySelector } from "../../../../store/slices/category/categorySlice";
+import { ITransaction } from "../../../../store/slices/transaction/transaction.interface";
+import { CircledBox, StyledCategoryCell } from "../../../../styles";
 import {
   formatDate,
   formatNumber,
   getBackgroundColor,
   getRandomColor,
 } from "../../../../utils/helpers";
-import { Stack, Typography, useTheme } from "@mui/material";
-import { CircledBox, StyledCategoryCell } from "../../../../styles";
-import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { categorySelector } from "../../../../store/slices/category/categorySlice";
-import { ActionButtons } from "../../../../components/ActionButtons";
-import { useActions } from "../../../../hooks/useActions";
 
 type ITransactionProps = ITransaction & {
   idx: number;
@@ -25,7 +28,6 @@ export const Transaction: FC<ITransactionProps> = ({
   amount,
   id,
   categoryId,
-  userId,
 }) => {
   const { categories } = useAppSelector(categorySelector);
   const { deleteTransaction } = useActions();

@@ -1,13 +1,15 @@
 import { FC, FormEvent, useState } from "react";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import {
   IconButton,
   InputAdornment,
   TextFieldProps,
   useTheme,
 } from "@mui/material";
+
 import { StyledInput } from "../../styles";
 
 type IInput = TextFieldProps & {

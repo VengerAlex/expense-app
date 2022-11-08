@@ -1,15 +1,26 @@
 import { FC, useEffect } from "react";
+
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
 import { Box, Link, Typography } from "@mui/material";
+import { useForm } from "react-hook-form";
+
+import { Checkbox } from "../../../../components/Checkbox";
+import Input from "../../../../components/Input";
+import { MyLink } from "../../../../components/MyLink";
+
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { authSelector } from "../../../../store/slices/auth/authSlice";
 import {
   StyledFormControl,
-  StyledPrimaryButton,
   StyledLabel,
+  StyledPrimaryButton,
 } from "../../../../styles";
+import {
+  showErrorOnConfirmPassword,
+  showErrorText,
+} from "../../../../utils/helpers";
+import { signUpSchema } from "../../../../utils/schema";
 import {
   ISignUpFormValue,
   LOADING_STATUS,
@@ -17,14 +28,6 @@ import {
   SIGN_UP,
   STATUS_CODE,
 } from "../../../../utils/types";
-import Input from "../../../../components/Input";
-import { Checkbox } from "../../../../components/Checkbox";
-import { MyLink } from "../../../../components/MyLink";
-import { signUpSchema } from "../../../../utils/schema";
-import {
-  showErrorOnConfirmPassword,
-  showErrorText,
-} from "../../../../utils/helpers";
 
 interface ISignUpForm {
   setCurrentComponent: (component: SIGN_UP) => void;

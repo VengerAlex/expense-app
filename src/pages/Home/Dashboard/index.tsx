@@ -1,24 +1,27 @@
 import { FC, useEffect, useState } from "react";
+
 import { Stack, Typography } from "@mui/material";
+
 import { MainLayout } from "../../../components/MainLayout";
-import {
-  DashboardLeftSide,
-  DashboardRightSide,
-  DashboardWrapper,
-} from "../../../styles";
-import { DashboardHeader } from "./DashboardHeader";
 import { NewCategory } from "../../../components/NewCategory";
 import { NewTransaction } from "../../../components/NewTransaction";
+
 import { useActions } from "../../../hooks/useActions";
-import { AllTransaction } from "./AllTransaction";
 import { useAppSelector } from "../../../hooks/useAppSelector";
-import { transactionSelector } from "../../../store/slices/transaction/transactionSlice";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { ICategory } from "../../../store/slices/category/category.interface";
 import {
   categorySelector,
   selectFirstCategory,
 } from "../../../store/slices/category/categorySlice";
+import { transactionSelector } from "../../../store/slices/transaction/transactionSlice";
+import {
+  DashboardLeftSide,
+  DashboardRightSide,
+  DashboardWrapper,
+} from "../../../styles";
+import { AllTransaction } from "./AllTransaction";
+import { DashboardHeader } from "./DashboardHeader";
 
 export type SearchBy = {
   label: string;

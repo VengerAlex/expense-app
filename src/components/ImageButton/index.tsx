@@ -1,6 +1,8 @@
 import { FC } from "react";
-import { AddImageBtn } from "../../styles";
+
 import ImageIcon from "@mui/icons-material/Image";
+
+import { AddImageBtn } from "../../styles";
 
 interface IImageBtn {}
 export const ImageButton: FC<IImageBtn> = () => {

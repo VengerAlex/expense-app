@@ -1,14 +1,16 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { ROUTES } from "../../utils/types";
-import { localstorageAuthService } from "../../services/localstorage.service";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { userSelector } from "../../store/slices/user/userSlice";
-import { useActions } from "../../hooks/useActions";
 import { useEffect } from "react";
+
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+
+import { useActions } from "../../hooks/useActions";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { localstorageAuthService } from "../../services/localstorage.service";
+import { userSelector } from "../../store/slices/user/userSlice";
+import { ROUTES } from "../../utils/types";
 
 export const PrivateRoute = () => {
   const location = useLocation();
-  const { getMe, getCategories } = useActions();
+  const { getMe } = useActions();
 
   const token = localstorageAuthService.getAccessToken();
   const { user } = useAppSelector(userSelector);

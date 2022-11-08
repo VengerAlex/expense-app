@@ -1,25 +1,27 @@
 import { FC } from "react";
 import * as React from "react";
+
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import {
   Box,
-  TableHead,
-  TableContainer,
-  TableBody,
-  TableRow,
-  Table,
   Stack,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import {
   sortHandler,
   transactionSelector,
 } from "../../../../store/slices/transaction/transactionSlice";
-import { Transaction } from "../Transaction";
 import { IconWrapper, StyledTableCell } from "../../../../styles";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { SORT } from "../../../../utils/types";
-import { useDispatch } from "react-redux";
+import { Transaction } from "../Transaction";
 
 interface ITransactionTable {}
 export const TransactionTable: FC<ITransactionTable> = () => {

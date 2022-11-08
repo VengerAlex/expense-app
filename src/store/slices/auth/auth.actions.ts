@@ -1,6 +1,8 @@
-import { toastr } from "react-redux-toastr";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toastr } from "react-redux-toastr";
+
 import AuthService from "../../../services/auth.service";
+import { toastError } from "../../../utils/helpers";
 import {
   IChangePassword,
   ILoginProps,
@@ -8,7 +10,6 @@ import {
   IRegisterProps,
   IRegisterResponse,
 } from "./auth.interface";
-import { toastError } from "../../../utils/helpers";
 
 export const login = createAsyncThunk<
   ILoginResponse,

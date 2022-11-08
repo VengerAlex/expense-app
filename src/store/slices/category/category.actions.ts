@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import CategoryService from "../../../services/category.service";
-import { ICategoryDto } from "./category.interface";
-import { toastError } from "../../../utils/helpers";
 import { toastr } from "react-redux-toastr";
+
+import CategoryService from "../../../services/category.service";
+import { toastError } from "../../../utils/helpers";
+import { ICategoryDto } from "./category.interface";
 
 const CATEGORY = {
   ALL: "category",

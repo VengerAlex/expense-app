@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
+
+import { MainContent, MainWrapper } from "../../styles";
 import { Sidebar } from "../Sidebar";
-import { MainWrapper, MainContent } from "../../styles";
 
 interface IMainLayout {
   children: ReactNode;

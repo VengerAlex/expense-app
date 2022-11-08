@@ -1,12 +1,14 @@
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { resetSchema } from "../../../../utils/schema";
+
 import Input from "../../../../components/Input";
-import { StyledPrimaryButton, StyledFormControl } from "../../../../styles";
-import { IResetPassword, RESET_PAGE, ROUTES } from "../../../../utils/types";
 import { MyLink } from "../../../../components/MyLink";
+
+import { StyledFormControl, StyledPrimaryButton } from "../../../../styles";
 import { showErrorText } from "../../../../utils/helpers";
+import { resetSchema } from "../../../../utils/schema";
+import { IResetPassword, RESET_PAGE, ROUTES } from "../../../../utils/types";
 
 interface IEmailReset {
   setCurrentComponent: (component: RESET_PAGE) => void;

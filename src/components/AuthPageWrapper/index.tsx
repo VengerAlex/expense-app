@@ -1,11 +1,12 @@
 import { FC, ReactNode } from "react";
 
-import CssBaseline from "@mui/material/CssBaseline";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import { Logo } from "../Logo";
 import { useTheme } from "@mui/material";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+
+import { Logo } from "../Logo";
 
 interface IAuthPageWrapper {
   children: ReactNode;

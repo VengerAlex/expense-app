@@ -1,11 +1,13 @@
 import { ReactElement, useState } from "react";
+
 import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
 import { NotificationBox } from "../../../components/NotificationBox";
+
+import signInCover from "../../../assets/images/cover-login.jpg";
+import signUpCover from "../../../assets/images/cover-sign-up.jpg";
 import { RESET_PAGE, ROUTES } from "../../../utils/types";
 import EmailReset from "./EmailReset";
 import { ResetPassword } from "./ResetPassword";
-import signUpCover from "../../../assets/images/cover-sign-up.jpg";
-import signInCover from "../../../assets/images/cover-login.jpg";
 
 type ISteps = Record<RESET_PAGE, { component: ReactElement }>;
 

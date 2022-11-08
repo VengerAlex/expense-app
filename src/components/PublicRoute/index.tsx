@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { ROUTES } from "../../utils/types";
+
 import { localstorageAuthService } from "../../services/localstorage.service";
+import { ROUTES } from "../../utils/types";
 
 export const PublicRoute = () => {
   const { state } = useLocation();

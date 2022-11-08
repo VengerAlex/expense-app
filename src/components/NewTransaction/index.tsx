@@ -1,22 +1,24 @@
 import { FC, useState } from "react";
-import { Stack, Typography, Box, useTheme } from "@mui/material";
-import { NewTransactionWrapper, StyledSecondaryButton } from "../../styles";
-import Input from "../Input";
-import { MySelect } from "../Select";
+
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { useForm } from "react-hook-form";
+
+import { useActions } from "../../hooks/useActions";
 import { useAppSelector } from "../../hooks/useAppSelector";
+import { ICategory } from "../../store/slices/category/category.interface";
 import {
   categorySelector,
   selectFirstCategory,
 } from "../../store/slices/category/categorySlice";
-import { DataPicker } from "../DataPicker";
 import { userSelector } from "../../store/slices/user/userSlice";
-import { useForm } from "react-hook-form";
-import { ICreateTransactionForm } from "../../utils/types";
-import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { createTransactionSchema } from "../../utils/schema";
+import { NewTransactionWrapper, StyledSecondaryButton } from "../../styles";
 import { showErrorText } from "../../utils/helpers";
-import { useActions } from "../../hooks/useActions";
-import { ICategory } from "../../store/slices/category/category.interface";
+import { createTransactionSchema } from "../../utils/schema";
+import { ICreateTransactionForm } from "../../utils/types";
+import { DataPicker } from "../DataPicker";
+import Input from "../Input";
+import { MySelect } from "../Select";
 
 interface INewTransaction {}
 

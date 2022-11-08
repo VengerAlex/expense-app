@@ -1,15 +1,17 @@
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { Typography } from "@mui/material";
+import { useForm } from "react-hook-form";
+
 import Input from "../../../../components/Input";
-import { IResetForm, RESET_PAGE, ROUTES } from "../../../../utils/types";
-import { StyledPrimaryButton, StyledFormControl } from "../../../../styles";
-import { resetPasswordSchema } from "../../../../utils/schema";
+import { MyLink } from "../../../../components/MyLink";
+
+import { StyledFormControl, StyledPrimaryButton } from "../../../../styles";
 import {
   showErrorOnConfirmPassword,
   showErrorText,
 } from "../../../../utils/helpers";
-import { MyLink } from "../../../../components/MyLink";
+import { resetPasswordSchema } from "../../../../utils/schema";
+import { IResetForm, RESET_PAGE, ROUTES } from "../../../../utils/types";
 
 interface IResetPassword {
   setCurrentComponent: (component: RESET_PAGE) => void;

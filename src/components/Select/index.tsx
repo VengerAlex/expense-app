@@ -1,13 +1,15 @@
 import { FC } from "react";
-import { SelectWrapper } from "../../styles";
+
 import {
   FormControl,
+  InputLabel,
   MenuItem,
-  useTheme,
   Select,
   SelectChangeEvent,
-  InputLabel,
+  useTheme,
 } from "@mui/material";
+
+import { SelectWrapper } from "../../styles";
 
 interface ISelect {
   menuItems: any;

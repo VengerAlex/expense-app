@@ -1,5 +1,4 @@
 import axios, { URL_TEMPLATES } from "../api/index";
-import { localstorageAuthService } from "./localstorage.service";
 import {
   IChangePassword,
   ILoginProps,
@@ -8,6 +7,7 @@ import {
   IRegisterData,
   IRegisterProps,
 } from "../store/slices/auth/auth.interface";
+import { localstorageAuthService } from "./localstorage.service";
 
 class AuthService {
   async register(dto: IRegisterProps) {

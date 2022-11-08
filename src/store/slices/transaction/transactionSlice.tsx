@@ -1,16 +1,17 @@
-import {
-  ITransaction,
-  ITransactionInitialState,
-  sortKeys,
-} from "./transaction.interface";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
 import { LOADING_STATUS, SORT } from "../../../utils/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../index";
 import {
   createTransaction,
   deleteTransaction,
   getTransactions,
 } from "./transaction.actions";
+import {
+  ITransaction,
+  ITransactionInitialState,
+  sortKeys,
+} from "./transaction.interface";
 
 const initialState: ITransactionInitialState = {
   loading: LOADING_STATUS.IDLE,

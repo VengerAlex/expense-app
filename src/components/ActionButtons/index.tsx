@@ -1,13 +1,15 @@
-import { FC, useState, MouseEvent } from "react";
+import { FC, MouseEvent, useState } from "react";
+
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {
-  Menu,
   Box,
-  MenuItem,
   IconButton,
+  Menu,
+  MenuItem,
   Stack,
   useTheme,
 } from "@mui/material";
+
 import { StyledSecondaryButton } from "../../styles";
 
 interface IActionButtons {

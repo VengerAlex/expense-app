@@ -1,11 +1,13 @@
-import { InfoCard } from "../../../../components/InfoCard";
-import WorkIcon from "@mui/icons-material/Work";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DescriptionIcon from "@mui/icons-material/Description";
-import { StyledDashboardHeader } from "../../../../styles";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import WorkIcon from "@mui/icons-material/Work";
 import { useTheme } from "@mui/material";
+
+import { InfoCard } from "../../../../components/InfoCard";
+
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { transactionSelector } from "../../../../store/slices/transaction/transactionSlice";
+import { StyledDashboardHeader } from "../../../../styles";
 import { formatNumber } from "../../../../utils/helpers";
 import { INFO_CARD_SIZE } from "../../../../utils/types";
 

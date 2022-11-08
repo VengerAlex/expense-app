@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { SignUpForm } from "./SignUpForm";
-import signUpCover from "../../../assets/images/cover-sign-up.jpg";
-import signInCover from "../../../assets/images/cover-login.jpg";
+
 import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
 import { NotificationBox } from "../../../components/NotificationBox";
+
+import signInCover from "../../../assets/images/cover-login.jpg";
+import signUpCover from "../../../assets/images/cover-sign-up.jpg";
 import { ROUTES, SIGN_UP } from "../../../utils/types";
+import { SignUpForm } from "./SignUpForm";
 
 const SignUp = () => {
   const [currentComponent, setCurrentComponent] = useState(SIGN_UP.FORM);

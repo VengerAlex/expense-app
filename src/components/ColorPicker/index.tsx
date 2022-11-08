@@ -1,7 +1,9 @@
 import { FC, useState } from "react";
-import { Divider, Typography, useTheme } from "@mui/material";
-import { ColorPickerBox, ColorPickerWrapper, Picker } from "../../styles";
+
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Divider, Typography, useTheme } from "@mui/material";
+
+import { ColorPickerBox, ColorPickerWrapper, Picker } from "../../styles";
 
 interface IColorPicker {}
 

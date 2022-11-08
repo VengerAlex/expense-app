@@ -1,5 +1,6 @@
-import { LOADING_STATUS, SORT } from "../../../utils/types";
 import { Dayjs } from "dayjs";
+
+import { LOADING_STATUS, SORT } from "../../../utils/types";
 
 export interface ITransactionInitialState {
   transactions: ITransaction[] | null;

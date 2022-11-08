@@ -1,9 +1,11 @@
 import { FC } from "react";
+
 import { Box, Grid, Typography, useTheme } from "@mui/material";
-import { CategoryItem } from "../CategoryItem";
+
 import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { categorySelector } from "../../../../store/slices/category/categorySlice";
 import { ICategory } from "../../../../store/slices/category/category.interface";
+import { categorySelector } from "../../../../store/slices/category/categorySlice";
+import { CategoryItem } from "../CategoryItem";
 
 interface ICategoryList {}
 

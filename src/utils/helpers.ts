@@ -1,6 +1,7 @@
-import { toastr } from "react-redux-toastr";
-import { theme } from "../providers/ThemeProvider";
 import dayjs, { Dayjs } from "dayjs";
+import { toastr } from "react-redux-toastr";
+
+import { theme } from "../providers/ThemeProvider";
 
 const colors = [
   "#FF6633",

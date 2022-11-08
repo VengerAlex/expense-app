@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import UserService from "../../../services/user.service";
-import { IUser } from "../../../utils/types";
+
 import AuthService from "../../../services/auth.service";
+import UserService from "../../../services/user.service";
 import { toastError } from "../../../utils/helpers";
+import { IUser } from "../../../utils/types";
 
 export const getMe = createAsyncThunk<IUser>(
   "user/getMe",

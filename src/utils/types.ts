@@ -87,3 +87,8 @@ export enum SORT {
   ASC = "asc",
   DESC = "desc",
 }
+
+export enum INFO_CARD_SIZE {
+  "SM" = "sm",
+  "LG" = "lg",
+}

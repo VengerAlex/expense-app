@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { Stack, Typography, useTheme, Box } from "@mui/material";
 import { CircledInfoCard, InfoCardWrapper, ResultNumber } from "../../styles";
+import { INFO_CARD_SIZE } from "../../utils/types";
 
 interface IInfoCard {
-  isBig?: boolean;
+  size: INFO_CARD_SIZE;
   bgColor?: string;
   number: string | number;
   iconColor: string;
@@ -13,7 +14,7 @@ interface IInfoCard {
 
 export const InfoCard: FC<IInfoCard> = ({
   number,
-  isBig = false,
+  size,
   bgColor,
   iconColor,
   icon,
@@ -23,7 +24,7 @@ export const InfoCard: FC<IInfoCard> = ({
 
   return (
     <InfoCardWrapper>
-      <CircledInfoCard bgColor={bgColor} isBig={isBig}>
+      <CircledInfoCard bgColor={bgColor} size={size}>
         <Box sx={{ marginBottom: "-6px", color: iconColor }}>{icon}</Box>
       </CircledInfoCard>
       <Stack>

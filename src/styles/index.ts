@@ -16,6 +16,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { theme } from "../providers/ThemeProvider";
+import { INFO_CARD_SIZE } from "../utils/types";
 
 export const StyledPrimaryButton = styled(Button)<{ p?: string }>(
   ({ p = "9.5px 125.5px" }) => ({
@@ -459,17 +460,19 @@ export const StyledDashboardHeader = styled(Box)(() => ({
 }));
 
 export const CircledInfoCard = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "isBig" && prop !== "bgColor",
-})<{ isBig?: boolean; bgColor?: string }>(({ isBig, bgColor = "#fff" }) => ({
-  width: isBig ? "48px" : "36px",
-  height: isBig ? "48px" : "36px",
-  marginRight: "16px",
-  borderRadius: "100%",
-  backgroundColor: bgColor,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
+  shouldForwardProp: (prop) => prop !== "size" && prop !== "bgColor",
+})<{ size: INFO_CARD_SIZE; bgColor?: string }>(
+  ({ size, bgColor = "#fff" }) => ({
+    width: size === INFO_CARD_SIZE.SM ? "36px" : "48px",
+    height: size === INFO_CARD_SIZE.SM ? "36px" : "48px",
+    marginRight: "16px",
+    borderRadius: "100%",
+    backgroundColor: bgColor,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }),
+);
 
 export const InfoCardWrapper = styled(Box)(() => ({
   display: "flex",

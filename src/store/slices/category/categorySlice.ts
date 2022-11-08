@@ -6,6 +6,7 @@ import {
   deleteCategory,
   getCategories,
   postCategory,
+  updateCategory,
 } from "./category.actions";
 import { ICategory, ICategoryInitialState } from "./category.interface";
 
@@ -64,6 +65,30 @@ const categorySlice = createSlice({
         },
       )
       .addCase(deleteCategory.rejected, (state) => {
+        state.loading = LOADING_STATUS.REJECTED;
+      })
+
+      // updateCategory
+      .addCase(updateCategory.pending, (state) => {
+        state.loading = LOADING_STATUS.PENDING;
+      })
+      .addCase(
+        updateCategory.fulfilled,
+        (state, action: PayloadAction<ICategory>) => {
+          state.loading = LOADING_STATUS.FULFILLED;
+
+          state.categories?.map((category: ICategory) => {
+            if (category.id === action.payload.id) {
+              category["label"] = action.payload.label;
+
+              return category;
+            }
+
+            return category;
+          });
+        },
+      )
+      .addCase(updateCategory.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
       });
   },

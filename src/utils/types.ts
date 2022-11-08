@@ -92,3 +92,8 @@ export enum INFO_CARD_SIZE {
   "SM" = "sm",
   "LG" = "lg",
 }
+
+export enum CATEGORY_ACTION {
+  CREATE = "CREATE",
+  UPDATE = "UPDATE",
+}

@@ -10,41 +10,73 @@ import { userSelector } from "../../store/slices/user/userSlice";
 import { NewCategoryWrapper, StyledSecondaryButton } from "../../styles";
 import { showErrorText } from "../../utils/helpers";
 import { createCategorySchema } from "../../utils/schema";
-import { ICreateCategoryForm } from "../../utils/types";
+import { CATEGORY_ACTION, ICreateCategoryForm } from "../../utils/types";
 import { ColorPicker } from "../ColorPicker";
 import { ImageButton } from "../ImageButton";
 import Input from "../Input";
 
-interface INewCategory {}
-export const NewCategory: FC<INewCategory> = () => {
+interface INewCategory {
+  title: string;
+  btnTitle: string;
+  initLabel?: string;
+  type: CATEGORY_ACTION;
+  updateCategoryHandler?: (label: string) => void;
+}
+
+export const NewCategory: FC<INewCategory> = ({
+  title,
+  btnTitle,
+  initLabel,
+  type,
+  updateCategoryHandler,
+}) => {
   const {
+    watch,
     control,
     getValues,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<ICreateCategoryForm>({
-    mode: "onSubmit",
+    mode: "onChange",
     resolver: yupResolver(createCategorySchema),
+    defaultValues: { label: initLabel ? initLabel : "" },
   });
+  watch();
   const { label } = getValues();
   const { postCategory } = useActions();
   const { user } = useAppSelector(userSelector);
   const theme = useTheme();
 
-  const createCategoryHandler = (data: ICreateCategoryForm) => {
+  const categoryCreateHandler = (data: ICreateCategoryForm) => {
     const newCategory = { ...data, userId: user?.id };
 
     postCategory(newCategory);
     reset();
   };
 
+  const categoryUpdateHandler = (data: ICreateCategoryForm) => {
+    if (CATEGORY_ACTION.UPDATE && updateCategoryHandler) {
+      updateCategoryHandler(data?.label);
+    }
+
+    reset();
+  };
+
+  const isBtnDisabled = label === initLabel;
+
   return (
     <NewCategoryWrapper>
       <Typography variant="h4" mb={2} color={theme.palette.darkBlack}>
-        Add Category
+        {title}
       </Typography>
-      <form onSubmit={handleSubmit(createCategoryHandler)}>
+      <form
+        onSubmit={handleSubmit(
+          type === CATEGORY_ACTION.CREATE
+            ? categoryCreateHandler
+            : categoryUpdateHandler,
+        )}
+      >
         <Input
           helperText={showErrorText(errors, "label", label)}
           error={!!errors.label && !!label}
@@ -63,8 +95,12 @@ export const NewCategory: FC<INewCategory> = () => {
           justifyContent="space-between"
         >
           <ColorPicker />
-          <StyledSecondaryButton type="submit" sx={{ p: "4px 45px" }}>
-            ADD
+          <StyledSecondaryButton
+            disabled={isBtnDisabled}
+            type="submit"
+            sx={{ p: "4px 45px" }}
+          >
+            {btnTitle}
           </StyledSecondaryButton>
         </Stack>
       </form>

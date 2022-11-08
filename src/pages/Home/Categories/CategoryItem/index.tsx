@@ -15,12 +15,24 @@ import {
   StyledGridItem,
 } from "../../../../styles";
 
-export const CategoryItem: FC<ICategory> = ({ label, id }) => {
+type ICategoryItem = ICategory & {
+  modalHandler: () => void;
+  setSelectedCategory: (category: ICategory) => void;
+};
+
+export const CategoryItem: FC<ICategoryItem> = ({
+  label,
+  id,
+  userId,
+  modalHandler,
+  setSelectedCategory,
+}) => {
   const theme = useTheme();
   const { deleteCategory } = useActions();
 
   const editHandler = () => {
-    console.log("EDIT");
+    setSelectedCategory({ id, label, userId });
+    modalHandler();
   };
 
   return (

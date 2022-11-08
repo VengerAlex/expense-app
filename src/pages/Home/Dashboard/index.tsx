@@ -20,6 +20,7 @@ import {
   DashboardRightSide,
   DashboardWrapper,
 } from "../../../styles";
+import { CATEGORY_ACTION } from "../../../utils/types";
 import { AllTransaction } from "./AllTransaction";
 import { DashboardHeader } from "./DashboardHeader";
 
@@ -88,7 +89,11 @@ export const Dashboard: FC<IDashboard> = () => {
           <DashboardHeader />
           <Stack spacing={2} direction="row">
             <NewTransaction />
-            <NewCategory />
+            <NewCategory
+              type={CATEGORY_ACTION.CREATE}
+              btnTitle="Add"
+              title="Add Category"
+            />
           </Stack>
           <AllTransaction
             SEARCH_BY={SEARCH_BY}

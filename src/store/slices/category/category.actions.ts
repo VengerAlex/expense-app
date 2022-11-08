@@ -9,6 +9,7 @@ const CATEGORY = {
   ALL: "category",
   POST: "category/post",
   DELETE: "category/delete",
+  UPDATE: "category/update",
 };
 
 export const getCategories = createAsyncThunk<any, string>(
@@ -60,3 +61,20 @@ export const postCategory = createAsyncThunk<any, ICategoryDto>(
     }
   },
 );
+
+export const updateCategory = createAsyncThunk<
+  any,
+  { id: number; label: string }
+>(CATEGORY.UPDATE, async ({ id, label }, thunkAPI) => {
+  try {
+    const response = await CategoryService.update(id, label);
+
+    toastr.success("Category", "Updated successfully");
+    return response;
+  } catch (error: any) {
+    if (error.response) {
+      toastError(error);
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+});

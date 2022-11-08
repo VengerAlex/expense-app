@@ -31,6 +31,14 @@ class CategoryService {
 
     return data;
   }
+
+  async update(id: number, label: string) {
+    const { data } = await axios.patch(URL_TEMPLATES.UPDATE_CATEGORY(id), {
+      label,
+    });
+
+    return data;
+  }
 }
 
 export default new CategoryService();

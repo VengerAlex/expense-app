@@ -42,24 +42,24 @@ export const NewTransaction: FC<INewTransaction> = () => {
   const { user } = useAppSelector(userSelector);
   const firstCategory = useAppSelector(selectFirstCategory);
 
-  const [category, setCategory] = useState<ICategory | undefined>(
+  const [category, setCategory] = useState<ICategory>(
     firstCategory || {
       id: -1,
       label: "Інше",
-      userId: 1590,
+      userId: user?.id,
     },
   );
 
   const createTransactionHandler = () => {
-    if (category && user && category?.id) {
+    if (user && category?.id) {
       const newTransaction = {
         label,
         amount: Number(amount),
         date,
-        userId: user && user.id,
-        categoryId: category && category.id,
+        userId: user.id,
+        categoryId: category.id,
       };
-      console.log(newTransaction, "newTransaction");
+
       createTransaction(newTransaction);
     }
 

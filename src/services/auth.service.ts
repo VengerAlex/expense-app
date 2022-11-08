@@ -11,12 +11,12 @@ import {
 
 class AuthService {
   async register(dto: IRegisterProps) {
-    const response = await axios.post<IRegisterData>(
+    const { data, status } = await axios.post<IRegisterData>(
       URL_TEMPLATES.REGISTER,
       dto,
     );
 
-    return { data: response.data, status: response.status };
+    return { data, status };
   }
 
   async login(dto: ILoginProps) {

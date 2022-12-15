@@ -1,15 +1,17 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Divider, Typography, useTheme } from "@mui/material";
 
 import { ColorPickerBox, ColorPickerWrapper, Picker } from "../../styles";
 
-interface IColorPicker {}
+interface IColorPicker {
+  color: string;
+  setColor: (value: string) => void;
+}
 
-export const ColorPicker: FC<IColorPicker> = () => {
+export const ColorPicker: FC<IColorPicker> = ({ color, setColor }) => {
   const theme = useTheme();
-  const [color, setColor] = useState("#fff");
 
   return (
     <ColorPickerWrapper>

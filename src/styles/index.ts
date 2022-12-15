@@ -395,10 +395,12 @@ export const CategoryWrapper = styled(Grid)(() => ({
   alignItems: "center",
 }));
 
-export const CategoryAvatar = styled(Box)(() => ({
+export const CategoryAvatar = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "bgColor",
+})<{ bgColor?: string }>(({ bgColor }) => ({
   width: "40px",
   height: "40px",
-  backgroundColor: "#F8E4B2",
+  backgroundColor: bgColor ? bgColor : "#F8E4B2",
   border: "1px solid #fff",
   borderRadius: "120px",
   marginBottom: "8px",

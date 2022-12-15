@@ -23,6 +23,7 @@ type ICategoryItem = ICategory & {
 export const CategoryItem: FC<ICategoryItem> = ({
   label,
   id,
+  color,
   userId,
   modalHandler,
   setSelectedCategory,
@@ -43,7 +44,7 @@ export const CategoryItem: FC<ICategoryItem> = ({
           onDelete={() => deleteCategory(id)}
           onEdit={editHandler}
         />
-        <CategoryAvatar />
+        <CategoryAvatar bgColor={color} />
         <CategoryTitle variant="h5">{label}</CategoryTitle>
         <Typography variant="subtitle2" color={theme.palette.black}>
           Total Transactions

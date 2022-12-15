@@ -44,13 +44,14 @@ export const NewCategory: FC<INewCategory> = ({
   });
   watch();
   const [image, setImage] = useState();
+  const [color, setColor] = useState("#ffffff");
   const { label } = getValues();
   const { postCategory } = useActions();
   const { user } = useAppSelector(userSelector);
   const theme = useTheme();
 
   const categoryCreateHandler = (data: ICreateCategoryForm) => {
-    const newCategory = { ...data, userId: user?.id };
+    const newCategory = { ...data, color, userId: user?.id };
 
     postCategory(newCategory);
     reset();
@@ -99,7 +100,7 @@ export const NewCategory: FC<INewCategory> = ({
           direction="row"
           justifyContent="space-between"
         >
-          <ColorPicker />
+          <ColorPicker color={color} setColor={setColor} />
           <StyledSecondaryButton
             disabled={isBtnDisabled}
             type="submit"

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { Stack, Typography, useTheme } from "@mui/material";
@@ -43,6 +43,7 @@ export const NewCategory: FC<INewCategory> = ({
     defaultValues: { label: initLabel ? initLabel : "" },
   });
   watch();
+  const [image, setImage] = useState();
   const { label } = getValues();
   const { postCategory } = useActions();
   const { user } = useAppSelector(userSelector);
@@ -61,6 +62,10 @@ export const NewCategory: FC<INewCategory> = ({
     }
 
     reset();
+  };
+
+  const uploadImage = (event: any) => {
+    setImage(event.target.files[0]);
   };
 
   const isBtnDisabled = label === initLabel;
@@ -88,7 +93,7 @@ export const NewCategory: FC<INewCategory> = ({
           placeholder="Cars & Coffee"
           isBlack
         />
-        <ImageButton />
+        <ImageButton imageHandler={uploadImage} />
         <Stack
           alignItems="flex-end"
           direction="row"

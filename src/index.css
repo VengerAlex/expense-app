@@ -5,6 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Montserrat";
 }
 a {
     color: white;
@@ -14,4 +15,16 @@ a {
 form {
     display: flex;
     flex-direction: column;
+}
+
+input[type="color"]{
+    visibility: hidden;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

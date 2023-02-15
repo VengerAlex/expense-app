@@ -1,8 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUserInitialState } from "./user.interface";
+import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
+
 import { IUser, LOADING_STATUS } from "../../../utils/types";
-import { changeInformation, getMe, logout } from "./user.actions";
 import { RootState } from "../../index";
+import { changeInformation, deleteSelf, getMe, logout } from "./user.actions";
+import { IUserInitialState } from "./user.interface";
 
 const initialState: IUserInitialState = {
   user: null,
@@ -49,10 +50,35 @@ const userSlice = createSlice({
       })
       .addCase(logout.rejected, (state) => {
         state.loading = LOADING_STATUS.REJECTED;
+      })
+
+      // delete
+      .addCase(deleteSelf.pending, (state) => {
+        state.loading = LOADING_STATUS.PENDING;
+      })
+      .addCase(deleteSelf.fulfilled, (state) => {
+        state.loading = LOADING_STATUS.FULFILLED;
+      })
+      .addCase(deleteSelf.rejected, (state) => {
+        state.loading = LOADING_STATUS.REJECTED;
       });
   },
 });
 
 export const userSelector = (state: RootState) => state.user;
+
+const userDisplayName = (state: RootState) => state.user.user?.displayName;
+
+export const selectDisplayName = createSelector(
+  userDisplayName,
+  (displayName) => {
+    const initials = displayName
+      ?.split(" ")
+      .map((value) => value[0])
+      .join("");
+
+    return [initials, displayName];
+  },
+);
 
 export default userSlice.reducer;

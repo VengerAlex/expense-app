@@ -1,6 +1,8 @@
 import { FC } from "react";
+
+import { Box, BoxProps } from "@mui/material";
 import { Link } from "react-router-dom";
-import { BoxProps, Box } from "@mui/material";
+
 import companyLogo from "../../assets/images/logo.svg";
 
 type ILogo = BoxProps;

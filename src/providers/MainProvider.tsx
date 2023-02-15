@@ -1,11 +1,14 @@
+import { FC, ReactNode } from "react";
+
+import { ThemeProvider } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { FC, ReactNode } from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./ThemeProvider";
-import { store } from "../store";
+
 import { ReduxToastr } from "../components/ReduxToastr";
+
+import { store } from "../store";
+import { theme } from "./ThemeProvider";
 
 interface IMainProvider {
   children: ReactNode;

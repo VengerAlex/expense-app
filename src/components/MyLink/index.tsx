@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
-import { Link } from "react-router-dom";
+
 import { Typography, useTheme } from "@mui/material";
+import { Link } from "react-router-dom";
 
 interface ILink {
   to: string;

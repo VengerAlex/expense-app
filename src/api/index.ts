@@ -1,9 +1,12 @@
 import axios, { AxiosRequestConfig } from "axios";
+
 import AuthService from "../services/auth.service";
 import { localstorageAuthService } from "../services/localstorage.service";
 
 const AuthUrlRoute = "/auth";
 const UserUrlRoute = "/users";
+const CategoryUrlRoute = "/categories";
+const TransactionUrlRoute = "/transactions";
 
 export const URL_TEMPLATES = {
   LOGIN: `${AuthUrlRoute}/login`,
@@ -13,10 +16,20 @@ export const URL_TEMPLATES = {
 
   CHANGE_INFORMATION: `${UserUrlRoute}/self`,
   GET_ME: `${UserUrlRoute}/self`,
+  DELETE_ME: `${UserUrlRoute}/self`,
+
+  GET_CATEGORIES: CategoryUrlRoute,
+  CREATE_CATEGORY: `${CategoryUrlRoute}`,
+  DELETE_CATEGORY: (id: number) => `${CategoryUrlRoute}/${id}`,
+  UPDATE_CATEGORY: (id: number) => `${CategoryUrlRoute}/${id}`,
+
+  GET_TRANSACTIONS: TransactionUrlRoute,
+  CREATE_TRANSACTIONS: TransactionUrlRoute,
+  DELETE_TRANSACTIONS: (id: number) => `${TransactionUrlRoute}/${id}`,
 };
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "https://expa.fly.dev",
   headers: { "Content-Type": "application/json" },
 });
 

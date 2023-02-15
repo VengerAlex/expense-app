@@ -1,14 +1,16 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
+
 import { CheckboxProps } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { StyledCheckbox, StyledLabel } from "../../styles";
+
+import { StyledCheckbox } from "../../styles";
 
 type ICheckbox = CheckboxProps & {
   control: any;
-  labelText: string;
+  label: ReactElement;
 };
 
-export const Checkbox: FC<ICheckbox> = ({ control, labelText, ...props }) => {
+export const Checkbox: FC<ICheckbox> = ({ control, label, ...props }) => {
   return (
     <FormControlLabel
       control={
@@ -18,7 +20,7 @@ export const Checkbox: FC<ICheckbox> = ({ control, labelText, ...props }) => {
           {...control.register("isConfirmed")}
         />
       }
-      label={<StyledLabel variant="subtitle2">{labelText}</StyledLabel>}
+      label={label}
     />
   );
 };

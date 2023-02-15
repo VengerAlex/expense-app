@@ -1,26 +1,29 @@
 import { FC, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import Input from "../../../components/Input";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { AuthPageWrapper } from "../../../components/AuthPageWrapper";
-import { ISignInForm, LOADING_STATUS, ROUTES } from "../../../utils/types";
+import Input from "../../../components/Input";
 import { MyLink } from "../../../components/MyLink";
+
 import signInCover from "../../../assets/images/cover-login.jpg";
-import { StyledPrimaryButton, StyledFormControl } from "../../../styles/index";
 import { useActions } from "../../../hooks/useActions";
 import { useAppSelector } from "../../../hooks/useAppSelector";
-import { authSelector } from "../../../store/slices/auth/authSlice";
-import { signInSchema } from "../../../utils/schema";
-import { showErrorText } from "../../../utils/helpers";
 import { localstorageAuthService } from "../../../services/localstorage.service";
+import { authSelector } from "../../../store/slices/auth/authSlice";
+import { StyledFormControl, StyledPrimaryButton } from "../../../styles/index";
+import { showErrorText } from "../../../utils/helpers";
+import { signInSchema } from "../../../utils/schema";
+import { ISignInForm, LOADING_STATUS, ROUTES } from "../../../utils/types";
 
 const SignIn: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const token = localstorageAuthService.getAccessToken();
   const from = location.state?.from?.pathname || ROUTES.HOME;
-  const isAuth = localstorageAuthService.getAccessToken();
   const { login } = useActions();
   const { loading } = useAppSelector(authSelector);
 
@@ -44,10 +47,10 @@ const SignIn: FC = () => {
   };
 
   useEffect(() => {
-    if (isAuth) {
+    if (loading === LOADING_STATUS.FULFILLED && token) {
       navigate(from, { replace: true });
     }
-  }, [isAuth]);
+  }, [loading, token]);
 
   return (
     <AuthPageWrapper bgImage={signInCover}>

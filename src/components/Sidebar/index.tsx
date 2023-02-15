@@ -1,11 +1,10 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import SettingsIcon from "@mui/icons-material/Settings";
-import AssessmentIcon from "@mui/icons-material/Assessment";
 import ArticleIcon from "@mui/icons-material/Article";
+import AssessmentIcon from "@mui/icons-material/Assessment";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
-import { ProfileAvatar } from "../ProfileAvatar";
-import { ROUTES } from "../../utils/types";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { ListItemIcon, Typography, useTheme } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import {
   StyledDivider,
   StyledGridNavbar,
@@ -14,7 +13,9 @@ import {
   StyledListItemButton,
   StyledProvideWrapper,
 } from "../../styles";
+import { ROUTES } from "../../utils/types";
 import { Logo } from "../Logo";
+import { ProfileAvatar } from "../ProfileAvatar";
 
 const LIST_ITEMS = [
   { text: "DashBoard", to: ROUTES.HOME, icon: <GridViewRoundedIcon /> },

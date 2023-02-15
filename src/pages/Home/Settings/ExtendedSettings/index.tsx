@@ -1,24 +1,27 @@
 import { FC, useEffect } from "react";
-import { useForm } from "react-hook-form";
+
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { FormControl, useTheme } from "@mui/material";
+import { useForm } from "react-hook-form";
+
 import Input from "../../../../components/Input";
-import {
-  IExtendedSettingsForm,
-  LOADING_STATUS,
-  SETTINGS,
-} from "../../../../utils/types";
-import { extendedSettingsSchema } from "../../../../utils/schema";
+import { ProfileAvatar } from "../../../../components/ProfileAvatar";
+
+import { useActions } from "../../../../hooks/useActions";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
+import { userSelector } from "../../../../store/slices/user/userSlice";
 import {
   StyledLogoutButton,
   StyledPrimaryButton,
   StyledSecondaryButton,
 } from "../../../../styles";
-import { ProfileAvatar } from "../../../../components/ProfileAvatar";
 import { showErrorText } from "../../../../utils/helpers";
-import { useActions } from "../../../../hooks/useActions";
-import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { userSelector } from "../../../../store/slices/user/userSlice";
+import { extendedSettingsSchema } from "../../../../utils/schema";
+import {
+  IExtendedSettingsForm,
+  LOADING_STATUS,
+  SETTINGS,
+} from "../../../../utils/types";
 
 interface IExtendedSettings {
   setCurrentComponent: (component: SETTINGS) => void;
@@ -28,7 +31,7 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
 }) => {
   const theme = useTheme();
   const { user, loading } = useAppSelector(userSelector);
-  const { logout, changeInformation } = useActions();
+  const { logout, changeInformation, deleteSelf } = useActions();
   const {
     handleSubmit,
     control,
@@ -99,8 +102,14 @@ export const ExtendedSettings: FC<IExtendedSettings> = ({
           >
             Reset Password
           </StyledSecondaryButton>
-          <StyledLogoutButton onClick={() => logout()}>
+          <StyledLogoutButton onClick={() => logout()} sx={{ mb: 2 }}>
             Log Out
+          </StyledLogoutButton>
+          <StyledLogoutButton
+            onClick={() => deleteSelf()}
+            sx={{ backgroundColor: theme.palette.red }}
+          >
+            Delete Your Account
           </StyledLogoutButton>
         </form>
       </FormControl>

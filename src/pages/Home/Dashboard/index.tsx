@@ -1,12 +1,114 @@
-import { FC, useEffect } from "react";
-import { Typography } from "@mui/material";
+import { FC, useEffect, useState } from "react";
+
+import { Stack, Typography } from "@mui/material";
+
 import { MainLayout } from "../../../components/MainLayout";
+import { NewCategory } from "../../../components/NewCategory";
+import { NewTransaction } from "../../../components/NewTransaction";
+
+import { useActions } from "../../../hooks/useActions";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { useDebounce } from "../../../hooks/useDebounce";
+import { ICategory } from "../../../store/slices/category/category.interface";
+import {
+  categorySelector,
+  selectFirstCategory,
+} from "../../../store/slices/category/categorySlice";
+import { transactionSelector } from "../../../store/slices/transaction/transactionSlice";
+import {
+  DashboardLeftSide,
+  DashboardRightSide,
+  DashboardWrapper,
+} from "../../../styles";
+import { CATEGORY_ACTION } from "../../../utils/types";
+import { AllTransaction } from "./AllTransaction";
+import { DashboardHeader } from "./DashboardHeader";
+
+export type SearchBy = {
+  label: string;
+  id: number;
+};
+
+const SEARCH_BY: SearchBy[] = [
+  { label: "Title", id: 0 },
+  { label: "Category", id: 1 },
+];
 
 interface IDashboard {}
+
 export const Dashboard: FC<IDashboard> = () => {
+  const firstCategory = useAppSelector(selectFirstCategory);
+  const { categories } = useAppSelector(categorySelector);
+  const [searchValue, setSearchValue] = useState("");
+  const [category, setCategory] = useState<ICategory>(
+    firstCategory || {
+      id: -1,
+      label: "Інше",
+      userId: 1590,
+    },
+  );
+  const [searchBy, setSearchBy] = useState<SearchBy>(SEARCH_BY[0]);
+  const debouncedValue = useDebounce(searchValue, 500);
+  const { sort } = useAppSelector(transactionSelector);
+  const { getTransactions, getCategories } = useActions();
+
+  useEffect(() => {
+    getTransactions({
+      dateOrder: sort.date,
+      idOrder: sort.id,
+      searchValue: searchBy.label === "Title" ? debouncedValue : null,
+      categoryId: searchBy.label === "Category" ? String(category?.id) : null,
+    });
+  }, [sort, debouncedValue, category]);
+
+  useEffect(() => {
+    getCategories("");
+  }, []);
+
+  const changeCategoryByHandler = (value: string) => {
+    const searchCategory = categories?.find(
+      (elem: ICategory) => elem.label === value,
+    );
+
+    if (searchCategory) {
+      setCategory(searchCategory);
+    }
+  };
+  const changeSearchByHandler = (value: string) => {
+    const searchElem = SEARCH_BY.find((elem: SearchBy) => elem.label === value);
+
+    if (searchElem) {
+      setSearchBy(searchElem);
+    }
+  };
+
   return (
     <MainLayout>
-      <Typography>IDashboard</Typography>
+      <DashboardWrapper>
+        <DashboardLeftSide>
+          <DashboardHeader />
+          <Stack spacing={2} direction="row">
+            <NewTransaction />
+            <NewCategory
+              type={CATEGORY_ACTION.CREATE}
+              btnTitle="Add"
+              title="Add Category"
+            />
+          </Stack>
+          <AllTransaction
+            SEARCH_BY={SEARCH_BY}
+            searchBy={searchBy}
+            changeSearchByHandler={changeSearchByHandler}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            category={category}
+            changeCategoryByHandler={changeCategoryByHandler}
+          />
+        </DashboardLeftSide>
+        <DashboardRightSide>
+          <Typography>RIGHT SIDE</Typography>
+        </DashboardRightSide>
+      </DashboardWrapper>
     </MainLayout>
   );
 };

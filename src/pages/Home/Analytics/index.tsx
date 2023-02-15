@@ -1,5 +1,7 @@
 import { FC } from "react";
+
 import { Typography } from "@mui/material";
+
 import { MainLayout } from "../../../components/MainLayout";
 
 interface IAnalytics {}

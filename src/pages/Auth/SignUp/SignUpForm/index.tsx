@@ -1,11 +1,26 @@
 import { FC, useEffect } from "react";
+
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Link, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { Box, Typography } from "@mui/material";
+
+import { Checkbox } from "../../../../components/Checkbox";
+import Input from "../../../../components/Input";
+import { MyLink } from "../../../../components/MyLink";
+
 import { useActions } from "../../../../hooks/useActions";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { authSelector } from "../../../../store/slices/auth/authSlice";
-import { StyledFormControl, StyledPrimaryButton } from "../../../../styles";
+import {
+  StyledFormControl,
+  StyledLabel,
+  StyledPrimaryButton,
+} from "../../../../styles";
+import {
+  showErrorOnConfirmPassword,
+  showErrorText,
+} from "../../../../utils/helpers";
+import { signUpSchema } from "../../../../utils/schema";
 import {
   ISignUpFormValue,
   LOADING_STATUS,
@@ -13,11 +28,6 @@ import {
   SIGN_UP,
   STATUS_CODE,
 } from "../../../../utils/types";
-import Input from "../../../../components/Input";
-import { Checkbox } from "../../../../components/Checkbox";
-import { MyLink } from "../../../../components/MyLink";
-import { signUpSchema } from "../../../../utils/schema";
-import { showErrorText } from "../../../../utils/helpers";
 
 interface ISignUpForm {
   setCurrentComponent: (component: SIGN_UP) => void;
@@ -27,6 +37,7 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
   const { register } = useActions();
   const { loading, statusCode } = useAppSelector(authSelector);
   const {
+    watch,
     control,
     getValues,
     handleSubmit,
@@ -36,7 +47,9 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
     mode: "onChange",
     resolver: yupResolver(signUpSchema),
   });
+  watch();
   const { username, fullName, password, confirmedPassword } = getValues();
+  const passwordIsEqual = password === confirmedPassword;
 
   const onSubmit = (data: ISignUpFormValue) => {
     const { username, password, fullName: displayName } = data;
@@ -89,12 +102,12 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             isPassword
           />
           <Input
-            helperText={showErrorText(
-              errors,
-              "confirmedPassword",
+            helperText={showErrorOnConfirmPassword(
+              password,
               confirmedPassword,
+              passwordIsEqual,
             )}
-            error={!!errors.confirmedPassword && !!confirmedPassword}
+            error={!passwordIsEqual && !!confirmedPassword}
             placeholder="***************"
             control={control}
             formName="confirmedPassword"
@@ -106,7 +119,14 @@ export const SignUpForm: FC<ISignUpForm> = ({ setCurrentComponent }) => {
             <Checkbox
               defaultChecked
               disableRipple
-              labelText="By creating an account you agree to the terms of use and our privacy policy."
+              label={
+                <StyledLabel variant="subtitle2">
+                  By creating an account you agree to the
+                  <Link href="#"> terms of use </Link>
+                  and our
+                  <Link href="#"> privacy policy.</Link>
+                </StyledLabel>
+              }
               control={control}
             />
           </Box>

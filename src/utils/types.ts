@@ -73,3 +73,27 @@ export interface IResetProfileForm {
   password: string;
   confirmedPassword: string;
 }
+
+export interface ICreateCategoryForm {
+  label: string;
+}
+
+export interface ICreateTransactionForm {
+  label: string;
+  amount: number;
+}
+
+export enum SORT {
+  ASC = "asc",
+  DESC = "desc",
+}
+
+export enum INFO_CARD_SIZE {
+  "SM" = "sm",
+  "LG" = "lg",
+}
+
+export enum CATEGORY_ACTION {
+  CREATE = "CREATE",
+  UPDATE = "UPDATE",
+}

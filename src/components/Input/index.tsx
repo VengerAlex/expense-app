@@ -1,27 +1,34 @@
 import { FC, FormEvent, useState } from "react";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import {
   IconButton,
   InputAdornment,
   TextFieldProps,
   useTheme,
 } from "@mui/material";
+
 import { StyledInput } from "../../styles";
 
 type IInput = TextFieldProps & {
   isPassword?: boolean;
+  isNumber?: boolean;
   isResetPassword?: boolean;
-  control: any;
+  control?: any;
   isBlack?: boolean;
-  formName: string;
+  formName?: string;
+  weight?: number;
 };
 
 const Input: FC<IInput> = ({
   isPassword = false,
+  isNumber = false,
   isResetPassword = false,
   formName,
   control,
+  weight,
   isBlack = false,
   ...props
 }) => {
@@ -34,36 +41,58 @@ const Input: FC<IInput> = ({
     }
   };
 
+  const isRegister = control && { ...control.register(formName) };
+
   return (
     <StyledInput
-      {...control.register(formName)}
+      {...isRegister}
       {...props}
+      weight={weight}
       isBlack={isBlack}
       InputLabelProps={{ shrink: true }}
       onCopy={handleChange}
       onPaste={handleChange}
       name={formName}
-      type={!isPassword ? "text" : showPassword ? "text" : "password"}
+      type={
+        isNumber
+          ? "number"
+          : !isPassword
+          ? "text"
+          : showPassword
+          ? "text"
+          : "password"
+      }
       variant="standard"
       InputProps={
-        isPassword
+        isPassword || isNumber
           ? {
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton
-                    sx={{
-                      color: isBlack
-                        ? theme.palette.black
-                        : theme.palette.white,
-                    }}
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <RemoveRedEyeOutlinedIcon />
-                    ) : (
-                      <VisibilityOffOutlinedIcon />
-                    )}
-                  </IconButton>
+                  {isPassword && (
+                    <IconButton
+                      disableRipple
+                      sx={{
+                        color: isBlack
+                          ? theme.palette.black
+                          : theme.palette.white,
+                      }}
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <RemoveRedEyeOutlinedIcon />
+                      ) : (
+                        <VisibilityOffOutlinedIcon />
+                      )}
+                    </IconButton>
+                  )}
+                  {isNumber && (
+                    <IconButton
+                      sx={{ color: theme.palette.black }}
+                      disableRipple
+                    >
+                      {isNumber && <AttachMoneyIcon />}
+                    </IconButton>
+                  )}
                 </InputAdornment>
               ),
             }

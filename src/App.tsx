@@ -1,16 +1,19 @@
 import { FC } from "react";
+
 import { Route, Routes } from "react-router-dom";
+
+import { PrivateRoute } from "./components/PrivateRoute";
+import { PublicRoute } from "./components/PublicRoute";
+
+import Reset from "./pages/Auth/Reset";
 import SignIn from "./pages/Auth/SignIn";
 import SignUp from "./pages/Auth/SignUp";
-import NotFound from "./pages/NotFound";
-import Reset from "./pages/Auth/Reset";
-import { ROUTES } from "./utils/types";
-import { PublicRoute } from "./components/PublicRoute";
-import { PrivateRoute } from "./components/PrivateRoute";
 import { Analytics } from "./pages/Home/Analytics";
 import { Categories } from "./pages/Home/Categories";
-import { Settings } from "./pages/Home/Settings";
 import { Dashboard } from "./pages/Home/Dashboard";
+import { Settings } from "./pages/Home/Settings";
+import NotFound from "./pages/NotFound";
+import { ROUTES } from "./utils/types";
 
 const App: FC = () => {
   return (

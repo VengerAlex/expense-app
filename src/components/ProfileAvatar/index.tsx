@@ -1,8 +1,10 @@
-import { FC } from "react";
+import { FC, memo } from "react";
+
 import { AvatarProps, Typography } from "@mui/material";
-import { StyledAvatar, AvatarWrapper } from "../../styles";
-import { userSelector } from "../../store/slices/user/userSlice";
+
 import { useAppSelector } from "../../hooks/useAppSelector";
+import { selectDisplayName } from "../../store/slices/user/userSlice";
+import { AvatarWrapper, StyledAvatar } from "../../styles";
 
 type IProfileAvatar = AvatarProps & {
   color: string;
@@ -10,24 +12,17 @@ type IProfileAvatar = AvatarProps & {
   myVariant: "subtitle1" | "h4";
 };
 
-export const ProfileAvatar: FC<IProfileAvatar> = ({
-  myVariant,
-  isBig,
-  color,
-}) => {
-  const { user } = useAppSelector(userSelector);
+export const ProfileAvatar: FC<IProfileAvatar> = memo(
+  ({ myVariant, isBig, color }) => {
+    const [initials, displayName] = useAppSelector(selectDisplayName);
 
-  const INITIALS = user?.displayName
-    .split(" ")
-    .map((value) => value[0])
-    .join("");
-
-  return (
-    <AvatarWrapper>
-      <StyledAvatar isBig={isBig}>{INITIALS}</StyledAvatar>
-      <Typography color={color} variant={myVariant}>
-        {user?.displayName}
-      </Typography>
-    </AvatarWrapper>
-  );
-};
+    return (
+      <AvatarWrapper>
+        <StyledAvatar isBig={isBig}>{initials}</StyledAvatar>
+        <Typography color={color} variant={myVariant}>
+          {displayName}
+        </Typography>
+      </AvatarWrapper>
+    );
+  },
+);

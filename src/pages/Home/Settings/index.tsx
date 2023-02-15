@@ -1,11 +1,14 @@
 import { FC, ReactElement, useState } from "react";
+
 import { Box, Typography, useTheme } from "@mui/material";
+
 import { MainLayout } from "../../../components/MainLayout";
+import { NotificationBox } from "../../../components/NotificationBox";
+
+import { StyledBoxSettingsWrapper, StyledNotifWrapper } from "../../../styles";
 import { ROUTES, SETTINGS } from "../../../utils/types";
 import { ExtendedSettings } from "./ExtendedSettings";
-import { StyledBoxSettingsWrapper, StyledNotifWrapper } from "../../../styles";
 import { ProfileSettings } from "./ProfileSettings";
-import { NotificationBox } from "../../../components/NotificationBox";
 
 type ISteps = Record<
   SETTINGS,
